@@ -10,7 +10,7 @@ import json
 load_dotenv()
 
 class Context(BaseModel):
-    translated_outputs: List[str]
+    refined_outputs: List[str]
 
 class TranslationRefiner:
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model="google/gemini-2.5-pro-preview-03-25"):
@@ -19,7 +19,7 @@ class TranslationRefiner:
         self.model = model
         self.temperature = temperature
 
-    def create_refinement_prompt(self, japanese_text: str, current_translation: str) -> str:
+    def create_refinement_prompt(self, japanese_text: str, current_translation: str, size: int) -> str:
         prompt = f"""
         TASK: Refine each line of the following English translation of a Japanese text.
         
@@ -39,6 +39,12 @@ class TranslationRefiner:
         7. Keep cultural references intact.
         8. Ensure emotional nuances are conveyed.
 
+        CRITICAL: 
+        - Your refinement MUST have EXACTLY {size} lines, no more and no less.
+        - The "refined_outputs" array MUST contain EXACTLY {size} elements.
+        - Count the number of elements in your "refined_outputs" array before submitting to ensure it's exactly {size}.
+        - Return the result as JSON: "refined_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
+
         CONTEXT: 
         - Japanese text to translate:
         {japanese_text}
@@ -52,7 +58,7 @@ class TranslationRefiner:
         return prompt
 
     def refine(self, japanese_text: str, current_translation: str, size: int) -> str:
-        prompt = self.create_refinement_prompt(japanese_text, current_translation)
+        prompt = self.create_refinement_prompt(japanese_text, current_translation, size)
         
         output_lines = 0
         while (output_lines != size):

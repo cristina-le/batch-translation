@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from app.temperature_test import run_temperature_test
-from app.temperature_test_refine import run_temperature_test_refine
+from app.test.temperature_test import run_temperature_test
+from app.test.temperature_test_refine import run_temperature_test_refine
 
 def run_all_tests():
     print("\n" + "="*70)

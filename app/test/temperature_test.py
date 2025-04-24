@@ -4,30 +4,28 @@ import pandas as pd
 from tqdm import tqdm
 from dotenv import load_dotenv
 from app.utils import preprocess
-from app.core.refiner import TranslationRefiner
+from app.core.translator import JapaneseToEnglishTranslator
 from app.benchmark.calculateBleu import evaluate_translation
 
 load_dotenv()
 
-def run_temperature_test_refine():
+def run_temperature_test():
     # File paths
     jp_file = "app/data/japaneseOriginal.txt"
     en_ref_file = "app/data/humanTranslation.txt"
-    initial_pred_file = "app/data/translated_output.txt"
-    results_csv = "app/data/temperature_test_refine_results.csv"
+    results_csv = "app/data/temperature_test_results.csv"
     
     # Temperature values to test
-    temperatures = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
-    runs_per_temp = 5
-    model = "google/gemini-2.5-pro-preview-03-25"
+    temperatures = [ 0.1, 0.2, 0.3]
+    runs_per_temp = 3
+    model = "google/gemini-2.5-flash-preview"
     chunk_size = 50
     
     # Results storage
     results_data = []
     
-    # Read Japanese input and current translations
+    # Read Japanese input
     japanese_segments = preprocess.reader(jp_file, size=chunk_size)
-    current_translations = preprocess.reader(initial_pred_file, size=chunk_size)
     
     print(f"Testing {len(temperatures)} temperature values with {runs_per_temp} runs each")
     
@@ -40,20 +38,20 @@ def run_temperature_test_refine():
         
         for run in range(1, runs_per_temp + 1):
             print(f"\nRun {run}/{runs_per_temp} with temperature {temp}")
-            output_file = f"app/data/temp_test_refine_output_{temp}_{run}.txt"
+            output_file = f"app/data/temp_test_output_{temp}_{run}.txt"
             
-            # Create refiner with current temperature
-            refiner = TranslationRefiner(temperature=temp, model=model)
+            # Create translator with current temperature
+            translator = JapaneseToEnglishTranslator(temperature=temp, model=model)
             
-            # Refine each segment
-            refined = []
-            for (jp, cur) in tqdm(zip(japanese_segments, current_translations)):
-                num_lines = len(cur.splitlines())
-                refined.append(refiner.refine(jp, cur, num_lines))
+            # Translate each segment
+            translations = []
+            for segment in tqdm(japanese_segments):
+                num_lines = len(segment.splitlines())
+                translations.append(translator.translate(segment, num_lines))
                 time.sleep(0.5)  # Respect API rate limits
             
-            # Write refined translations to file
-            preprocess.writer(output_file, refined)
+            # Write translations to file
+            preprocess.writer(output_file, translations)
             
             # Evaluate BLEU score
             bleu = evaluate_translation(en_ref_file, output_file)
@@ -103,4 +101,4 @@ def run_temperature_test_refine():
     return best_temp, results_df, summary_df
 
 if __name__ == "__main__":
-    best_temp, results_df, summary_df = run_temperature_test_refine()
+    best_temp, results_df, summary_df = run_temperature_test()
