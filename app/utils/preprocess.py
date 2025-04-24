@@ -1,13 +1,13 @@
 from typing import List
 import os
 
-def reader(file_path: str, size: int = 100) -> List[str]:
+def reader(file_path: str, size: int = 50) -> List[str]:
     """
     Read text from file and split into chunks of lines.
 
     Args:
         file_path (str): Path to the text file
-        size (int): Number of lines per chunk (default 100)
+        size (int): Number of lines per chunk (default 50)
 
     Returns:
         list: List of text segments, each containing up to 'size' lines
