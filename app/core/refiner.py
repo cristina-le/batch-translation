@@ -21,40 +21,34 @@ class TranslationRefiner:
 
     def create_refinement_prompt(self, japanese_text: str, current_translation: str, size: int) -> str:
         prompt = f"""
-        TASK: Refine each line of the following English translation of a Japanese text.
-        
-        REQUIREMENT:
-        - The goal is to maximize its BLEU score by improving translation quality.
-        - Focus on accuracy, naturalness, and contextual appropriateness.
-        - Ensure the translation closely follows the original Japanese meaning and nuances.
-        - Use natural, flowing English suitable for high-quality localization.
+Refine each line of the following English translation of a Japanese text.
 
-        IMPORTANT:
-        1. Do not create empty lines in your translation.
-        2. Keep the same number of lines as the current translation.
-        3. Double-check each line for accuracy against the Japanese original.
-        4. Make sure the translation is contextually appropriate and coherent.
-        5. Maintain character speech patterns and personality if present.
-        6. Preserve Japanese honorifics where appropriate.
-        7. Keep cultural references intact.
-        8. Ensure emotional nuances are conveyed.
+Requirements:
+- Maximize BLEU score by improving translation quality, accuracy, and naturalness.
+- Ensure the translation closely follows the Japanese meaning and nuance.
+- Use natural, high-quality English localization.
+- Preserve character speech, personality, honorifics, cultural references, and emotional nuance.
+- Do NOT add or remove lines. No empty lines.
 
-        CRITICAL: 
-        - Your refinement MUST have EXACTLY {size} lines, no more and no less.
-        - The "refined_outputs" array MUST contain EXACTLY {size} elements.
-        - Count the number of elements in your "refined_outputs" array before submitting to ensure it's exactly {size}.
-        - Return the result as JSON: "refined_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
+CRITICAL:
+- Output MUST have EXACTLY {size} lines.
+- Return ONLY valid JSON in this format:
 
-        CONTEXT: 
-        - Japanese text to translate:
-        {japanese_text}
+"refined_outputs": [
+    "English line 1",
+    "English line 2",
+    "...",
+    "English line {size}"
+]
 
-        - Current translation:
-        {current_translation}
+- Do not return anything except the JSON object above.
 
-        RESULT: Refined translation:
-        """
-    
+Japanese text:
+{japanese_text}
+
+Current translation:
+{current_translation}
+"""
         return prompt
 
     def refine(self, japanese_text: str, current_translation: str, size: int) -> str:

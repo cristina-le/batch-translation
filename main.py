@@ -10,14 +10,14 @@ load_dotenv()
 
 def main():
     # File paths
-    jp_file = "app/data/japaneseOriginal.txt"
-    en_ref_file = "app/data/humanTranslation.txt"
-    output_file = "app/data/translated_output.txt"
+    jp_file = "app/data/batch_jp.txt"
+    en_ref_file = "app/data/batch_en.txt"
+    output_file = "app/data/batch_output.txt"
 
     # 1. Read and chunk Japanese input
-    chunk_size = 50
-    model = "google/gemini-2.5-flash-preview"
-    temperature = 0.2  # Recommended temperature for initial translation
+    chunk_size = 20
+    model = "google/gemini-2.0-flash-001"
+    temperature = 0.3  # Recommended temperature for initial translation
     segments = preprocess.reader(jp_file, size=chunk_size)
 
     # 2. Translate each chunk

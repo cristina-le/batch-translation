@@ -1,81 +1,46 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from app.test.temperature_test import run_temperature_test
-from app.test.temperature_test_refine import run_temperature_test_refine
+from app.test.temperature_test import run_model_test
 
-def run_all_tests():
+def run_model_analysis():
     print("\n" + "="*70)
-    print("STARTING TRANSLATION TEMPERATURE TESTS")
+    print("STARTING MODEL TESTS")
     print("="*70)
-    
-    # Run translation temperature tests
-    best_trans_temp, trans_results_df, trans_summary_df = run_temperature_test()
-    
-    print("\n\n" + "="*70)
-    print("STARTING REFINEMENT TEMPERATURE TESTS")
-    print("="*70)
-    
-    # Run refinement temperature tests
-    best_refine_temp, refine_results_df, refine_summary_df = run_temperature_test_refine()
-    
-    # Combine results for visualization
-    trans_summary_df['process'] = 'Translation'
-    refine_summary_df['process'] = 'Refinement'
-    combined_df = pd.concat([trans_summary_df, refine_summary_df])
-    
-    # Save combined results
-    combined_df.to_csv("app/data/combined_temperature_results.csv", index=False)
-    
+
+    # Run model tests
+    best_model, results_df, summary_df = run_model_test()
+
+    # Save summary results
+    summary_df.to_csv("app/data/model_test_results.csv", index=False)
+
     # Create visualization
-    plt.figure(figsize=(12, 8))
-    
-    # Plot translation results
-    plt.subplot(2, 1, 1)
+    plt.figure(figsize=(10, 6))
     plt.errorbar(
-        trans_summary_df['temperature'], 
-        trans_summary_df['avg_bleu'],
-        yerr=trans_summary_df['std_dev'],
+        summary_df['model'],
+        summary_df['avg_bleu'],
+        yerr=summary_df['std_dev'],
         fmt='o-',
         capsize=5,
-        label='Translation'
+        label='Model'
     )
-    plt.axvline(x=best_trans_temp, color='r', linestyle='--', label=f'Best Temp: {best_trans_temp}')
-    plt.title('Translation Temperature vs BLEU Score')
-    plt.xlabel('Temperature')
+    plt.axvline(x=best_model, color='r', linestyle='--', label=f'Best Model: {best_model}')
+    plt.title('Model vs BLEU Score')
+    plt.xlabel('Model')
     plt.ylabel('Average BLEU Score')
     plt.grid(True, alpha=0.3)
     plt.legend()
-    
-    # Plot refinement results
-    plt.subplot(2, 1, 2)
-    plt.errorbar(
-        refine_summary_df['temperature'], 
-        refine_summary_df['avg_bleu'],
-        yerr=refine_summary_df['std_dev'],
-        fmt='o-',
-        capsize=5,
-        label='Refinement'
-    )
-    plt.axvline(x=best_refine_temp, color='r', linestyle='--', label=f'Best Temp: {best_refine_temp}')
-    plt.title('Refinement Temperature vs BLEU Score')
-    plt.xlabel('Temperature')
-    plt.ylabel('Average BLEU Score')
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    
     plt.tight_layout()
-    plt.savefig("app/data/temperature_comparison.png", dpi=300)
-    
+    plt.savefig("app/data/model_comparison.png", dpi=300)
+
     print("\n\n" + "="*70)
     print("FINAL RESULTS")
     print("="*70)
-    print(f"Best Translation Temperature: {best_trans_temp}")
-    print(f"Best Refinement Temperature: {best_refine_temp}")
-    print(f"Results visualization saved to app/data/temperature_comparison.png")
-    print(f"Combined results saved to app/data/combined_temperature_results.csv")
+    print(f"Best Model: {best_model}")
+    print(f"Results visualization saved to app/data/model_comparison.png")
+    print(f"Summary results saved to app/data/model_test_results.csv")
     print("="*70)
-    
-    return best_trans_temp, best_refine_temp, combined_df
+
+    return best_model, summary_df
 
 if __name__ == "__main__":
-    best_trans_temp, best_refine_temp, combined_df = run_all_tests()
+    best_model, summary_df = run_model_analysis()

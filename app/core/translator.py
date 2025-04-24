@@ -11,47 +11,49 @@ class Context(BaseModel):
     translated_outputs: List[str]
 
 class JapaneseToEnglishTranslator:
-    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model = "google/gemini-2.5-flash-preview"):
+    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model = "openai/gpt-4o-mini"):
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model
         self.temperature = temperature
         self.prev_context = None
 
-    def create_prompt(self, japanese_text: str, size) -> str:       
+    def create_prompt(self, japanese_text: str, size) -> str:
         base_prompt = f"""
-        TASK: For each line of the following Japanese text, translate it to English.
+Translate each line of the following Japanese text to English.
 
-        REQUIREMENTS:
-        - Maintain character speech patterns and personality.
-        - Preserve Japanese honorifics where appropriate.
-        - Keep cultural references intact.
-        - Ensure emotional nuances are conveyed.
-        - Use natural, flowing English suitable for high-quality localization.
-        - Do not create empty lines in your translation.
+Requirements:
+- Preserve character speech, personality, honorifics, cultural references, and emotional nuance.
+- Use natural, high-quality English localization.
+- Do NOT add or remove lines. No empty lines.
 
-        CRITICAL: 
-        - Your translation MUST have EXACTLY {size} lines, no more and no less.
-        - The "translated_outputs" array MUST contain EXACTLY {size} elements.
-        - Count the number of elements in your "translated_outputs" array before submitting to ensure it's exactly {size}.
-        - Return the result as JSON: "translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
+CRITICAL:
+- Output MUST have EXACTLY {size} lines.
+- Return ONLY valid JSON in this format:
 
-        CONTEXT: Japanese text to translate:
-        {japanese_text} 
+"translated_outputs": [
+    "English line 1",
+    "English line 2",
+    "...",
+    "English line {size}"
+]
 
-        RESULT: Translation into English:
-        """
+- Do not return anything except the JSON object above.
+
+Japanese text to translate:
+{japanese_text}
+"""
 
         if self.prev_context:
-            context_prompt = f""""
-            For context, here is the previous text and its translation:
-            Previous Japanese: {self.prev_context['japanese']}
+            context_prompt = f"""
+Previous context:
+Japanese: {self.prev_context['japanese']}
+English: {self.prev_context['english']}
 
-            Previous English: {self.prev_context['english']}
+Now translate the following with the same style and consistency:
 
-            Now based on the previous translation:
-            {base_prompt}
-            """
+{base_prompt}
+"""
             return context_prompt
         return base_prompt
 

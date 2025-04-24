@@ -11,14 +11,14 @@ load_dotenv()
 
 def run_temperature_test_refine():
     # File paths
-    jp_file = "app/data/japaneseOriginal.txt"
-    en_ref_file = "app/data/humanTranslation.txt"
-    initial_pred_file = "app/data/translated_output.txt"
+    jp_file = "app/data/batch_jp.txt"
+    en_ref_file = "app/data/batch_en.txt"
+    initial_pred_file = "app/data/batch_output.txt"
     results_csv = "app/data/temperature_test_refine_results.csv"
     
     # Temperature values to test
-    temperatures = [ 0.1, 0.2, 0.3]
-    runs_per_temp = 3
+    temperatures = [ 0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+    runs_per_temp = 5
     model = "google/gemini-2.5-pro-preview-03-25"
     chunk_size = 50
     
