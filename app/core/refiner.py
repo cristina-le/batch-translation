@@ -13,7 +13,7 @@ class Context(BaseModel):
     translated_outputs: List[str]
 
 class TranslationRefiner:
-    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.3, model="google/gemini-2.5-pro-preview-03-25"):
+    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model="google/gemini-2.5-pro-preview-03-25"):
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model

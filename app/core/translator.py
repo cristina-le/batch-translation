@@ -11,7 +11,7 @@ class Context(BaseModel):
     translated_outputs: List[str]
 
 class JapaneseToEnglishTranslator:
-    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.1, model = "google/gemini-2.5-flash-preview"):
+    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model = "google/gemini-2.5-flash-preview"):
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model

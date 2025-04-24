@@ -17,7 +17,7 @@ def main():
     # 1. Read Japanese input and reference
     chunk_size = 50
     model = "google/gemini-2.5-pro-preview-03-25"
-    temperature = 0.3
+    temperature = 0.2  # Recommended temperature for refinement
 
     japanese_segments = preprocess.reader(jp_file, size=chunk_size)
     current_translations = preprocess.reader(initial_pred_file, size=chunk_size)

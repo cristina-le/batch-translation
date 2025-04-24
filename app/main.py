@@ -17,7 +17,7 @@ def main():
     # 1. Read and chunk Japanese input
     chunk_size = 50
     model = "google/gemini-2.5-flash-preview"
-    temperature = 0.1
+    temperature = 0.2  # Recommended temperature for initial translation
     segments = preprocess.reader(jp_file, size=chunk_size)
 
     # 2. Translate each chunk
