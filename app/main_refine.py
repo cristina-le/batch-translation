@@ -1,36 +1,35 @@
-import os
+import time
+from tqdm import tqdm
 from dotenv import load_dotenv
 from app.utils import preprocess
 from app.core.refiner import TranslationRefiner
 from app.benchmark.calculateBleu import evaluate_translation
-from tqdm import tqdm
-import time
+
 load_dotenv()
 
 def main():
     # File paths
-    jp_file = "app/data/batch_1_jp.txt"
-    en_ref_file = "app/data/batch_1_en.txt"
-    initial_pred_file = "app/data/batch_1_output.txt"
-    refined_pred_file = "app/data/batch_1_refined.txt"
+    jp_file = "app/data/japaneseOriginal.txt"
+    en_ref_file = "app/data/humanTranslation.txt"
+    initial_pred_file = "app/data/translated_output.txt"
+    refined_pred_file = "app/data/translated_output_refined.txt"
 
     # 1. Read Japanese input and reference
-    chunk_size = 100
-    model = "google/gemini-2.5-flash-preview"
+    chunk_size = 50
+    model = "google/gemini-2.5-pro-preview-03-25"
     temperature = 0.3
 
     japanese_segments = preprocess.reader(jp_file, size=chunk_size)
     current_translations = preprocess.reader(initial_pred_file, size=chunk_size)
-    reference_translations = preprocess.reader(en_ref_file, size=chunk_size)
 
     # 2. Refine translations
     refiner = TranslationRefiner(temperature=temperature, model=model)
 
     refined = []
-    for (jp, cur, ref) in tqdm(zip(japanese_segments, current_translations, reference_translations)):
-        refined_translation = refiner.refine(jp, cur, ref)
-        refined.append(refined_translation)
-        time.sleep(0.5)
+    for (jp, cur) in tqdm(zip(japanese_segments, current_translations)):
+        num_lines = len(cur.splitlines())
+        refined.append(refiner.refine(jp, cur, num_lines))
+        time.sleep(0.5) # Respect API rate limits
 
     # 3. Write refined output
     preprocess.writer(refined_pred_file, refined)
