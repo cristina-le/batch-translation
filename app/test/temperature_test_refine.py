@@ -17,7 +17,7 @@ def run_temperature_test_refine():
     results_csv = "app/data/temperature_test_refine_results.csv"
     
     # Temperature values to test
-    temperatures = [ 0.1, 0.2, 0.3, ]
+    temperatures = [ 0.1, 0.2, 0.3]
     runs_per_temp = 3
     model = "google/gemini-2.5-pro-preview-03-25"
     chunk_size = 50
