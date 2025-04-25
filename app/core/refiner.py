@@ -1,25 +1,35 @@
 import os
-import time
 from typing import List, Optional
 from openai import OpenAI
 from dotenv import load_dotenv
-from tqdm import tqdm
 from pydantic import BaseModel
 import json
 
 load_dotenv()
 
 class Context(BaseModel):
+    """
+    Pydantic model for refined translation outputs.
+    """
     refined_outputs: List[str]
 
 class TranslationRefiner:
+    """
+    Refines Japanese-to-English translations to maximize BLEU score and naturalness.
+    """
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model="google/gemini-2.5-pro-preview-03-25"):
+        """
+        Initialize the TranslationRefiner with API key, temperature, and model.
+        """
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model
         self.temperature = temperature
 
     def create_refinement_prompt(self, japanese_text: str, current_translation: str, size: int) -> str:
+        """
+        Create a prompt for refining translations with strict output requirements.
+        """
         prompt = f"""
 Refine each line of the following English translation of a Japanese text.
 
@@ -52,6 +62,9 @@ Current translation:
         return prompt
 
     def refine(self, japanese_text: str, current_translation: str, size: int) -> str:
+        """
+        Refine the current translation to match the Japanese text and required line count.
+        """
         prompt = self.create_refinement_prompt(japanese_text, current_translation, size)
         
         output_lines = 0

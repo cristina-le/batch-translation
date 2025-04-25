@@ -1,19 +1,21 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-from app.test.temperature_test import run_model_test
+from app.test.test import run_model_test
 
 def run_model_analysis():
+    """
+    Run model tests, save summary results, and generate BLEU score visualization.
+
+    Returns:
+        tuple: (best_model, summary_df)
+    """
     print("\n" + "="*70)
     print("STARTING MODEL TESTS")
     print("="*70)
 
-    # Run model tests
     best_model, results_df, summary_df = run_model_test()
 
-    # Save summary results
     summary_df.to_csv("app/data/model_test_results.csv", index=False)
 
-    # Create visualization
     plt.figure(figsize=(10, 6))
     plt.errorbar(
         summary_df['model'],

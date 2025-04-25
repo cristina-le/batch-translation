@@ -5,32 +5,30 @@ from app.utils import preprocess
 from app.core.translator import JapaneseToEnglishTranslator
 from app.benchmark.calculateBleu import evaluate_translation
 
-
 load_dotenv()
 
 def main():
-    # File paths
+    """
+    Run batch translation from Japanese to English and evaluate BLEU score.
+    """
     jp_file = "app/data/japaneseOriginal.txt"
     en_ref_file = "app/data/humanTranslation.txt"
     output_file = "app/data/translated_output.txt"
 
-    # 1. Read and chunk Japanese input
     chunk_size = 20
     model = "google/gemini-2.5-flash-preview"
-    temperature = 0.3  # Recommended temperature for initial translation
+    temperature = 0.3
     segments = preprocess.reader(jp_file, size=chunk_size)
 
-    # 2. Translate each chunk
     translator = JapaneseToEnglishTranslator(temperature=temperature, model=model)
 
     translations = []
     for segment in tqdm(segments):
         num_lines = len(segment.splitlines())
         translations.append(translator.translate(segment, num_lines))
-        time.sleep(0.5)  # Respect API rate limits
+        time.sleep(0.5)
     
     preprocess.writer(output_file, translations)
-    # 3. Evaluate BLEU score
     bleu = evaluate_translation(en_ref_file, output_file)
     print(f"BLEU score: {bleu:.2f}")
 

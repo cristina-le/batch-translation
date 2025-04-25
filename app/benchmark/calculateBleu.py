@@ -2,8 +2,17 @@ import sacrebleu
 from sacremoses import MosesDetokenizer
 
 def evaluate_translation(target_test, target_pred):
+    """
+    Evaluate BLEU score between reference and predicted translation files.
+
+    Args:
+        target_test (str): Path to the reference (human translation) file.
+        target_pred (str): Path to the predicted translation file.
+
+    Returns:
+        float: BLEU score.
+    """
     md = MosesDetokenizer(lang='en')
-    # Open the test dataset human translation file and detokenize the references
     refs = []
 
     with open(target_test, encoding="utf8") as test:
@@ -12,9 +21,8 @@ def evaluate_translation(target_test, target_pred):
             line = md.detokenize(line) 
             refs.append(line)
         
-    refs = [refs]  # Yes, it is a list of list(s) as required by sacreBLEU
+    refs = [refs]
 
-    # Open the translation file by the NMT model and detokenize the predictions
     preds = []
 
     with open(target_pred, encoding="utf8") as pred:  
@@ -23,6 +31,5 @@ def evaluate_translation(target_test, target_pred):
             line = md.detokenize(line) 
             preds.append(line)
 
-    # Calculate and print the BLEU score
     bleu = sacrebleu.corpus_bleu(preds, refs)
     return bleu.score

@@ -8,10 +8,19 @@ import json
 load_dotenv()
 
 class Context(BaseModel):
+    """
+    Pydantic model for translated outputs.
+    """
     translated_outputs: List[str]
 
 class JapaneseToEnglishTranslator:
+    """
+    Translates Japanese text to English in batch mode with context preservation.
+    """
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model = "openai/gpt-4o-mini"):
+        """
+        Initialize the translator with API key, temperature, and model.
+        """
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model
@@ -19,6 +28,9 @@ class JapaneseToEnglishTranslator:
         self.prev_context = None
 
     def create_prompt(self, japanese_text: str, size) -> str:
+        """
+        Create a prompt for translation, optionally including previous context.
+        """
         base_prompt = f"""
 Translate each line of the following Japanese text to English.
 
@@ -58,6 +70,9 @@ Now translate the following with the same style and consistency:
         return base_prompt
 
     def translate(self, japanese_text: str, size: int) -> str:
+        """
+        Translate Japanese text to English, ensuring output matches required line count.
+        """
         prompt = self.create_prompt(japanese_text, size)
         
         output_lines = 0

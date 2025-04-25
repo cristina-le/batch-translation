@@ -1,5 +1,4 @@
 import time
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from dotenv import load_dotenv
@@ -10,22 +9,24 @@ from app.benchmark.calculateBleu import evaluate_translation
 load_dotenv()
 
 def run_temperature_test_refine():
-    # File paths
+    """
+    Run temperature sweep for translation refinement and analyze BLEU scores.
+
+    Returns:
+        tuple: (best_temp, results_df, summary_df)
+    """
     jp_file = "app/data/batch_jp.txt"
     en_ref_file = "app/data/batch_en.txt"
     initial_pred_file = "app/data/batch_output.txt"
     results_csv = "app/data/temperature_test_refine_results.csv"
     
-    # Temperature values to test
-    temperatures = [ 0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+    temperatures = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
     runs_per_temp = 5
     model = "google/gemini-2.5-pro-preview-03-25"
     chunk_size = 50
     
-    # Results storage
     results_data = []
     
-    # Read Japanese input and current translations
     japanese_segments = preprocess.reader(jp_file, size=chunk_size)
     current_translations = preprocess.reader(initial_pred_file, size=chunk_size)
     
@@ -42,24 +43,19 @@ def run_temperature_test_refine():
             print(f"\nRun {run}/{runs_per_temp} with temperature {temp}")
             output_file = f"app/data/temp_test_refine_output_{temp}_{run}.txt"
             
-            # Create refiner with current temperature
             refiner = TranslationRefiner(temperature=temp, model=model)
             
-            # Refine each segment
             refined = []
             for (jp, cur) in tqdm(zip(japanese_segments, current_translations)):
                 num_lines = len(cur.splitlines())
                 refined.append(refiner.refine(jp, cur, num_lines))
-                time.sleep(0.5)  # Respect API rate limits
+                time.sleep(0.5)
             
-            # Write refined translations to file
             preprocess.writer(output_file, refined)
             
-            # Evaluate BLEU score
             bleu = evaluate_translation(en_ref_file, output_file)
             print(f"Run {run} BLEU score: {bleu:.4f}")
             
-            # Store individual run result
             results_data.append({
                 'temperature': temp,
                 'run': run,
@@ -68,10 +64,8 @@ def run_temperature_test_refine():
             
             temp_scores.append(bleu)
     
-    # Create DataFrame from results
     results_df = pd.DataFrame(results_data)
     
-    # Calculate summary statistics
     summary_df = results_df.groupby('temperature').agg(
         avg_bleu=('bleu_score', 'mean'),
         std_dev=('bleu_score', 'std'),
@@ -79,18 +73,14 @@ def run_temperature_test_refine():
         max_bleu=('bleu_score', 'max')
     ).reset_index()
     
-    # Find best temperature
     best_temp_row = summary_df.loc[summary_df['avg_bleu'].idxmax()]
     best_temp = best_temp_row['temperature']
     
-    # Add a column to mark the best temperature
     summary_df['is_best'] = summary_df['temperature'] == best_temp
     
-    # Save both DataFrames to CSV
     results_df.to_csv(results_csv.replace('.csv', '_detailed.csv'), index=False)
     summary_df.to_csv(results_csv, index=False)
     
-    # Print summary for convenience
     print("\n\n" + "="*60)
     print(f"RESULTS SUMMARY")
     print("="*60)
