@@ -67,7 +67,7 @@ Current translation:
             )
             translation = response.choices[0].message.content
             translation = json.loads(translation)
-            translation = "\n".join(translation["translated_outputs"])
+            translation = "\n".join(translation["refined_outputs"])
             output_lines = len(translation.splitlines())
             
         return translation

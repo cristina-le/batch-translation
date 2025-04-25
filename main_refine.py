@@ -1,5 +1,4 @@
 import time
-from tqdm import tqdm
 from dotenv import load_dotenv
 from app.utils import preprocess
 from app.core.refiner import TranslationRefiner
@@ -9,15 +8,15 @@ load_dotenv()
 
 def main():
     # File paths
-    jp_file = "app/data/japaneseOriginal.txt"
-    en_ref_file = "app/data/humanTranslation.txt"
-    initial_pred_file = "app/data/translated_output.txt"
-    refined_pred_file = "app/data/translated_output_refined.txt"
+    jp_file = "app/data/batch_jp.txt"
+    en_ref_file = "app/data/batch_en.txt"
+    initial_pred_file = "app/data/batch_output.txt"
+    refined_pred_file = "app/data/batch_output_refined.txt"
 
     # 1. Read Japanese input and reference
     chunk_size = 50
     model = "google/gemini-2.5-pro-preview-03-25"
-    temperature = 0.2  # Recommended temperature for refinement
+    temperature = 0.5  # Recommended temperature for refinement
 
     japanese_segments = preprocess.reader(jp_file, size=chunk_size)
     current_translations = preprocess.reader(initial_pred_file, size=chunk_size)
@@ -26,7 +25,7 @@ def main():
     refiner = TranslationRefiner(temperature=temperature, model=model)
 
     refined = []
-    for (jp, cur) in tqdm(zip(japanese_segments, current_translations)):
+    for (jp, cur) in zip(japanese_segments, current_translations):
         num_lines = len(cur.splitlines())
         refined.append(refiner.refine(jp, cur, num_lines))
         time.sleep(0.5) # Respect API rate limits
