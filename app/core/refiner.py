@@ -31,13 +31,20 @@ class TranslationRefiner:
         Create a prompt for refining translations with strict output requirements.
         """
         prompt = f"""
-Refine each line of the following English translation of a Japanese text.
+Refine the following English translation of a Japanese text to maximize BLEU score.
+
+IMPORTANT BLEU SCORE GUIDELINES:
+- Make MINIMAL changes to preserve existing n-gram matches with reference translations
+- Focus on correcting obvious translation errors only
+- Maintain exact terminology and phrasing where possible
+- Avoid unnecessary paraphrasing or rewording that could reduce n-gram matches
+- Only make changes that are likely to improve BLEU score
 
 Requirements:
-- Maximize BLEU score by improving translation quality, accuracy, and naturalness.
-- Ensure the translation closely follows the Japanese meaning and nuance.
-- Use natural, high-quality English localization.
-- Preserve character speech, personality, honorifics, cultural references, and emotional nuance.
+- Preserve all Japanese names, terms, and honorifics exactly as translated
+- Keep sentence structure similar to the original translation when possible
+- Maintain character speech patterns and personality
+- Ensure the translation follows the Japanese meaning and nuance
 - Do NOT add or remove lines. No empty lines.
 
 CRITICAL:
@@ -68,19 +75,30 @@ Current translation:
         prompt = self.create_refinement_prompt(japanese_text, current_translation, size)
         
         output_lines = 0
-        while (output_lines != size):
-            response = self.client.beta.chat.completions.parse(
-                model=self.model,
-                temperature=self.temperature,
-                messages=[
-                    {"role": "system", "content": "You are a professional Japanese to English translation refiner. Your goal is to maximize BLEU score by improving translation quality and accuracy."},
-                    {"role": "user", "content": prompt}
-                ],
-                response_format=Context
-            )
-            translation = response.choices[0].message.content
-            translation = json.loads(translation)
-            translation = "\n".join(translation["refined_outputs"])
-            output_lines = len(translation.splitlines())
+        max_attempts = 3
+        attempt = 0
+        
+        while (output_lines != size and attempt < max_attempts):
+            attempt += 1
+            try:
+                response = self.client.beta.chat.completions.parse(
+                    model=self.model,
+                    temperature=self.temperature,
+                    messages=[
+                        {"role": "system", "content": "You are a professional Japanese to English translation refiner specializing in BLEU score optimization. Your primary goal is to maximize BLEU score by making minimal, strategic changes to preserve n-gram matches with reference translations. Be extremely conservative with changes, only fixing clear errors."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    response_format=Context
+                )
+                translation = response.choices[0].message.content
+                translation = json.loads(translation)
+                translation = "\n".join(translation["refined_outputs"])
+                output_lines = len(translation.splitlines())
+            except Exception as e:
+                print(f"Error during refinement attempt {attempt}: {e}")
+                if attempt >= max_attempts:
+                    # If all attempts fail, return the original translation
+                    return current_translation
+                continue
             
         return translation
