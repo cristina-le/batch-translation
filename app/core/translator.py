@@ -27,48 +27,99 @@ class JapaneseToEnglishTranslator:
         self.temperature = temperature
         self.prev_context = None
 
+    # def create_prompt(self, japanese_text: str, size) -> str:       
+    #     base_prompt = f"""
+    #     TASK: For each line of the following Japanese text, translate it to English to maximize BLEU score.
+
+    #     REQUIREMENTS:
+    #     - Maintain character speech patterns and personality.
+    #     - Preserve Japanese honorifics where appropriate.
+    #     - Keep cultural references intact.
+    #     - Ensure emotional nuances are conveyed.
+    #     - Use natural, flowing English suitable for high-quality localization.
+    #     - Do not create empty lines in your translation.
+
+    #     CRITICAL: 
+    #     - Your translation MUST have EXACTLY {size} lines, no more and no less.
+    #     - Return the result as JSON: "translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
+
+    #     CONTEXT: Japanese text to translate:
+    #     {japanese_text} 
+
+    #     RESULT: Translation into English:
+    #     """
+
+    #     if self.prev_context:
+    #         context_prompt = f"""
+    #         For context, here is the previous text and its translation:
+    #         Previous Japanese: {self.prev_context['japanese']}
+
+    #         Previous English: {self.prev_context['english']}
+
+    #         When translating the new text, maintain consistency with the previous translation in terms of:
+    #         - Character voice and speech patterns
+    #         - Terminology for recurring concepts
+    #         - Overall tone and style
+
+    #         Now based on the previous translation:
+    #         {base_prompt}
+    #         """
+    #         return context_prompt
+    #     return base_prompt
+    
     def create_prompt(self, japanese_text: str, size) -> str:       
         base_prompt = f"""
-        TASK: For each line of the following Japanese text, translate it to English to maximize BLEU score.
+        TASK:
+        Translate each line of the following Japanese text into natural, fluent English that maximizes BLEU score and reflects the original meaning and tone.
 
         REQUIREMENTS:
-        - Maintain character speech patterns and personality.
-        - Preserve Japanese honorifics where appropriate.
-        - Keep cultural references intact.
-        - Ensure emotional nuances are conveyed.
-        - Use natural, flowing English suitable for high-quality localization.
-        - Do not create empty lines in your translation.
+        - Maintain each character’s speech patterns and personality.
+        - Preserve Japanese honorifics and culturally specific terms where appropriate.
+        - Keep emotional nuance and context.
+        - Avoid overly literal or machine-like translation.
+        - Do NOT paraphrase excessively — stay close to the structure unless needed for fluency.
+        - NO empty lines — every Japanese line must be translated.
 
-        CRITICAL: 
-        - Your translation MUST have EXACTLY {size} lines, no more and no less.
-        - The "translated_outputs" array MUST contain EXACTLY {size} elements.
-        - Count the number of elements in your "translated_outputs" array before submitting to ensure it's exactly {size}.
-        - Return the result as JSON: "translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
+        IMPORTANT:
+        - The output MUST have EXACTLY {size} lines, one per Japanese input line.
+        - Return ONLY valid JSON in the following format:
 
-        CONTEXT: Japanese text to translate:
-        {japanese_text} 
+        "translated_outputs": [
+        "English line 1",
+        "English line 2",
+        ...
+        "English line {size}"
+        ]
 
-        RESULT: Translation into English:
+        Japanese Text:
+        {japanese_text}
+
+        RESULT: Provide ONLY the JSON-formatted translation as described above.
         """
 
         if self.prev_context:
             context_prompt = f"""
-            For context, here is the previous text and its translation:
-            Previous Japanese: {self.prev_context['japanese']}
+            You are continuing a translation. Below is the previous context:
 
-            Previous English: {self.prev_context['english']}
+            Previous Japanese:
+            {self.prev_context['japanese']}
 
-            When translating the new text, maintain consistency with the previous translation in terms of:
-            - Character voice and speech patterns
-            - Terminology for recurring concepts
-            - Overall tone and style
+            Previous English:
+            {self.prev_context['english']}
 
-            Now based on the previous translation:
+            When translating the new text, ensure consistency with the previous translation in:
+            - Character speech style and tone
+            - Key terminology
+            - Narrative flow
+
+            Now, translate the new content below following the same principles.
+
             {base_prompt}
             """
             return context_prompt
+
         return base_prompt
-    
+
     def translate(self, japanese_text: str, size: int) -> str:
         """
         Translate Japanese text to English, ensuring output matches required line count.
@@ -81,7 +132,7 @@ class JapaneseToEnglishTranslator:
                 model=self.model,
                 temperature=self.temperature,
                 messages=[
-                    {"role": "system", "content": "You are a professional Japanese to English translator specializing in visual novels. Your goal is to produce translations that maximize BLEU score when compared to professional human translations. CRITICAL: You must follow all instructions exactly, especially regarding the number of lines in the output. The number of lines in your translation must match exactly what is requested."},
+                    {"role": "system", "content": "You are a professional English-Japanese translator focused on high-quality localization with strong BLEU performance."},
                     {"role": "user", "content": prompt}
                 ],
                 response_format=Context,

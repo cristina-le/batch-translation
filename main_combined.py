@@ -13,17 +13,17 @@ def main():
     Run a combined pipeline of translation and refinement, then evaluate BLEU scores.
     """
     # File paths
-    jp_file = "app/data/batch_jp.txt"
-    en_ref_file = "app/data/batch_en.txt"
-    initial_output_file = "app/data/batch_output.txt"
-    refined_output_file = "app/data/batch_output_refined.txt"
+    jp_file = "app/data/VN/japaneseOriginal.txt"
+    en_ref_file = "app/data/VN/humanTranslation.txt"
+    initial_output_file = "app/data/VN/translated_output.txt"
+    refined_output_file = "app/data/VN/translated_output_refined.txt"
 
     # Configuration
     chunk_size = 20  # Original chunk size that worked well
     translation_model = "google/gemini-2.0-flash-001"
-    refinement_model = "google/gemini-2.5-flash-preview"  # More powerful model for refinement
-    translation_temperature = 0.2  # Original temperature that worked well
-    refinement_temperature = 0.2  # Same temperature for refinement
+    refinement_model = "google/gemini-2.0-flash-001"
+    translation_temperature = 0.3  # Original temperature that worked well
+    refinement_temperature = 0.3  # Same temperature for refinement
 
     # Read Japanese text in chunks
     segments = preprocess.reader(jp_file, size=chunk_size)

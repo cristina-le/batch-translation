@@ -27,46 +27,43 @@ class TranslationRefiner:
         self.temperature = temperature
 
     def create_refinement_prompt(self, japanese_text: str, current_translation: str, size: int) -> str:
-        """
-        Create a prompt for refining translations with strict output requirements.
-        """
         prompt = f"""
-Refine the following English translation of a Japanese text to maximize BLEU score.
+        Refine an existing English translation of a Japanese text to maximize the BLEU score.
+        
+        BLEU OPTIMIZATION GUIDELINES:
+        - Make ONLY MINIMAL edits that clearly improve BLEU score.
+        - Preserve existing n-gram matches wherever possible.
+        - Correct clear translation errors ONLY.
+        - Avoid paraphrasing or stylistic changes that may reduce BLEU overlap.
+        - Retain terminology, phrasing, and structure unless incorrect.
 
-IMPORTANT BLEU SCORE GUIDELINES:
-- Make MINIMAL changes to preserve existing n-gram matches with reference translations
-- Focus on correcting obvious translation errors only
-- Maintain exact terminology and phrasing where possible
-- Avoid unnecessary paraphrasing or rewording that could reduce n-gram matches
-- Only make changes that are likely to improve BLEU score
+        ADDITIONAL CONSTRAINTS:
+        - Preserve all Japanese names, terms, and honorifics exactly as they appear.
+        - Maintain sentence structure and tone aligned with the original.
+        - Keep characters’ speech style and personality intact.
+        - Do NOT add or remove lines. Do NOT leave empty lines.
+        - Ensure every English line corresponds clearly to its Japanese counterpart.
 
-Requirements:
-- Preserve all Japanese names, terms, and honorifics exactly as translated
-- Keep sentence structure similar to the original translation when possible
-- Maintain character speech patterns and personality
-- Ensure the translation follows the Japanese meaning and nuance
-- Do NOT add or remove lines. No empty lines.
+        IMPORTANT:
+        - The final output MUST contain EXACTLY {size} lines.
+        - Output ONLY valid JSON in the following format:
 
-CRITICAL:
-- Output MUST have EXACTLY {size} lines.
-- Return ONLY valid JSON in this format:
+        "refined_outputs": [
+            "English line 1",
+            "English line 2",
+            ...
+            "English line {size}"
+        ]
 
-"refined_outputs": [
-    "English line 1",
-    "English line 2",
-    "...",
-    "English line {size}"
-]
+        DO NOT include any explanations, markdown, or comments — ONLY return the JSON object as shown.
 
-- Do not return anything except the JSON object above.
+        Japanese Text:
+        {japanese_text}
 
-Japanese text:
-{japanese_text}
-
-Current translation:
-{current_translation}
-"""
-        return prompt
+        Current Translation:
+        {current_translation}
+        """
+        return prompt   
 
     def refine(self, japanese_text: str, current_translation: str, size: int) -> str:
         """
@@ -85,7 +82,7 @@ Current translation:
                     model=self.model,
                     temperature=self.temperature,
                     messages=[
-                        {"role": "system", "content": "You are a professional Japanese to English translation refiner specializing in BLEU score optimization. Your primary goal is to maximize BLEU score by making minimal, strategic changes to preserve n-gram matches with reference translations. Be extremely conservative with changes, only fixing clear errors."},
+                        {"role": "system", "content": "You are an expert English-Japanese translation assistant. Your task is to refine an existing English translation of a Japanese text to maximize the BLEU score."},
                         {"role": "user", "content": prompt}
                     ],
                     response_format=Context
