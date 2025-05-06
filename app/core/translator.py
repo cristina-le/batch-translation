@@ -27,98 +27,46 @@ class JapaneseToEnglishTranslator:
         self.temperature = temperature
         self.prev_context = None
 
-    # def create_prompt(self, japanese_text: str, size) -> str:       
-    #     base_prompt = f"""
-    #     TASK: For each line of the following Japanese text, translate it to English to maximize BLEU score.
-
-    #     REQUIREMENTS:
-    #     - Maintain character speech patterns and personality.
-    #     - Preserve Japanese honorifics where appropriate.
-    #     - Keep cultural references intact.
-    #     - Ensure emotional nuances are conveyed.
-    #     - Use natural, flowing English suitable for high-quality localization.
-    #     - Do not create empty lines in your translation.
-
-    #     CRITICAL: 
-    #     - Your translation MUST have EXACTLY {size} lines, no more and no less.
-    #     - Return the result as JSON: "translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
-
-    #     CONTEXT: Japanese text to translate:
-    #     {japanese_text} 
-
-    #     RESULT: Translation into English:
-    #     """
-
-    #     if self.prev_context:
-    #         context_prompt = f"""
-    #         For context, here is the previous text and its translation:
-    #         Previous Japanese: {self.prev_context['japanese']}
-
-    #         Previous English: {self.prev_context['english']}
-
-    #         When translating the new text, maintain consistency with the previous translation in terms of:
-    #         - Character voice and speech patterns
-    #         - Terminology for recurring concepts
-    #         - Overall tone and style
-
-    #         Now based on the previous translation:
-    #         {base_prompt}
-    #         """
-    #         return context_prompt
-    #     return base_prompt
-    
     def create_prompt(self, japanese_text: str, size) -> str:       
         base_prompt = f"""
-        TASK:
-        Translate each line of the following Japanese text into natural, fluent English that maximizes BLEU score and reflects the original meaning and tone.
+        TASK: For each line of the following Japanese text, translate it to English to maximize BLEU score.
 
         REQUIREMENTS:
-        - Maintain each character’s speech patterns and personality.
-        - Preserve Japanese honorifics and culturally specific terms where appropriate.
-        - Keep emotional nuance and context.
-        - Avoid overly literal or machine-like translation.
-        - Do NOT paraphrase excessively — stay close to the structure unless needed for fluency.
-        - NO empty lines — every Japanese line must be translated.
+        - Maintain character speech patterns and personality.
+        - Preserve Japanese honorifics where appropriate.
+        - Keep cultural references intact.
+        - Ensure emotional nuances are conveyed.
+        - Use natural, flowing English suitable for high-quality localization.
+        - Do not create empty lines in your translation.
 
-        IMPORTANT:
-        - The output MUST have EXACTLY {size} lines, one per Japanese input line.
-        - Return ONLY valid JSON in the following format:
+        CRITICAL: 
+        - Your translation MUST have EXACTLY {size} lines, no more and no less.
+        - Return the result as JSON: "translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
 
-        "translated_outputs": [
-        "English line 1",
-        "English line 2",
-        ...
-        "English line {size}"
-        ]
+        CONTEXT: Japanese text to translate:
+        {japanese_text} 
 
-        Japanese Text:
-        {japanese_text}
-
-        RESULT: Provide ONLY the JSON-formatted translation as described above.
+        RESULT: Translation into English:
         """
 
         if self.prev_context:
             context_prompt = f"""
-            You are continuing a translation. Below is the previous context:
+            For context, here is the previous text and its translation:
+            Previous Japanese: {self.prev_context['japanese']}
 
-            Previous Japanese:
-            {self.prev_context['japanese']}
+            Previous English: {self.prev_context['english']}
 
-            Previous English:
-            {self.prev_context['english']}
+            When translating the new text, maintain consistency with the previous translation in terms of:
+            - Character voice and speech patterns
+            - Terminology for recurring concepts
+            - Overall tone and style
 
-            When translating the new text, ensure consistency with the previous translation in:
-            - Character speech style and tone
-            - Key terminology
-            - Narrative flow
-
-            Now, translate the new content below following the same principles.
-
+            Now based on the previous translation:
             {base_prompt}
             """
             return context_prompt
-
         return base_prompt
+    
 
     def translate(self, japanese_text: str, size: int) -> str:
         """
