@@ -41,7 +41,7 @@ if __name__ == "__main__":
     jp_file = f"app\data/test\JP\japaneseOriginal_part{i}.txt"
     en_ref_file = f"app\data/test\ENG\humanTranslation_part{i}.txt"
     output_file = f"app\data/test\TRANS/translated_output_part{i}.txt"
-    best_bleu = evaluate_translation(en_ref_file, output_file)
+    best_bleu = 0
     print(best_bleu)
     best_translate = ""
     for j in range (5):
