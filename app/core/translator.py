@@ -29,7 +29,7 @@ class JapaneseToEnglishTranslator:
 
     def create_prompt(self, japanese_text: str, size) -> str:       
         base_prompt = f"""
-        TASK: For each line of the following Japanese text, translate it to English to maximize BLEU score.
+        TASK: For each line of the following Japanese text, translate it to English.
 
         REQUIREMENTS:
         - Maintain character speech patterns and personality.
@@ -48,18 +48,13 @@ class JapaneseToEnglishTranslator:
 
         RESULT: Translation into English:
         """
-
+    
         if self.prev_context:
-            context_prompt = f"""
+            context_prompt = f""""
             For context, here is the previous text and its translation:
             Previous Japanese: {self.prev_context['japanese']}
 
             Previous English: {self.prev_context['english']}
-
-            When translating the new text, maintain consistency with the previous translation in terms of:
-            - Character voice and speech patterns
-            - Terminology for recurring concepts
-            - Overall tone and style
 
             Now based on the previous translation:
             {base_prompt}
@@ -80,7 +75,7 @@ class JapaneseToEnglishTranslator:
                 model=self.model,
                 temperature=self.temperature,
                 messages=[
-                    {"role": "system", "content": "You are a professional English-Japanese translator focused on high-quality localization with strong BLEU performance."},
+                    {"role": "system", "content": "You are a professional Japanese to English translator specializing in visual novels. Your goal is to produce translations that maximize BLEU score when compared to professional human translations. CRITICAL: You must follow all instructions exactly"},
                     {"role": "user", "content": prompt}
                 ],
                 response_format=Context,
