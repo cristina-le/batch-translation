@@ -37,7 +37,7 @@ def main(jp_file, en_ref_file, output_file):
     return bleu, translations
 
 if __name__ == "__main__":
-    i = 2
+    i = 10
     jp_file = f"app\data/test\JP\japaneseOriginal_part{i}.txt"
     en_ref_file = f"app\data/test\ENG\humanTranslation_part{i}.txt"
     output_file = f"app\data/test\TRANS/translated_output_part{i}.txt"
