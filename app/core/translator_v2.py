@@ -13,7 +13,7 @@ class Context(BaseModel):
     """
     translated_outputs: List[str]
 
-class EnhancedJapaneseToEnglishTranslator:
+class JapaneseToEnglishTranslator:
     """
     Enhanced translator with improved context preservation and speaker awareness.
     """
@@ -37,10 +37,6 @@ class EnhancedJapaneseToEnglishTranslator:
         self.context_window = context_window
         self.speaker_aware = speaker_aware
         self.context_history = []
-        self.character_roles = {
-            "speaker": "female",  # Main speaker is female
-            "listener": "male"    # Listener/protagonist is male
-        }
 
     def preprocess_with_speakers(self, text: str) -> str:
         """
@@ -107,19 +103,11 @@ class EnhancedJapaneseToEnglishTranslator:
         - Ensure emotional nuances are conveyed.
         - Use natural, flowing English suitable for high-quality localization.
         - Do not create empty lines in your translation.
-        
-        CHARACTER ROLES:
-        - The main speaker is a {self.character_roles["speaker"]} character.
-        - The listener/protagonist is a {self.character_roles["listener"]} character.
-        - CRITICAL: Maintain the correct subject-object relationships in dialogue. 
-          When the speaker refers to "you", she means the male listener.
-          When actions are described, be clear about who is performing them.
-
+    
         CRITICAL: 
         - Your translation MUST have EXACTLY {size} lines, no more and no less.
         - Return the result as JSON: "translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]
         - Pay special attention to pronouns and subject-object relationships.
-        - Ensure that when the female speaker says "you", she is referring to the male listener.
         - When translating actions, be clear about who is performing the action.
 
         CONTEXT: Japanese text to translate:
@@ -133,7 +121,6 @@ class EnhancedJapaneseToEnglishTranslator:
             For context, here are the previous segments and their translations:
             """
             
-            # Add previous context chunks
             for prev_context in self.context_history[-self.context_window:]:
                 context_prompt += f"""
                 Previous Japanese:
@@ -165,40 +152,28 @@ class EnhancedJapaneseToEnglishTranslator:
         prompt = self.create_prompt(japanese_text, size)
         
         output_lines = 0
-        max_attempts = 3
-        attempts = 0
-        
-        while output_lines != size and attempts < max_attempts:
-            try:
-                response = self.client.beta.chat.completions.parse(
-                    model=self.model,
-                    temperature=self.temperature,
-                    messages=[
-                        {"role": "system", "content": "You are a professional Japanese to English translator specializing in visual novels. Your goal is to produce translations that maximize BLEU score when compared to professional human translations. CRITICAL: You must follow all instructions exactly, especially regarding subject-object relationships and character roles."},
-                        {"role": "user", "content": prompt}
-                    ],
-                    response_format=Context,
-                )
-                translation = response.choices[0].message.content
-                translation = json.loads(translation)
-                translation = "\n".join(translation["translated_outputs"])
-                output_lines = len(translation.splitlines())
-                attempts += 1
-            except Exception as e:
-                print(f"Error during translation: {e}")
-                attempts += 1
-                if attempts >= max_attempts:
-                    # Return best effort translation or error message
-                    return f"Translation error after {max_attempts} attempts: {e}"
-
-        # Store context for future translations
+        while (output_lines != size):
+            response = self.client.beta.chat.completions.parse(
+                model=self.model,
+                temperature=self.temperature,
+                messages=[
+                    {"role": "system", "content": "You are a professional Japanese to English translator specializing in visual novels. Your goal is to produce translations that maximize BLEU score when compared to professional human translations. CRITICAL: You must follow all instructions exactly"},
+                    {"role": "user", "content": prompt}
+                ],
+                response_format=Context,
+            )
+            translation = response.choices[0].message.content
+            translation = json.loads(translation)
+            translation = "\n".join(translation["translated_outputs"])
+            output_lines = len(translation.splitlines())
+            
         self.context_history.append({
             'japanese': japanese_text,
             'english': translation
         })
         
-        # Keep context history within the specified window
         if len(self.context_history) > self.context_window:
             self.context_history = self.context_history[-self.context_window:]
             
         return translation
+
