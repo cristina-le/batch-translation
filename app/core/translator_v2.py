@@ -15,7 +15,7 @@ class Context(BaseModel):
 
 class JapaneseToEnglishTranslator:
     """
-    Enhanced translator với improved context preservation.
+    Enhanced translator with improved context preservation.
     """
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, 
                  model = "openai/gpt-4o-mini", context_window: int = 3):

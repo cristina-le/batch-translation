@@ -3,7 +3,7 @@ from typing import Dict
 
 def post_process_translation(translation: str) -> str:
     """
-    Post-process translation để fix các vấn đề thường gặp.
+    Post-process translation to fix common issues.
     
     Args:
         translation: Raw translation text

@@ -25,10 +25,10 @@ class SpeakerTagging(BaseModel):
     tagged_lines: List[Dict[str, str]]
 
 class SpeakerAwareness:
-    """Class để xử lý speaker awareness với LLM-based character detection và caching."""
+    """Class to handle speaker awareness with LLM-based character detection and caching."""
     
     def __init__(self, model: str = "openai/gpt-4o"):
-        """Initialize speaker awareness với OpenAI client."""
+        """Initialize speaker awareness with OpenAI client."""
         api_key = os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
         self.model = model
@@ -183,7 +183,7 @@ class SpeakerAwareness:
             return "\n".join(tagged_lines)
 
     def preprocess_speakers(self, text: str, full_text: str = None) -> str:
-        """LLM-based speaker detection với caching."""
+        """LLM-based speaker detection with caching."""
         text_hash = self._get_text_hash(text)
         cached_result = self._load_tagged_text(text_hash)
         if cached_result:

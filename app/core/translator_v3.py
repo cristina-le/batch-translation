@@ -19,7 +19,7 @@ class QualityScore(BaseModel):
     reasoning: str
 
 class JapaneseToEnglishTranslator:
-    """Ultra-optimized translator chỉ tập trung vào translation."""
+    """Ultra-optimized translator focused only on translation."""
     
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.1, 
                  model = "openai/gpt-4o", context_window: int = 5, 
