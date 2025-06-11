@@ -1,5 +1,6 @@
 import os
 import time
+from typing import List
 from tqdm import tqdm
 from dotenv import load_dotenv
 from app.utils import preprocess
@@ -39,16 +40,33 @@ class TranslatorFactory:
         return JapaneseToEnglishTranslator(**params)
 
 
-def apply_speaker_awareness(text: str, full_text: str, enabled: bool, model: str) -> str:
-    """Apply speaker awareness if enabled."""
+def apply_speaker_awareness(lines: List[str], enabled: bool, model: str) -> tuple:
+    """Apply speaker awareness if enabled.
+    
+    Returns:
+        tuple: (tagged_lines, speaker_processor)
+    """
     if not enabled:
-        return text
+        return lines
+    
     try:
         processor = SpeakerAwareness(model)
-        return processor.preprocess_speakers(text, full_text)
+        full_text = '\n'.join(lines)
+        
+        # Process entire text at once
+        print("Processing speaker awareness for entire text...")
+        tagged_full_text = processor.preprocess_full_text(full_text)
+        tagged_lines = tagged_full_text.splitlines()
+        
+        # Ensure line count matches
+        if len(tagged_lines) != len(lines):
+            print(f"Warning: Tagged lines ({len(tagged_lines)}) != Original lines ({len(lines)})")
+            return lines
+            
+        return tagged_lines
     except Exception as e:
         print(f"Speaker awareness error: {e}")
-        return text
+        return lines
 
 
 def translate_file(input_file: str, output_file: str, translator, 
@@ -67,18 +85,21 @@ def translate_file(input_file: str, output_file: str, translator,
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = [line.strip() for line in f.readlines() if line.strip()]
     
-    full_text = '\n'.join(lines) if speaker_aware else None
-    
     print(f"Total lines to translate: {len(lines)}")
+    
+    # Apply speaker awareness to entire text if enabled
     if speaker_aware:
         print("Speaker awareness enabled - analyzing characters...")
+        tagged_lines = apply_speaker_awareness(lines, True, translator.model)
+    else:
+        tagged_lines = lines
     
     translated_lines = []
-    total_chunks = (len(lines) + chunk_size - 1) // chunk_size
+    total_chunks = (len(tagged_lines) + chunk_size - 1) // chunk_size
     
     # Translate each chunk
-    for i in range(0, len(lines), chunk_size):
-        chunk = lines[i:i + chunk_size]
+    for i in range(0, len(tagged_lines), chunk_size):
+        chunk = tagged_lines[i:i + chunk_size]
         chunk_text = '\n'.join(chunk)
         chunk_num = (i // chunk_size) + 1
         
@@ -86,13 +107,7 @@ def translate_file(input_file: str, output_file: str, translator,
         
         start_time = time.time()
         try:
-            # Apply speaker awareness if needed
-            if speaker_aware:
-                chunk_text = apply_speaker_awareness(
-                    chunk_text, full_text, True, translator.model
-                )
-            
-            # Translate chunk
+            # Translate chunk (already has speaker tags if enabled)
             translated = translator.translate(chunk_text, len(chunk))
             translated_lines.extend(translated.split('\n'))
             
@@ -200,7 +215,7 @@ def main(jp_file: str,
 
 if __name__ == "__main__":
 
-    config = get_config(preset='balanced')
+    config = get_config(preset='fast')
         
     # Run translation
     main(**config)

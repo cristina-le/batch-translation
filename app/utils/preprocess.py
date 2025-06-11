@@ -35,10 +35,11 @@ class SpeakerAwareness:
         
         # Cache setup
         self.cache_dir = "app/data/cache"
-        self.tagged_texts_dir = os.path.join(self.cache_dir, "tagged_texts")
         self.profiles_cache_file = os.path.join(self.cache_dir, "character_profiles.json")
-        os.makedirs(self.tagged_texts_dir, exist_ok=True)
+        self.full_text_cache_dir = os.path.join(self.cache_dir, "full_tagged_texts")
+        os.makedirs(self.full_text_cache_dir, exist_ok=True)
         self.character_profiles_cache = self._load_cache()
+        self.character_profiles = {}  # Store current profiles for consistency
 
     def _load_cache(self) -> Dict:
         """Load character profiles cache."""
@@ -63,34 +64,6 @@ class SpeakerAwareness:
         """Generate hash for text."""
         return hashlib.md5(text.encode('utf-8')).hexdigest()
 
-    def _load_tagged_text(self, text_hash: str) -> Optional[str]:
-        """Load tagged text from cache."""
-        try:
-            tagged_file = os.path.join(self.tagged_texts_dir, f"{text_hash}.txt")
-            if os.path.exists(tagged_file):
-                with open(tagged_file, 'r', encoding='utf-8') as f:
-                    return f.read()
-        except Exception:
-            pass
-        return None
-
-    def _save_tagged_text(self, text_hash: str, tagged_text: str):
-        """Save tagged text to cache."""
-        try:
-            tagged_file = os.path.join(self.tagged_texts_dir, f"{text_hash}.txt")
-            with open(tagged_file, 'w', encoding='utf-8') as f:
-                f.write(tagged_text)
-            
-            # Save metadata
-            meta_file = os.path.join(self.tagged_texts_dir, f"{text_hash}_meta.json")
-            metadata = {
-                "timestamp": datetime.now().isoformat(),
-                "lines_count": len(tagged_text.splitlines())
-            }
-            with open(meta_file, 'w', encoding='utf-8') as f:
-                json.dump(metadata, f, indent=2)
-        except Exception as e:
-            print(f"Error saving tagged text: {e}")
 
     def _build_character_profiles(self, full_text: str) -> Dict:
         """Use LLM to analyze text and create character profiles."""
@@ -182,20 +155,55 @@ class SpeakerAwareness:
                     tagged_lines.append(f"[Narration]: {line}")
             return "\n".join(tagged_lines)
 
-    def preprocess_speakers(self, text: str, full_text: str = None) -> str:
-        """LLM-based speaker detection with caching."""
-        text_hash = self._get_text_hash(text)
-        cached_result = self._load_tagged_text(text_hash)
+    def _load_full_tagged_text(self, text_hash: str) -> Optional[str]:
+        """Load full tagged text from cache."""
+        try:
+            tagged_file = os.path.join(self.full_text_cache_dir, f"{text_hash}.txt")
+            if os.path.exists(tagged_file):
+                with open(tagged_file, 'r', encoding='utf-8') as f:
+                    return f.read()
+        except Exception:
+            pass
+        return None
+
+    def _save_full_tagged_text(self, text_hash: str, tagged_text: str):
+        """Save full tagged text to cache."""
+        try:
+            tagged_file = os.path.join(self.full_text_cache_dir, f"{text_hash}.txt")
+            with open(tagged_file, 'w', encoding='utf-8') as f:
+                f.write(tagged_text)
+            
+            # Save metadata
+            meta_file = os.path.join(self.full_text_cache_dir, f"{text_hash}_meta.json")
+            metadata = {
+                "timestamp": datetime.now().isoformat(),
+                "lines_count": len(tagged_text.splitlines()),
+                "characters": list(self.character_profiles.keys()) if self.character_profiles else []
+            }
+            with open(meta_file, 'w', encoding='utf-8') as f:
+                json.dump(metadata, f, indent=2)
+        except Exception as e:
+            print(f"Error saving full tagged text: {e}")
+
+    def preprocess_full_text(self, full_text: str) -> str:
+        """Process entire text at once for consistent speaker tagging."""
+        text_hash = self._get_text_hash(full_text)
+        
+        # Check cache first
+        cached_result = self._load_full_tagged_text(text_hash)
         if cached_result:
-            print(f"Using cached tags: {text_hash[:8]}...")
+            print(f"Using cached full text tags: {text_hash[:8]}...")
             return cached_result
         
-        # Get or build profiles
-        profiles = self._build_character_profiles(full_text) if full_text else {}
+        # Build character profiles
+        self.character_profiles = self._build_character_profiles(full_text)
         
-        print(f"Processing with LLM: {text_hash[:8]}...")
-        tagged_result = self._llm_tag_speakers(text, profiles)
-        self._save_tagged_text(text_hash, tagged_result)
+        # Tag entire text at once
+        print(f"Tagging full text with LLM: {text_hash[:8]}...")
+        tagged_result = self._llm_tag_speakers(full_text, self.character_profiles)
+        
+        # Save to cache
+        self._save_full_tagged_text(text_hash, tagged_result)
         
         return tagged_result
 

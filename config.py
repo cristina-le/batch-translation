@@ -43,23 +43,17 @@ PRESETS = {
         'model': "google/gemini-2.0-flash-001",
         'temperature': 0.3,
         'chunk_size': 30,
-        'speaker_aware': False,
+        'speaker_aware': True,
+        'context_window': 3,
     },
     'quality': {
         'translator_version': 2,
-        'model': "openai/gpt-4o",
+        'model': "google/gemini-2.0-flash-001",
         'temperature': 0.05,
         'chunk_size': 15,
         'speaker_aware': True,
         'quality_threshold': 9.0,
-    },
-    'balanced': {
-        'translator_version': 2,
-        'model': "google/gemini-2.0-flash-001",
-        'temperature': 0.2,
-        'chunk_size': 20,
-        'speaker_aware': True,
-        'quality_threshold': 8.5,
+        'context_window': 6,
     }
 }
 
@@ -69,7 +63,7 @@ def get_config(preset=None, **overrides):
     Get configuration with optional preset and overrides.
     
     Args:
-        preset: Name of preset configuration ('fast', 'quality', 'balanced')
+        preset: Name of preset configuration ('fast', 'quality')
         **overrides: Any configuration values to override
         
     Returns:

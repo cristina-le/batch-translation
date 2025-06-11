@@ -17,8 +17,7 @@ class JapaneseToEnglishTranslator:
     """
     Enhanced translator with improved context preservation.
     """
-    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, 
-                 model = "openai/gpt-4o-mini", context_window: int = 3):
+    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, model = "openai/gpt-4o-mini", context_window: int = 3, quality_threshold: float = 8.0):
         """
         Initialize the translator with API key, temperature, model and context settings.
         
@@ -46,7 +45,40 @@ class JapaneseToEnglishTranslator:
         Returns:
             Prompt for the translation model
         """
-        base_prompt = f"""
+        # Check if text has speaker tags
+        has_speaker_tags = any(line.startswith('[') and ']: ' in line for line in japanese_text.splitlines())
+        
+        if has_speaker_tags:
+            base_prompt = f"""
+        TASK: For each line of the following Japanese text, translate it to English.
+
+        SPEAKER AWARENESS: The text includes speaker tags in format [Speaker Name]: dialogue
+        - Maintain the exact same speaker tags in your translation
+        - Adapt the translation style to match each character's personality and speech patterns
+        - Ensure consistency in how each character speaks throughout the text
+
+        REQUIREMENTS:
+        - Maintain character speech patterns and personality based on speaker tags.
+        - Preserve Japanese honorifics where appropriate.
+        - Keep cultural references intact.
+        - Ensure emotional nuances are conveyed.
+        - Use natural, flowing English suitable for high-quality localization.
+        - Do not create empty lines in your translation.
+    
+        CRITICAL: 
+        - Your translation MUST have EXACTLY {size} lines, no more and no less.
+        - Return the result as JSON: "translated_outputs": ["[Speaker]: English line 1", "[Speaker]: English line 2", ..., "English line {size}"]
+        - Keep the speaker tags EXACTLY as they appear in the original
+        - Pay special attention to pronouns and subject-object relationships.
+        - When translating actions, be clear about who is performing the action.
+
+        CONTEXT: Japanese text to translate (with speaker tags):
+        {japanese_text} 
+
+        RESULT: Translation into English:
+        """
+        else:
+            base_prompt = f"""
         TASK: For each line of the following Japanese text, translate it to English.
 
         REQUIREMENTS:

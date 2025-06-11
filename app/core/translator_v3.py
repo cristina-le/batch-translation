@@ -21,9 +21,7 @@ class QualityScore(BaseModel):
 class JapaneseToEnglishTranslator:
     """Ultra-optimized translator focused only on translation."""
     
-    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.1, 
-                 model = "openai/gpt-4o", context_window: int = 5, 
-                 quality_threshold: float = 8.0):
+    def __init__(self, api_key: Optional[str] = None, temperature: float = 0.1, model = "openai/gpt-4o", context_window: int = 5, quality_threshold: float = 8.0):
         """Initialize the translator."""
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
@@ -35,7 +33,34 @@ class JapaneseToEnglishTranslator:
 
     def create_ultra_optimized_prompt(self, japanese_text: str, size: int) -> str:
         """Create optimized prompt for translation."""
-        base_prompt = f"""
+        # Check if text has speaker tags
+        has_speaker_tags = any(line.startswith('[') and ']: ' in line for line in japanese_text.splitlines())
+        
+        if has_speaker_tags:
+            base_prompt = f"""
+        TASK: Translate Japanese visual novel text to English with MAXIMUM BLEU SCORE optimization.
+
+        SPEAKER AWARENESS: The text includes speaker tags in format [Speaker Name]: dialogue
+        - Maintain the EXACT same speaker tags in your translation
+        - Adapt translation style to match each character's unique voice and personality
+        - Ensure each character maintains consistent speech patterns throughout
+
+        CRITICAL REQUIREMENTS:
+        - Use natural, fluent English matching professional translations
+        - Maintain consistent character voices based on speaker tags
+        - Preserve emotional nuances and narrative flow
+        - Use common English expressions over literal translations
+
+        TECHNICAL REQUIREMENTS:
+        - Return EXACTLY {size} lines as JSON: {{"translated_outputs": ["[Speaker]: line1", "[Speaker]: line2", ...]}}
+        - Keep speaker tags EXACTLY as they appear in the original
+        - Each line should be complete and natural-sounding
+
+        TEXT TO TRANSLATE (with speaker tags):
+        {japanese_text}
+        """
+        else:
+            base_prompt = f"""
         TASK: Translate Japanese visual novel text to English with MAXIMUM BLEU SCORE optimization.
 
         CRITICAL REQUIREMENTS:
@@ -144,7 +169,7 @@ class JapaneseToEnglishTranslator:
                 )
                 translation_data = json.loads(response.choices[0].message.content)
                 best_translation = "\n".join(translation_data["translated_outputs"])
-                best_translation = self._post_process(best_translation)
+                best_translation = post_process_translation(best_translation)
             except:
                 best_translation = "Translation failed."
 
