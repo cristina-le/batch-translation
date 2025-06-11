@@ -3,7 +3,9 @@ import sys
 import time
 from tqdm import tqdm
 from dotenv import load_dotenv
+from openai import OpenAI
 from app.utils import preprocess
+from app.utils.preprocess import SpeakerAwareness
 from app.benchmark.calculateBleu import evaluate_translation
 
 load_dotenv()
@@ -24,8 +26,7 @@ def get_translator(version: int, **kwargs):
         return JapaneseToEnglishTranslator(
             temperature=kwargs.get('temperature', 0.2),
             model=kwargs.get('model', "google/gemini-2.0-flash-001"),
-            context_window=kwargs.get('context_window', 3),
-            speaker_aware=kwargs.get('speaker_aware', True)
+            context_window=kwargs.get('context_window', 3)
         )
     elif version == 2:
         from app.core.translator_v3 import JapaneseToEnglishTranslator
@@ -33,7 +34,6 @@ def get_translator(version: int, **kwargs):
             temperature=kwargs.get('temperature', 0.05),
             model=kwargs.get('model', "openai/gpt-4o"),
             context_window=kwargs.get('context_window', 7),
-            speaker_aware=kwargs.get('speaker_aware', True),
             quality_threshold=kwargs.get('quality_threshold', 8.5)
         )
     else:
@@ -43,9 +43,22 @@ def preprocess_text(text: str) -> str:
     """Simple text preprocessing for v3."""
     return text.strip()
 
-def translate_batch_file_v2(input_file: str, output_file: str, chunk_size: int, translator):
+def apply_speaker_awareness(text: str, full_text: str, speaker_aware: bool, model: str) -> str:
     """
-    Ultra-optimized translation method for v2.
+    Áp dụng speaker awareness cho text nếu được bật.
+    """
+    if not speaker_aware:
+        return text
+    try:
+        speaker_processor = SpeakerAwareness(model)
+        return speaker_processor.preprocess_speakers(text, full_text)
+    except Exception as e:
+        print(f"Speaker awareness error: {e}")
+        return text
+
+def translate_batch_file_v2(input_file: str, output_file: str, chunk_size: int, translator, speaker_aware: bool = False, model: str = "openai/gpt-4o"):
+    """
+    Ultra-optimized translation method for v2 với speaker awareness.
     """
     print(f"Reading input file: {input_file}")
     with open(input_file, 'r', encoding='utf-8') as f:
@@ -53,8 +66,12 @@ def translate_batch_file_v2(input_file: str, output_file: str, chunk_size: int, 
     
     # Preprocess the text
     lines = [preprocess_text(line.strip()) for line in lines if line.strip()]
+    full_text = '\n'.join(lines)
     
     print(f"Total lines to translate: {len(lines)}")
+    
+    if speaker_aware:
+        print("Speaker awareness enabled - analyzing characters...")
     
     translated_lines = []
     total_chunks = (len(lines) + chunk_size - 1) // chunk_size
@@ -68,7 +85,10 @@ def translate_batch_file_v2(input_file: str, output_file: str, chunk_size: int, 
         
         start_time = time.time()
         try:
-            translated_chunk = translator.translate(chunk_text, len(chunk))
+            # Áp dụng speaker awareness nếu được bật
+            processed_text = apply_speaker_awareness(chunk_text, full_text, speaker_aware, model)
+            
+            translated_chunk = translator.translate(processed_text, len(chunk))
             translated_lines.extend(translated_chunk.split('\n'))
             
             elapsed = time.time() - start_time
@@ -165,7 +185,7 @@ def main(jp_file: str, output_file: str, en_ref_file: str = None,
             return
         
         start_time = time.time()
-        num_lines = translate_batch_file_v2(jp_file, output_file, chunk_size, translator)
+        num_lines = translate_batch_file_v2(jp_file, output_file, chunk_size, translator, speaker_aware, model)
         total_time = time.time() - start_time
         
         print(f"\nTranslation Summary:")
@@ -179,10 +199,21 @@ def main(jp_file: str, output_file: str, en_ref_file: str = None,
         # Use standard method for v1
         segments = preprocess.reader(jp_file, size=chunk_size)
         
+        # Đọc full text để sử dụng cho speaker awareness
+        full_text = None
+        if speaker_aware:
+            with open(jp_file, 'r', encoding='utf-8') as f:
+                full_text = f.read()
+            print("Speaker awareness enabled - analyzing characters...")
+        
         translations = []
         for segment in tqdm(segments):
             num_lines = len(segment.splitlines())
-            translations.append(translator.translate(segment, num_lines))
+            
+            # Áp dụng speaker awareness nếu được bật
+            processed_segment = apply_speaker_awareness(segment, full_text, speaker_aware, model)
+            
+            translations.append(translator.translate(processed_segment, num_lines))
             time.sleep(0.5)  # Delay to avoid rate limiting
 
         preprocess.writer(output_file, translations)
@@ -216,7 +247,7 @@ if __name__ == "__main__":
     en_ref_file = "app/data/batch_en.txt"  # Set to reference file path if available
     
     # Translator version selection (1 or 2)
-    translator_version = 1  # Change this to select translator version
+    translator_version = 2  # Change this to select translator version
     
     # Common parameters
     chunk_size = 20  # Number of lines per chunk
@@ -244,7 +275,7 @@ if __name__ == "__main__":
     elif translator_version == 2:
         # Version 2 (Ultra-optimized with quality assessment)
         context_window = 3  # Larger context for better consistency
-        speaker_aware = False  # Enable speaker diarization
+        speaker_aware = True  # Enable speaker diarization
         model = "google/gemini-2.0-flash-001"  # Best model for quality
         temperature = 0.2  # Very low for consistency
         quality_threshold = 8.5  # High quality threshold

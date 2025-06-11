@@ -1,5 +1,5 @@
 import os
-from typing import List, Optional, Dict
+from typing import List, Optional
 from openai import OpenAI
 from dotenv import load_dotenv
 from pydantic import BaseModel
@@ -15,11 +15,10 @@ class Context(BaseModel):
 
 class JapaneseToEnglishTranslator:
     """
-    Enhanced translator with improved context preservation and speaker awareness.
+    Enhanced translator với improved context preservation.
     """
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.2, 
-                 model = "openai/gpt-4o-mini", context_window: int = 3, 
-                 speaker_aware: bool = True):
+                 model = "openai/gpt-4o-mini", context_window: int = 3):
         """
         Initialize the translator with API key, temperature, model and context settings.
         
@@ -28,59 +27,17 @@ class JapaneseToEnglishTranslator:
             temperature: Temperature for generation
             model: Model to use for translation
             context_window: Number of previous chunks to keep in context
-            speaker_aware: Whether to use speaker diarization
         """
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model
         self.temperature = temperature
         self.context_window = context_window
-        self.speaker_aware = speaker_aware
         self.context_history = []
-
-    def preprocess_with_speakers(self, text: str) -> str:
-        """
-        Add speaker tags to dialogue lines.
-        This is a simple implementation that assumes lines starting with specific
-        patterns are dialogue.
-        
-        Args:
-            text: Input Japanese text
-            
-        Returns:
-            Text with speaker tags added
-        """
-        if not self.speaker_aware:
-            return text
-            
-        lines = text.splitlines()
-        processed_lines = []
-        
-        for line in lines:
-            # Skip empty lines
-            if not line.strip():
-                processed_lines.append(line)
-                continue
-                
-            # Simple heuristic: lines that start with quotes or specific patterns
-            # are likely dialogue from the main female character
-            if (line.strip().startswith('「') or 
-                line.strip().startswith('ねぇ') or
-                line.strip().startswith('はい') or
-                line.strip().startswith('ほら') or
-                line.strip().startswith('あ') or
-                line.strip().startswith('え') or
-                line.strip().startswith('ん')):
-                processed_lines.append(f"Female-Speaker: {line}")
-            else:
-                # Narration or description
-                processed_lines.append(line)
-                
-        return "\n".join(processed_lines)
 
     def create_prompt(self, japanese_text: str, size: int) -> str:
         """
-        Create a translation prompt with enhanced context and character awareness.
+        Create a translation prompt with enhanced context.
         
         Args:
             japanese_text: Japanese text to translate
@@ -89,10 +46,6 @@ class JapaneseToEnglishTranslator:
         Returns:
             Prompt for the translation model
         """
-        # Add speaker tags if enabled
-        if self.speaker_aware:
-            japanese_text = self.preprocess_with_speakers(japanese_text)
-        
         base_prompt = f"""
         TASK: For each line of the following Japanese text, translate it to English.
 
@@ -176,4 +129,3 @@ class JapaneseToEnglishTranslator:
             self.context_history = self.context_history[-self.context_window:]
             
         return translation
-
