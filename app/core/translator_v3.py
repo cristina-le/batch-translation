@@ -1,45 +1,47 @@
 import os
-from typing import List, Optional, Dict, Tuple
+from typing import List, Optional, Dict
 from openai import OpenAI
 from dotenv import load_dotenv
 from pydantic import BaseModel
 import json
 import re
-from collections import defaultdict
+import hashlib
+from datetime import datetime
 
 load_dotenv()
 
 class Context(BaseModel):
-    """
-    Pydantic model for translated outputs.
-    """
+    """Pydantic model for translated outputs."""
     translated_outputs: List[str]
 
 class QualityScore(BaseModel):
-    """
-    Pydantic model for translation quality assessment.
-    """
+    """Pydantic model for translation quality assessment."""
     score: float
     reasoning: str
+class CharacterProfile(BaseModel):
+    """
+    Pydantic model for discovered character profiles.
+    """
+    name: str
+    gender: str
+    personality: str
+    speech_patterns: List[str]
+    relationships: Dict[str, str]
+class CharacterProfiles(BaseModel):
+    """Pydantic model for all discovered character profiles."""
+    characters: Dict[str, CharacterProfile]
+
+class SpeakerTagging(BaseModel):
+    """Pydantic model for speaker tagging results."""
+    tagged_lines: List[Dict[str, str]]
 
 class JapaneseToEnglishTranslator:
-    """
-    Ultra-optimized translator designed to maximize BLEU scores through advanced techniques.
-    """
+    """Ultra-optimized translator with LLM-based character detection and caching."""
+    
     def __init__(self, api_key: Optional[str] = None, temperature: float = 0.1, 
                  model = "openai/gpt-4o", context_window: int = 5, 
                  speaker_aware: bool = True, quality_threshold: float = 8.0):
-        """
-        Initialize the ultra-optimized translator.
-        
-        Args:
-            api_key: API key for OpenRouter
-            temperature: Temperature for generation (lower for consistency)
-            model: Model to use (gpt-4o for best quality)
-            context_window: Number of previous chunks to keep in context
-            speaker_aware: Whether to use speaker diarization
-            quality_threshold: Minimum quality score to accept translation
-        """
+        """Initialize the translator with caching and LLM-based speaker detection."""
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=self.api_key)
         self.model = model
@@ -48,184 +50,225 @@ class JapaneseToEnglishTranslator:
         self.speaker_aware = speaker_aware
         self.quality_threshold = quality_threshold
         self.context_history = []
-        self.character_consistency = defaultdict(list)
-        self.translation_memory = {}
         
-        # Character profiles for consistency
-        self.character_profiles = {
-            "レイ": {
-                "name": "Rei",
-                "gender": "male",
-                "personality": "introspective, gentle, android",
-                "speech_pattern": "formal but warm, uses 'I' consistently"
-            },
-            "シオナ": {
-                "name": "Shiona", 
-                "gender": "female",
-                "personality": "kind, caring, optimistic",
-                "speech_pattern": "warm, uses 'you' when addressing Rei"
-            },
-            "ティピィ": {
-                "name": "Tipi",
-                "gender": "female", 
-                "personality": "childlike, lonely, affectionate",
-                "speech_pattern": "simple, childish language"
-            },
-            "マッド": {
-                "name": "Madd",
-                "gender": "male",
-                "personality": "gruff, stern but caring underneath",
-                "speech_pattern": "rough, direct, uses contractions"
-            }
-        }
+        # Cache setup
+        self.cache_dir = "app/data/cache"
+        self.tagged_texts_dir = os.path.join(self.cache_dir, "tagged_texts")
+        self.profiles_cache_file = os.path.join(self.cache_dir, "character_profiles.json")
+        os.makedirs(self.tagged_texts_dir, exist_ok=True)
+        self.character_profiles_cache = self._load_cache()
 
-    def preprocess_with_advanced_speakers(self, text: str) -> str:
-        """
-        Advanced speaker detection and tagging.
-        """
-        if not self.speaker_aware:
-            return text
-            
-        lines = text.splitlines()
-        processed_lines = []
-        
-        for line in lines:
-            if not line.strip():
-                processed_lines.append(line)
-                continue
-                
-            # Detect character names and dialogue patterns
-            character_detected = None
-            
-            # Check for character name patterns
-            for char_jp, profile in self.character_profiles.items():
-                if char_jp in line or profile["name"] in line:
-                    character_detected = profile["name"]
-                    break
-            
-            # Dialogue detection patterns
-            if line.strip().startswith('「'):
-                if not character_detected:
-                    # Use context to determine speaker
-                    if any('シオナ' in prev for prev in lines[max(0, lines.index(line)-3):lines.index(line)]):
-                        character_detected = "Shiona"
-                    elif any('ティピィ' in prev for prev in lines[max(0, lines.index(line)-3):lines.index(line)]):
-                        character_detected = "Tipi"
-                    else:
-                        character_detected = "Rei"  # Default protagonist
-                        
-                processed_lines.append(f"[{character_detected}]: {line}")
-            else:
-                # Narration or description
-                processed_lines.append(f"[Narration]: {line}")
-                
-        return "\n".join(processed_lines)
-
-    def create_ultra_optimized_prompt(self, japanese_text: str, size: int) -> str:
-        """
-        Create an ultra-optimized prompt designed to maximize BLEU scores.
-        """
-        # Add speaker tags if enabled
-        if self.speaker_aware:
-            japanese_text = self.preprocess_with_advanced_speakers(japanese_text)
-        
-        # Character consistency information
-        char_info = ""
-        if self.character_profiles:
-            char_info = "\nCHARACTER PROFILES:\n"
-            for char_jp, profile in self.character_profiles.items():
-                char_info += f"- {char_jp} ({profile['name']}): {profile['personality']}, {profile['speech_pattern']}\n"
-
-        base_prompt = f"""
-        TASK: Translate Japanese visual novel text to English with MAXIMUM BLEU SCORE optimization.
-
-        CRITICAL BLEU OPTIMIZATION REQUIREMENTS:
-        - Use natural, fluent English that matches professional human translations
-        - Maintain consistent terminology and character voices throughout
-        - Preserve sentence structure when it enhances readability
-        - Use common English expressions over literal translations
-        - Ensure smooth narrative flow and emotional resonance
-        - Match the tone and register of high-quality visual novel localizations
-
-        TRANSLATION GUIDELINES:
-        - Maintain character speech patterns and personality consistently
-        - Preserve Japanese honorifics only when they add cultural value
-        - Adapt cultural references for English readers while keeping essence
-        - Ensure emotional nuances are clearly conveyed
-        - Use natural, flowing English suitable for professional localization
-        - Avoid overly literal translations that sound unnatural
-        - Prioritize readability and natural expression over word-for-word accuracy
-
-        CHARACTER CONSISTENCY:
-        {char_info}
-
-        TECHNICAL REQUIREMENTS:
-        - Your translation MUST have EXACTLY {size} lines, no more and no less
-        - Return as JSON: {{"translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]}}
-        - Each line should be complete and natural-sounding
-        - Maintain narrative coherence across all lines
-
-        CONTEXT: Japanese text to translate:
-        {japanese_text}
-
-        RESULT: High-quality English translation optimized for maximum BLEU score:
-        """
-    
-        if self.context_history:
-            context_prompt = f"""
-            PREVIOUS CONTEXT (for consistency):
-            """
-            
-            # Add previous context chunks with character tracking
-            for i, prev_context in enumerate(self.context_history[-self.context_window:]):
-                context_prompt += f"""
-                Segment {i+1}:
-                Japanese: {prev_context['japanese']}
-                English: {prev_context['english']}
-                """
-                
-            context_prompt += f"""
-            
-            Based on the above context, maintain consistency in:
-            - Character names and personalities
-            - Terminology and world-building elements
-            - Narrative tone and style
-            - Relationship dynamics
-            
-            Now translate the new segment:
-            {base_prompt}
-            """
-            return context_prompt
-            
-        return base_prompt
-
-    def assess_translation_quality(self, japanese_text: str, english_text: str) -> float:
-        """
-        Assess translation quality using AI evaluation.
-        """
+    def _load_cache(self) -> Dict:
+        """Load character profiles cache."""
         try:
-            assessment_prompt = f"""
-            Evaluate this Japanese to English translation on a scale of 1-10 for BLEU score potential.
+            if os.path.exists(self.profiles_cache_file):
+                with open(self.profiles_cache_file, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+        except Exception as e:
+            print(f"Error loading cache: {e}")
+        return {}
+
+    def _save_profiles_cache(self, profiles: Dict, text_hash: str):
+        """Save character profiles to cache."""
+        try:
+            self.character_profiles_cache[text_hash] = profiles
+            with open(self.profiles_cache_file, 'w', encoding='utf-8') as f:
+                json.dump(self.character_profiles_cache, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"Error saving profiles cache: {e}")
+
+    def _get_text_hash(self, text: str) -> str:
+        """Generate hash for text."""
+        return hashlib.md5(text.encode('utf-8')).hexdigest()
+
+    def _load_tagged_text(self, text_hash: str) -> Optional[str]:
+        """Load tagged text from cache."""
+        try:
+            tagged_file = os.path.join(self.tagged_texts_dir, f"{text_hash}.txt")
+            if os.path.exists(tagged_file):
+                with open(tagged_file, 'r', encoding='utf-8') as f:
+                    return f.read()
+        except Exception:
+            pass
+        return None
+
+    def _save_tagged_text(self, text_hash: str, tagged_text: str):
+        """Save tagged text to cache."""
+        try:
+            tagged_file = os.path.join(self.tagged_texts_dir, f"{text_hash}.txt")
+            with open(tagged_file, 'w', encoding='utf-8') as f:
+                f.write(tagged_text)
             
-            Consider:
-            - Natural English flow and readability
-            - Accuracy of meaning preservation
-            - Character voice consistency
-            - Cultural adaptation appropriateness
-            - Professional localization quality
+            # Save metadata
+            meta_file = os.path.join(self.tagged_texts_dir, f"{text_hash}_meta.json")
+            metadata = {
+                "timestamp": datetime.now().isoformat(),
+                "lines_count": len(tagged_text.splitlines())
+            }
+            with open(meta_file, 'w', encoding='utf-8') as f:
+                json.dump(metadata, f, indent=2)
+        except Exception as e:
+            print(f"Error saving tagged text: {e}")
+
+    def _build_character_profiles(self, full_text: str) -> Dict:
+        """Use LLM to analyze text and create character profiles."""
+        text_hash = self._get_text_hash(full_text)
+        
+        if text_hash in self.character_profiles_cache:
+            print(f"Using cached profiles: {text_hash[:8]}...")
+            return self.character_profiles_cache[text_hash]
+        
+        print("Analyzing character profiles with LLM...")
+        try:
+            prompt = f"""
+            Analyze this Japanese visual novel text and identify ALL characters.
             
-            Japanese: {japanese_text}
-            English: {english_text}
+            For each character, determine:
+            1. Character name and gender
+            2. Personality and speech patterns
+            3. Relationships with other characters
             
-            Provide a score and brief reasoning.
+            Text: {full_text}
+            
+            Return character profiles in JSON format.
             """
             
             response = self.client.beta.chat.completions.parse(
                 model=self.model,
                 temperature=0.1,
                 messages=[
-                    {"role": "system", "content": "You are an expert translation quality assessor specializing in Japanese visual novels."},
-                    {"role": "user", "content": assessment_prompt}
+                    {"role": "system", "content": "You are an expert at analyzing Japanese visual novel characters."},
+                    {"role": "user", "content": prompt}
+                ],
+                response_format=CharacterProfiles,
+            )
+            
+            result = json.loads(response.choices[0].message.content)
+            profiles = result["characters"]
+            self._save_profiles_cache(profiles, text_hash)
+            return profiles
+            
+        except Exception as e:
+            print(f"Error analyzing profiles: {e}")
+            return {}
+
+    def _llm_tag_speakers(self, text: str, profiles: Dict) -> str:
+        """Use LLM to tag speakers based on profiles."""
+        try:
+            prompt = f"""
+            Tag speakers for each line in this Japanese text using the character profiles.
+            
+            CHARACTER PROFILES:
+            {json.dumps(profiles, indent=2, ensure_ascii=False)}
+            
+            TEXT TO TAG:
+            {text}
+            
+            Tag each line with [Speaker]: or [Narration]: format.
+            Use English character names from profiles.
+            """
+            
+            response = self.client.beta.chat.completions.parse(
+                model=self.model,
+                temperature=0.1,
+                messages=[
+                    {"role": "system", "content": "You are an expert at identifying speakers in Japanese visual novel text."},
+                    {"role": "user", "content": prompt}
+                ],
+                response_format=SpeakerTagging,
+            )
+            
+            result = json.loads(response.choices[0].message.content)
+            tagged_lines = []
+            
+            for line_data in result["tagged_lines"]:
+                line = line_data["line"]
+                speaker = line_data.get("speaker", "Narration")
+                tagged_lines.append(f"[{speaker}]: {line}")
+            
+            return "\n".join(tagged_lines)
+            
+        except Exception as e:
+            print(f"Error in speaker tagging: {e}")
+            # Simple fallback
+            lines = text.splitlines()
+            tagged_lines = []
+            for line in lines:
+                if line.strip().startswith('「'):
+                    tagged_lines.append(f"[Speaker]: {line}")
+                else:
+                    tagged_lines.append(f"[Narration]: {line}")
+            return "\n".join(tagged_lines)
+
+    def _preprocess_speakers(self, text: str, full_text: str = None) -> str:
+        """LLM-based speaker detection with caching."""
+        if not self.speaker_aware:
+            return text
+        
+        text_hash = self._get_text_hash(text)
+        cached_result = self._load_tagged_text(text_hash)
+        if cached_result:
+            print(f"Using cached tags: {text_hash[:8]}...")
+            return cached_result
+        
+        # Get or build profiles
+        profiles = self._build_character_profiles(full_text) if full_text else {}
+        
+        print(f"Processing with LLM: {text_hash[:8]}...")
+        tagged_result = self._llm_tag_speakers(text, profiles)
+        self._save_tagged_text(text_hash, tagged_result)
+        
+        return tagged_result
+
+    def create_ultra_optimized_prompt(self, japanese_text: str, size: int, full_text: str = None) -> str:
+        """Create optimized prompt with speaker tagging."""
+        if self.speaker_aware:
+            japanese_text = self._preprocess_speakers(japanese_text, full_text)
+
+        base_prompt = f"""
+        TASK: Translate Japanese visual novel text to English with MAXIMUM BLEU SCORE optimization.
+
+        CRITICAL REQUIREMENTS:
+        - Use natural, fluent English matching professional translations
+        - Maintain consistent character voices and terminology
+        - Preserve emotional nuances and narrative flow
+        - Use common English expressions over literal translations
+
+        TECHNICAL REQUIREMENTS:
+        - Return EXACTLY {size} lines as JSON: {{"translated_outputs": ["line1", "line2", ...]}}
+        - Each line should be complete and natural-sounding
+
+        TEXT TO TRANSLATE:
+        {japanese_text}
+        """
+    
+        if self.context_history:
+            context_info = "\nPREVIOUS CONTEXT:\n"
+            for i, ctx in enumerate(self.context_history[-self.context_window:]):
+                context_info += f"Segment {i+1}:\nJP: {ctx['japanese']}\nEN: {ctx['english']}\n\n"
+            
+            return f"{context_info}Maintain consistency with previous segments.\n\n{base_prompt}"
+            
+        return base_prompt
+
+    def _assess_quality(self, japanese_text: str, english_text: str) -> float:
+        """Assess translation quality using AI."""
+        try:
+            prompt = f"""
+            Evaluate this Japanese to English translation on a scale of 1-10.
+            
+            Consider: natural flow, accuracy, character consistency, cultural adaptation.
+            
+            Japanese: {japanese_text}
+            English: {english_text}
+            """
+            
+            response = self.client.beta.chat.completions.parse(
+                model=self.model,
+                temperature=0.1,
+                messages=[
+                    {"role": "system", "content": "You are a translation quality assessor."},
+                    {"role": "user", "content": prompt}
                 ],
                 response_format=QualityScore,
             )
@@ -233,27 +276,19 @@ class JapaneseToEnglishTranslator:
             result = json.loads(response.choices[0].message.content)
             return result["score"]
         except:
-            return 7.0  # Default acceptable score
+            return 7.0
 
-    def post_process_translation(self, translation: str) -> str:
-        """
-        Post-process translation to fix common issues.
-        """
-        # Fix common translation artifacts
-        translation = re.sub(r'\s+', ' ', translation)  # Normalize whitespace
-        translation = re.sub(r'([.!?])\s*([A-Z])', r'\1 \2', translation)  # Fix sentence spacing
-        translation = re.sub(r'\s+([.!?,:;])', r'\1', translation)  # Fix punctuation spacing
+    def _post_process(self, translation: str) -> str:
+        """Post-process translation to fix common issues."""
+        # Normalize whitespace and punctuation
+        translation = re.sub(r'\s+', ' ', translation)
+        translation = re.sub(r'([.!?])\s*([A-Z])', r'\1 \2', translation)
+        translation = re.sub(r'\s+([.!?,:;])', r'\1', translation)
         
-        # Character name consistency
-        for char_jp, profile in self.character_profiles.items():
-            translation = re.sub(char_jp, profile["name"], translation)
-        
-        # Common visual novel terminology
+        # Common replacements
         replacements = {
             "Philoid": "Phiroid",
-            "music-box": "music box",
-            "Onii-chan": "brother",
-            "Onee-chan": "sister"
+            "music-box": "music box"
         }
         
         for old, new in replacements.items():
@@ -261,23 +296,20 @@ class JapaneseToEnglishTranslator:
         
         return translation.strip()
 
-    def translate(self, japanese_text: str, size: int) -> str:
-        """
-        Ultra-optimized translation with multiple attempts and quality assessment.
-        """
+    def translate(self, japanese_text: str, size: int, full_text: str = None) -> str:
+        """Translate with multiple attempts and quality assessment."""
         best_translation = None
         best_score = 0
-        max_attempts = 3
         
-        for attempt in range(max_attempts):
+        for attempt in range(3):
             try:
-                prompt = self.create_ultra_optimized_prompt(japanese_text, size)
+                prompt = self.create_ultra_optimized_prompt(japanese_text, size, full_text)
                 
                 response = self.client.beta.chat.completions.parse(
                     model=self.model,
-                    temperature=self.temperature + (attempt * 0.05),  # Slight variation
+                    temperature=self.temperature + (attempt * 0.05),
                     messages=[
-                        {"role": "system", "content": "You are a world-class Japanese to English translator specializing in visual novels. Your translations consistently achieve the highest BLEU scores by producing natural, fluent English that perfectly captures the original meaning and emotional nuance."},
+                        {"role": "system", "content": "You are a world-class Japanese to English translator specializing in visual novels."},
                         {"role": "user", "content": prompt}
                     ],
                     response_format=Context,
@@ -286,22 +318,18 @@ class JapaneseToEnglishTranslator:
                 translation_data = json.loads(response.choices[0].message.content)
                 translation = "\n".join(translation_data["translated_outputs"])
                 
-                # Check line count
-                output_lines = len(translation.splitlines())
-                if output_lines != size:
+                # Verify line count
+                if len(translation.splitlines()) != size:
                     continue
                 
-                # Post-process
-                translation = self.post_process_translation(translation)
-                
-                # Assess quality
-                quality_score = self.assess_translation_quality(japanese_text, translation)
+                # Post-process and assess
+                translation = self._post_process(translation)
+                quality_score = self._assess_quality(japanese_text, translation)
                 
                 if quality_score > best_score:
                     best_score = quality_score
                     best_translation = translation
                 
-                # If we hit our quality threshold, use this translation
                 if quality_score >= self.quality_threshold:
                     break
                     
@@ -309,31 +337,32 @@ class JapaneseToEnglishTranslator:
                 print(f"Translation attempt {attempt + 1} failed: {e}")
                 continue
         
-        # Fallback to best attempt if no translation met threshold
+        # Fallback if needed
         if best_translation is None:
-            # Emergency fallback with simpler approach
-            prompt = self.create_ultra_optimized_prompt(japanese_text, size)
-            response = self.client.beta.chat.completions.parse(
-                model=self.model,
-                temperature=0.2,
-                messages=[
-                    {"role": "system", "content": "You are a professional Japanese to English translator. Translate accurately and naturally."},
-                    {"role": "user", "content": prompt}
-                ],
-                response_format=Context,
-            )
-            translation_data = json.loads(response.choices[0].message.content)
-            best_translation = "\n".join(translation_data["translated_outputs"])
-            best_translation = self.post_process_translation(best_translation)
+            try:
+                prompt = self.create_ultra_optimized_prompt(japanese_text, size, full_text)
+                response = self.client.beta.chat.completions.parse(
+                    model=self.model,
+                    temperature=0.2,
+                    messages=[
+                        {"role": "system", "content": "You are a professional Japanese translator."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    response_format=Context,
+                )
+                translation_data = json.loads(response.choices[0].message.content)
+                best_translation = "\n".join(translation_data["translated_outputs"])
+                best_translation = self._post_process(best_translation)
+            except:
+                best_translation = "Translation failed."
 
-        # Store context for future translations
+        # Update context history
         self.context_history.append({
             'japanese': japanese_text,
             'english': best_translation,
             'quality_score': best_score
         })
         
-        # Keep context history within the specified window
         if len(self.context_history) > self.context_window:
             self.context_history = self.context_history[-self.context_window:]
             

@@ -225,8 +225,8 @@ if __name__ == "__main__":
     if translator_version == 1:
         # Version 1 (Enhanced with context and speaker awareness)
         context_window = 3  # Number of previous chunks to keep in context
-        speaker_aware = True  # Enable/disable speaker diarization
-        model = "google/gemini-2.0-flash-001"
+        speaker_aware = False  # Enable/disable speaker diarization
+        model = "anthropic/claude-sonnet-4"
         temperature = 0.2
         
         main(
@@ -243,12 +243,12 @@ if __name__ == "__main__":
         
     elif translator_version == 2:
         # Version 2 (Ultra-optimized with quality assessment)
-        context_window = 7  # Larger context for better consistency
-        speaker_aware = True  # Enable speaker diarization
-        model = "openai/gpt-4o"  # Best model for quality
-        temperature = 0.05  # Very low for consistency
+        context_window = 3  # Larger context for better consistency
+        speaker_aware = False  # Enable speaker diarization
+        model = "google/gemini-2.0-flash-001"  # Best model for quality
+        temperature = 0.2  # Very low for consistency
         quality_threshold = 8.5  # High quality threshold
-        chunk_size = 8  # Smaller chunks for better quality
+        chunk_size = 20  # Smaller chunks for better quality
         
         main(
             jp_file=jp_file,
