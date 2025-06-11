@@ -1,4 +1,4 @@
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Set
 import os
 import json
 import hashlib
@@ -6,207 +6,289 @@ from datetime import datetime
 from openai import OpenAI
 from pydantic import BaseModel
 
-class CharacterProfile(BaseModel):
-    """
-    Pydantic model for discovered character profiles.
-    """
-    name: str
-    gender: str
-    personality: str
-    speech_patterns: List[str]
-    relationships: Dict[str, str]
+class CharacterDiscovery(BaseModel):
+    """Pydantic model for character discovery results."""
+    characters: List[str]
 
-class CharacterProfiles(BaseModel):
-    """Pydantic model for all discovered character profiles."""
-    characters: Dict[str, CharacterProfile]
+class CharacterValidation(BaseModel):
+    """Pydantic model for character validation results."""
+    missing_characters: List[str]
 
 class SpeakerTagging(BaseModel):
     """Pydantic model for speaker tagging results."""
-    tagged_lines: List[Dict[str, str]]
+    tagged_lines: List[str]
 
-class SpeakerAwareness:
-    """Class to handle speaker awareness with LLM-based character detection and caching."""
+class ChunkedSpeakerAwareness:
+    """Chunk-based speaker awareness with 3-phase processing."""
     
-    def __init__(self, model: str = "openai/gpt-4o"):
-        """Initialize speaker awareness with OpenAI client."""
+    def __init__(self, model: str = "google/gemini-2.0-flash-exp", chunk_size: int = 50):
+        """Initialize with OpenAI client and chunk settings."""
         api_key = os.getenv("OPENROUTER_API_KEY")
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-        self.model = model
+        self.model = "google/gemini-2.5-flash-preview-05-20"
+        self.chunk_size = chunk_size
         
         # Cache setup
         self.cache_dir = "app/data/cache"
-        self.profiles_cache_file = os.path.join(self.cache_dir, "character_profiles.json")
-        self.full_text_cache_dir = os.path.join(self.cache_dir, "full_tagged_texts")
-        os.makedirs(self.full_text_cache_dir, exist_ok=True)
-        self.character_profiles_cache = self._load_cache()
-        self.character_profiles = {}  # Store current profiles for consistency
-
-    def _load_cache(self) -> Dict:
-        """Load character profiles cache."""
-        try:
-            if os.path.exists(self.profiles_cache_file):
-                with open(self.profiles_cache_file, 'r', encoding='utf-8') as f:
-                    return json.load(f)
-        except Exception as e:
-            print(f"Error loading cache: {e}")
-        return {}
-
-    def _save_profiles_cache(self, profiles: Dict, text_hash: str):
-        """Save character profiles to cache."""
-        try:
-            self.character_profiles_cache[text_hash] = profiles
-            with open(self.profiles_cache_file, 'w', encoding='utf-8') as f:
-                json.dump(self.character_profiles_cache, f, ensure_ascii=False, indent=2)
-        except Exception as e:
-            print(f"Error saving profiles cache: {e}")
+        self.chunk_cache_dir = os.path.join(self.cache_dir, "chunks")
+        self.result_cache_dir = os.path.join(self.cache_dir, "results")
+        os.makedirs(self.chunk_cache_dir, exist_ok=True)
+        os.makedirs(self.result_cache_dir, exist_ok=True)
 
     def _get_text_hash(self, text: str) -> str:
         """Generate hash for text."""
         return hashlib.md5(text.encode('utf-8')).hexdigest()
 
-
-    def _build_character_profiles(self, full_text: str) -> Dict:
-        """Use LLM to analyze text and create character profiles."""
-        text_hash = self._get_text_hash(full_text)
+    def _split_into_chunks(self, text: str) -> List[str]:
+        """Split text into non-overlapping chunks."""
+        lines = text.splitlines()
+        chunks = []
         
-        if text_hash in self.character_profiles_cache:
-            print(f"Using cached profiles: {text_hash[:8]}...")
-            return self.character_profiles_cache[text_hash]
+        i = 0
+        while i < len(lines):
+            # Get chunk with size
+            chunk_end = min(i + self.chunk_size, len(lines))
+            chunk_lines = lines[i:chunk_end]
+            
+            chunks.append("\n".join(chunk_lines))
+            i += self.chunk_size
         
-        print("Analyzing character profiles with LLM...")
-        try:
-            prompt = f"""
-            Analyze this Japanese visual novel text and identify ALL characters.
-            
-            For each character, determine:
-            1. Character name and gender
-            2. Personality and speech patterns
-            3. Relationships with other characters
-            
-            Text: {full_text}
-            
-            Return character profiles in JSON format.
-            """
-            
-            response = self.client.beta.chat.completions.parse(
-                model=self.model,
-                temperature=0.1,
-                messages=[
-                    {"role": "system", "content": "You are an expert at analyzing Japanese visual novel characters."},
-                    {"role": "user", "content": prompt}
-                ],
-                response_format=CharacterProfiles,
-            )
-            
-            result = json.loads(response.choices[0].message.content)
-            profiles = result["characters"]
-            self._save_profiles_cache(profiles, text_hash)
-            return profiles
-            
-        except Exception as e:
-            print(f"Error analyzing profiles: {e}")
-            return {}
+        print(f"Split text into {len(chunks)} chunks (size: {self.chunk_size})")
+        return chunks
 
-    def _llm_tag_speakers(self, text: str, profiles: Dict) -> str:
-        """Use LLM to tag speakers based on profiles."""
-        try:
-            prompt = f"""
-            Tag speakers for each line in this Japanese text using the character profiles.
-            
-            CHARACTER PROFILES:
-            {json.dumps(profiles, indent=2, ensure_ascii=False)}
-            
-            TEXT TO TAG:
-            {text}
-            
-            Tag each line with [Speaker]: or [Narration]: format.
-            Use English character names from profiles.
-            """
-            
-            response = self.client.beta.chat.completions.parse(
-                model=self.model,
-                temperature=0.1,
-                messages=[
-                    {"role": "system", "content": "You are an expert at identifying speakers in Japanese visual novel text."},
-                    {"role": "user", "content": prompt}
-                ],
-                response_format=SpeakerTagging,
-            )
-            
-            result = json.loads(response.choices[0].message.content)
-            tagged_lines = []
-            
-            for line_data in result["tagged_lines"]:
-                line = line_data["line"]
-                speaker = line_data.get("speaker", "Narration")
-                tagged_lines.append(f"[{speaker}]: {line}")
-            
-            return "\n".join(tagged_lines)
-            
-        except Exception as e:
-            print(f"Error in speaker tagging: {e}")
-            # Simple fallback
-            lines = text.splitlines()
-            tagged_lines = []
-            for line in lines:
-                if line.strip().startswith('「'):
-                    tagged_lines.append(f"[Speaker]: {line}")
+    def _initial_discovery(self, chunks: List[str]) -> List[str]:
+        """Phase 1: Initial character discovery across all chunks."""
+        print("\n=== Phase 1: Initial Character Discovery ===")
+        all_characters = set()
+        
+        for i, chunk in enumerate(chunks):
+            print(f"Processing chunk {i+1}/{len(chunks)}...")
+            try:
+                prompt = (
+                    "Analyze this Japanese text chunk and identify ALL character names that appear.\n"
+                    "IMPORTANT: Only extract PROPER NAMES of characters (e.g., レイ, シオナ, マッド).\n"
+                    "DO NOT include personal pronouns like ボク, 私, 俺, あたし, わたし, 僕, etc.\n"
+                    "Focus on finding actual character names only.\n"
+                    f"Text chunk:\n{chunk}"
+                )
+                
+                response = self.client.beta.chat.completions.parse(
+                    model=self.model,
+                    temperature=0.1,
+                    messages=[
+                        {"role": "system", "content": "You are an expert at identifying character names in Japanese text. You understand the difference between proper names and personal pronouns."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    response_format=CharacterDiscovery,
+                )
+                
+                characters = response.choices[0].message.parsed.characters
+                all_characters.update(characters)
+                print(f"  Found {len(characters)} characters in chunk {i+1}")
+                
+            except Exception as e:
+                print(f"  Error in chunk {i+1}: {e}")
+        
+        initial_list = sorted(list(all_characters))
+        print(f"\nPhase 1 complete: Found {len(initial_list)} unique characters")
+        return initial_list
+
+    def _validate_and_complete(self, chunks: List[str], initial_characters: List[str]) -> List[str]:
+        """Phase 2: Validate and find missing characters."""
+        print("\n=== Phase 2: Character Validation & Completion ===")
+        complete_characters = set(initial_characters)
+        
+        for i, chunk in enumerate(chunks):
+            print(f"Validating chunk {i+1}/{len(chunks)}...")
+            try:
+                prompt = f"""
+                Current character list: {json.dumps(sorted(list(complete_characters)), ensure_ascii=False)}
+                
+                Read this text chunk carefully and check:
+                1. Are there any PROPER CHARACTER NAMES that appear but are NOT in the current list?
+                2. Are there alternative names/nicknames for existing characters?
+                
+                IMPORTANT: Only add PROPER NAMES (e.g., レイ, シオナ, マッド).
+                DO NOT add personal pronouns (ボク, 私, 俺, etc.) to the character list.
+                
+                Text chunk:
+                {chunk}
+                
+                Return only missing proper character names.
+                """
+                
+                response = self.client.beta.chat.completions.parse(
+                    model=self.model,
+                    temperature=0.1,
+                    messages=[
+                        {"role": "system", "content": "You are an expert at validating character names in Japanese text. You understand the difference between proper names and personal pronouns."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    response_format=CharacterValidation,
+                )
+                
+                result = response.choices[0].message.parsed
+                if result.missing_characters:
+                    complete_characters.update(result.missing_characters)
+                    print(f"  Added {len(result.missing_characters)} missing characters")
                 else:
-                    tagged_lines.append(f"[Narration]: {line}")
-            return "\n".join(tagged_lines)
+                    print(f"  No missing characters found")
+                    
+            except Exception as e:
+                print(f"  Error validating chunk {i+1}: {e}")
+        
+        final_list = sorted(list(complete_characters))
+        print(f"\nPhase 2 complete: Total {len(final_list)} characters after validation")
+        return final_list
 
-    def _load_full_tagged_text(self, text_hash: str) -> Optional[str]:
-        """Load full tagged text from cache."""
-        try:
-            tagged_file = os.path.join(self.full_text_cache_dir, f"{text_hash}.txt")
-            if os.path.exists(tagged_file):
-                with open(tagged_file, 'r', encoding='utf-8') as f:
-                    return f.read()
-        except Exception:
-            pass
+    def _tag_speakers(self, chunks: List[str], complete_characters: List[str]) -> List[str]:
+        """Phase 3: Tag speakers in all chunks with complete character list."""
+        print("\n=== Phase 3: Speaker Tagging ===")
+        tagged_chunks = []
+        
+        for i, chunk in enumerate(chunks):
+            print(f"Tagging chunk {i+1}/{len(chunks)}...")
+            try:
+                prompt = f"""
+                Character list: {json.dumps(complete_characters, ensure_ascii=False)}
+                
+                Tag each line in this Japanese text with the appropriate speaker.
+                
+                IMPORTANT RULES:
+                1. Use [Character Name] for dialogue lines. Example: [シオナ]「ねぇ、レイ……手、つないでもいい？」
+                2. Use [ナレーション] for narrative text. Example: [ナレーション]──空気が動いた。
+                3. When you see personal pronouns (ボク, 私, 俺, わたし, あたし, etc.) in dialogue:
+                   - Identify WHO is speaking based on context clues
+                   - Use the actual character name from the provided list, NOT the pronoun
+                   - Look at surrounding dialogue, actions, and who others are addressing
+                4. NEVER use pronouns as character names - always map to proper names
+                
+                Example:
+                - If someone says 「ボクは大丈夫」 and context shows it's レイ speaking
+                - Tag it as: [レイ]「ボクは大丈夫」
+                - NOT as: [ボク]「ボクは大丈夫」
+                
+                Use exact character names from the provided list.
+                
+                Text to tag:
+                {chunk}
+                """
+                
+                response = self.client.beta.chat.completions.parse(
+                    model=self.model,
+                    temperature=0.1,
+                    messages=[
+                        {"role": "system", "content": "You are an expert at identifying speakers in Japanese visual novel text. You can analyze context to determine which character is speaking, even when they use personal pronouns."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    response_format=SpeakerTagging,
+                )
+                
+                tagged_lines = response.choices[0].message.parsed.tagged_lines
+                tagged_chunks.append("\n".join(tagged_lines))
+                print(f"  Tagged {len(tagged_lines)} lines")
+                
+            except Exception as e:
+                print(f"  Error tagging chunk {i+1}: {e}")
+                # Fallback tagging
+                lines = chunk.splitlines()
+                tagged_lines = []
+                for line in lines:
+                    if line.strip():
+                        if line.strip().startswith('「'):
+                            tagged_lines.append(f"[Speaker]: {line}")
+                        else:
+                            tagged_lines.append(f"[ナレーション]: {line}")
+                tagged_chunks.append("\n".join(tagged_lines))
+        
+        print(f"\nPhase 3 complete: Tagged {len(tagged_chunks)} chunks")
+        return tagged_chunks
+
+    def _merge_tagged_chunks(self, tagged_chunks: List[str]) -> str:
+        """Merge tagged chunks, removing overlap duplicates."""
+        if not tagged_chunks:
+            return ""
+        
+        # For now, simple merge. Can be enhanced to handle overlaps intelligently
+        merged_lines = []
+        for chunk in tagged_chunks:
+            lines = chunk.splitlines()
+            merged_lines.extend(lines)
+        
+        # Remove exact duplicates while preserving order
+        seen = set()
+        unique_lines = []
+        for line in merged_lines:
+            if line not in seen:
+                seen.add(line)
+                unique_lines.append(line)
+        
+        return "\n".join(unique_lines)
+
+    def _load_cached_result(self, text_hash: str) -> Optional[str]:
+        """Load cached result if exists."""
+        cache_file = os.path.join(self.result_cache_dir, f"{text_hash}.txt")
+        if os.path.exists(cache_file):
+            with open(cache_file, 'r', encoding='utf-8') as f:
+                return f.read()
         return None
 
-    def _save_full_tagged_text(self, text_hash: str, tagged_text: str):
-        """Save full tagged text to cache."""
-        try:
-            tagged_file = os.path.join(self.full_text_cache_dir, f"{text_hash}.txt")
-            with open(tagged_file, 'w', encoding='utf-8') as f:
-                f.write(tagged_text)
-            
-            # Save metadata
-            meta_file = os.path.join(self.full_text_cache_dir, f"{text_hash}_meta.json")
-            metadata = {
-                "timestamp": datetime.now().isoformat(),
-                "lines_count": len(tagged_text.splitlines()),
-                "characters": list(self.character_profiles.keys()) if self.character_profiles else []
-            }
-            with open(meta_file, 'w', encoding='utf-8') as f:
-                json.dump(metadata, f, indent=2)
-        except Exception as e:
-            print(f"Error saving full tagged text: {e}")
+    def _save_cached_result(self, text_hash: str, result: str, characters: List[str]):
+        """Save result to cache."""
+        # Save tagged text
+        cache_file = os.path.join(self.result_cache_dir, f"{text_hash}.txt")
+        with open(cache_file, 'w', encoding='utf-8') as f:
+            f.write(result)
+        
+        # Save metadata
+        meta_file = os.path.join(self.result_cache_dir, f"{text_hash}_meta.json")
+        metadata = {
+            "timestamp": datetime.now().isoformat(),
+            "characters": characters,
+            "lines_count": len(result.splitlines()),
+            "chunk_size": self.chunk_size
+        }
+        with open(meta_file, 'w', encoding='utf-8') as f:
+            json.dump(metadata, f, ensure_ascii=False, indent=2)
 
     def preprocess_full_text(self, full_text: str) -> str:
-        """Process entire text at once for consistent speaker tagging."""
+        """Main entry point: Process text through 3 phases."""
         text_hash = self._get_text_hash(full_text)
         
-        # Check cache first
-        cached_result = self._load_full_tagged_text(text_hash)
+        # Check cache
+        cached_result = self._load_cached_result(text_hash)
         if cached_result:
-            print(f"Using cached full text tags: {text_hash[:8]}...")
+            print(f"Using cached result: {text_hash[:8]}...")
             return cached_result
         
-        # Build character profiles
-        self.character_profiles = self._build_character_profiles(full_text)
+        print(f"Processing new text: {text_hash[:8]}...")
         
-        # Tag entire text at once
-        print(f"Tagging full text with LLM: {text_hash[:8]}...")
-        tagged_result = self._llm_tag_speakers(full_text, self.character_profiles)
+        # Split into chunks
+        chunks = self._split_into_chunks(full_text)
+        
+        # Phase 1: Initial character discovery
+        initial_characters = self._initial_discovery(chunks)
+        
+        # Phase 2: Validate and complete character list
+        complete_characters = self._validate_and_complete(chunks, initial_characters)
+        
+        # Phase 3: Tag speakers with complete list
+        tagged_chunks = self._tag_speakers(chunks, complete_characters)
+        
+        # Merge results
+        final_result = self._merge_tagged_chunks(tagged_chunks)
         
         # Save to cache
-        self._save_full_tagged_text(text_hash, tagged_result)
+        self._save_cached_result(text_hash, final_result, complete_characters)
         
-        return tagged_result
+        print(f"\nProcessing complete!")
+        print(f"Total characters: {len(complete_characters)}")
+        print(f"Total lines: {len(final_result.splitlines())}")
+        
+        return final_result
 
+
+# Utility functions remain the same
 def reader(file_path: str, size: int = 50) -> List[str]:
     """
     Read text from file and split into chunks of lines.

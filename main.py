@@ -4,7 +4,7 @@ from typing import List
 from tqdm import tqdm
 from dotenv import load_dotenv
 from app.utils import preprocess
-from app.utils.preprocess import SpeakerAwareness
+from app.utils.preprocess import ChunkedSpeakerAwareness
 from app.benchmark.calculateBleu import evaluate_translation
 from config import get_config
 
@@ -40,8 +40,8 @@ class TranslatorFactory:
         return JapaneseToEnglishTranslator(**params)
 
 
-def apply_speaker_awareness(lines: List[str], enabled: bool, model: str) -> tuple:
-    """Apply speaker awareness if enabled.
+def apply_speaker_awareness(lines: List[str], enabled: bool, model: str, chunk_size: int = 50) -> tuple:
+    """Apply speaker awareness if enabled using chunked processing.
     
     Returns:
         tuple: (tagged_lines, speaker_processor)
@@ -50,18 +50,27 @@ def apply_speaker_awareness(lines: List[str], enabled: bool, model: str) -> tupl
         return lines
     
     try:
-        processor = SpeakerAwareness(model)
+        # Use ChunkedSpeakerAwareness with configurable chunk size
+        processor = ChunkedSpeakerAwareness(
+            model=model,
+            chunk_size=chunk_size,
+        )
         full_text = '\n'.join(lines)
         
-        # Process entire text at once
-        print("Processing speaker awareness for entire text...")
+        # Process entire text with 3-phase chunked approach
+        print("Processing speaker awareness with chunked approach...")
         tagged_full_text = processor.preprocess_full_text(full_text)
         tagged_lines = tagged_full_text.splitlines()
         
         # Ensure line count matches
         if len(tagged_lines) != len(lines):
             print(f"Warning: Tagged lines ({len(tagged_lines)}) != Original lines ({len(lines)})")
-            return lines
+            # Try to handle mismatch gracefully
+            if len(tagged_lines) > len(lines):
+                tagged_lines = tagged_lines[:len(lines)]
+            else:
+                # Pad with original lines if needed
+                tagged_lines.extend(lines[len(tagged_lines):])
             
         return tagged_lines
     except Exception as e:
@@ -90,7 +99,8 @@ def translate_file(input_file: str, output_file: str, translator,
     # Apply speaker awareness to entire text if enabled
     if speaker_aware:
         print("Speaker awareness enabled - analyzing characters...")
-        tagged_lines = apply_speaker_awareness(lines, True, translator.model)
+        # Use same chunk size for speaker awareness as translation
+        tagged_lines = apply_speaker_awareness(lines, True, translator.model, chunk_size)
     else:
         tagged_lines = lines
     
