@@ -41,17 +41,17 @@ PRESETS = {
     'fast': {
         'translator_version': 1,
         'model': "google/gemini-2.0-flash-001",
-        'temperature': 0.3,
-        'chunk_size': 30,
-        'speaker_aware': True,
-        'context_window': 3,
+        'temperature': 0.1,
+        'chunk_size': 15,
+        'speaker_aware': False,
+        'context_window': 6,
     },
     'quality': {
         'translator_version': 2,
         'model': "google/gemini-2.0-flash-001",
-        'temperature': 0.05,
+        'temperature': 0.1,
         'chunk_size': 15,
-        'speaker_aware': True,
+        'speaker_aware': False,
         'quality_threshold': 9.0,
         'context_window': 6,
     }

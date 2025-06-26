@@ -1,500 +1,500 @@
-[Narration]──The air stirred.
-[Narration] The pale blue light that had been enveloping me until now receded.
-[Narration] What I eventually saw was a grimy ceiling.
-[Narration] My right arm, extended towards that place, was slightly different from my left arm, which was also extended.
-[Narration] My right arm is made of exposed mechanical parts from the wrist down.
-[Narration] My fingers move smoothly, but each time, a faint metallic scraping sound echoes.
-[Narration] Next, I slowly raised my upper body.
-[Narration] That's when I realized that the pale blue light I had been seeing was actually the gently curved, oval lid of something.
-[Narration] It seems I was asleep inside this capsule-like thing.
-[Narration] Where is this place?
-[Narration] Who am I?
-[Narration] Why am I here?
-[Narration] Even when I ask myself these questions, I can't find the answers.
-[Narration] Even when I try to trace back my memories, all I have is the memory of the pale blue light.
-[Narration] In order to find a clue to my memories, I decided to get out of the capsule and walk around the room.
-[Narration] Although I know the act of walking, the act itself feels unfamiliar, and my footing is unsteady.
-[Narration] I paid attention not to fall, and slowly moved forward.
-[Narration] The stagnant air was lukewarm, and every time I inhaled, dust clung to my throat.
-[Narration] Light streamed in from a hole in the ceiling, revealing dust particles in the air along its path.
-[Narration] It's likely that no one has entered this building for quite some time.
-[Narration] A thin layer of dust spreads across the floor.
-[Narration] What is this place used for?
-[Narration] Countless oval capsules were scattered throughout the large room.
-[Narration] Most of them are open.
-[Narration] The insides are empty.
-[Narration] Even if some are closed, there's nothing inside.
-[Narration] It seems I'm the only one in this room.
-[Narration] --No, that's not entirely accurate.
-[Narration] There are people existing, leaning against the oval objects or lying on the floor.
-[Narration] 
-[Narration] But, that's not right.
-[Narration] To be precise, those aren't people.
-[Narration] It would be more accurate to call them humanoid objects.
-[Narration] Those humanoid objects had mechanical parts peeking out from under their skin.
-[Narration] Some had mechanical parts instead of a head.
-[Narration] Others had exposed mechanical arms.
-[Narration] Some had their lower bodies torn off, revealing the mechanical parts.
-[Narration] And then I remembered what those humanoid objects were.
-[Narration] Partners for humans, created for humans.
-[Narration] Equipped with not only the five senses, but also emotions, they are the closest existence to humans.
-[Narration] I reach out to a Philoid that has ceased functioning.
-[Narration] The hand, with its exposed parts not covered by skin, closely resembled my right hand.
-[Narration] This is a factory.
-[Narration] I was created here.
-[Narration] ......But the facility was likely abandoned for some reason just before completion.
-[Narration] I stare at my mechanical right hand, not yet covered with artificial skin, and conclude the most likely possibility.
-[Narration] Having understood my own existence, I started walking towards the wall.
-[Narration] There was an old automatic door, and right next to it, an LCD panel displaying "CLOSE" was covered in dust.
-[Narration] I touched it with my mechanical hand.
-[Narration] The moment I felt something cold like electricity at my bloodless fingertips, it displayed "OPEN" and the door opened.
-[Narration] Can I get outside from here?
-[Narration] Is anyone left in this facility?
-[Narration] I wanted to meet someone.
-[Narration] I wanted to meet a human.
-[I] Let's go find them, my partners.
-[Narration] I pushed open the door leading outside.
-[Narration] In order to prove my own existence.
-[Narration] Returning home, I headed straight for the living room.
-[Narration] There, a music box lay broken.
-[Narration] I unraveled a book borrowed from the library, learning about its structure.
-[Narration] Just as I thought, the gears inside were broken.
-[Narration] That's why no matter how much I turned the handle, the disc wouldn't spin and no sound would come out.
-[Narration] ...But what should I do about these gears?
-[Narration] Would it be possible to make them according to the size specified in the book? No, it's impossible.
-[Narration] With no answer in sight, I continued turning the pages of the book.
-[Narration] At the end of the book, there was a list of products for each manufacturer, and a list of parts used.
-[Narration] As I skimmed through it, my gaze caught on something.
-[Narration] What I learned there was that the manufacturer of this music box also made clocks.
-[Narration] If that's the case, then the precision parts might be the same as those used in clocks.
-[Narration] Suddenly, I remembered what I had broken at Mad's shop.
-[Narration] That clock... if they were going to throw it away because it was unusable...
-[Narration] If I used the gears and other parts from the clock, I might be able to fix the music box.
-[Shiona] "Ray, what are you doing?"
-[Narration] At the same time as I saw the possibility of repair, Shiona came into the living room.
-[I] "Shiona, listen. I might be able to fix the music box with the parts from the clock at Mad's shop."
-[Shiona] "Really? Is that true?"
-[Narration] Shiona had an even more joyful smile than usual.
-[Narration] From that expression, I could understand Shiona's joy.
-[Shiona] "But, don't push yourself too hard, okay? Even without the music box, I can still sing."
-[Narration] Shiona picked up the music box and began to sing.
-[Narration] That song she sang in the chapel.
-[Narration] That somewhat nostalgic song.
-[Narration] That song that warmed the depths of my heart.
-[Narration] Seeing Shiona looking at the music box so lovingly, my resolve grew stronger.
-[Narration] I want to fix this music box for her.
-[Narration] And I want to make Shiona happy.
-[Narration] That feeling swelled up inside me.
-[I] "I'm going to go to Mad's shop again tomorrow."
-[Narration] I'll try to ask if they can give me the clock somehow.
-[Narration] But there was only one thing that worried me.
-[Narration] The thing that worries me is that I broke that clock.
-[Narration] I apologized, but it's still hard to go back there.
-[Narration] The thought of Mad yelling at me again fills me with dread.
-[Shiona] "You know, I want to make a lot of people smile with my brother's song."
-[Narration] Shiona's words reached me as I hesitated.
-[Shiona] "This song is orange... I'm sure it can turn many people's hearts orange. Because it's a song created with the wish for that to happen. Because that's my brother's wish. That's why I want many people to hear this song. And I want to make many people smile. That's my wish."
-[Narration] Shiona said, as if to herself.
-[Narration] Those words pushed me forward.
-[Narration] I'll go to Mad's shop again tomorrow.
-[Narration] And I'll apologize again for breaking the clock.
-[Narration] Shiona's singing and the music box strengthened my resolve.
-[Narration] The next day, I visited Mad's shop alone.
-[Narration] I lost count of how many times I thought about turning back along the way.
-[Narration] Each time I thought that, Shiona's smile would flash in my mind.
-[Narration] I want to keep seeing that smile.
-[Narration] That's why I want to fix the music box for her.
-[Narration] I recalled my determination from yesterday many times.
-[Narration] What I can do for Shiona.
-[Narration] I steeled myself and stepped into Mad's shop.
-[Mad] "You... what kind of face do you have to show here?"
-[Narration] Immediately, Mad's voice, as low as distant thunder, poured down on me.
-[Narration] I immediately wanted to run away, but I didn't.
-[I] "I wanted to apologize more sincerely for yesterday."
-[Mad] "About the clock? You already apologized for that."
-[I] "Shiona was there then... I thought I should apologize properly, by myself."
-[Mad] "I don't need that. Get out of here."
-[I] "I can't do that. I'm truly sorry for breaking the clock yesterday."
-[Mad] "No matter how much you apologize, the clock is still broken. Get out."
-[I] "I'm sorry. I'm really sorry."
-[Narration] With my head bowed, I continued to apologize.
-[Narration] I wonder how much time had passed.
-[Narration] Eventually, Mad's slightly softer voice reached me.
-[Mad] "...Raise your head."
-[Narration] When I did as he said, Mad's face, looking somewhat exasperated, was there.
-[Mad] "Jeez... what a guy. You're persistent beyond belief."
-[I] "I'm sorry..."
-[Mad] "Don't apologize anymore, I'll punch you!"
-[Narration] He says that, but he doesn't seem as angry as he was yesterday.
-[Narration] I thought I heard a small sigh.
-[Mad] "You're done here, right? Get out of here."
-[I] "Um... there's one thing I wanted to ask."
-[Mad] "An ask? You've got some nerve asking me for something."
-[Narration] The pressure makes my legs tremble, but Shiona's words push me forward.
-[I] "That clock... could you let me have it?"
-[Mad] "...Say that again."
-[I] "Um... that clock from yesterday, could you let me have it--"
-[Mad] "Are you kidding meeeeeeeeeeeeeee!!"
-[Narration] The impact was like being struck by lightning, and I froze, standing perfectly still.
-[Mad] "You broke it yourself and now you want me to give it to you? Don't get cocky!"
-[Narration] It's no use....
-[Narration] I can't take any more...
-[Narration] Just as I was about to run away, a voice came from behind me.
-[Shiona] "Please wait, Mad-san. Ray just wants to fix my brother's music box."
-[Narration] There, standing before us, was Shiona, who should have been waiting at home.
-[Narration] Shiona, without being intimidated by Mad-san, stepped between us.
-[Shiona] "My brother's music box is broken, and Ray said he'd fix it for me. He just needs the parts for that. He's truly sorry for breaking the clock yesterday. So, won't you please forgive him?"
-[Narration] Shiona conveyed this to Mad-san with an unwavering smile.
-[Mad] "Hmm... hmmm...."
-[Narration] Mad-san's face, which had been bright red, gradually softened.
-[Mad] "But, that clock's already gone. I threw that thing away. However..."
-[Narration] Mad-san turned his back to us, but continued to move his mouth.
-[Mad] "The abandoned factory on the edge of town, I threw it away there. I don't know what happened after that."
-[Narration] After saying only that, Mad-san sat down, still facing the wall.
-[I] "Thank you, Mad-san."
-[Narration] Shiona bowed politely without losing her smile and left the shop.
-[I] "Ah, thank you very much..."
-[Narration] I bowed in the same way and left the shop.
-[Shiona] "The abandoned factory is very close to where Ray was collapsed."
-[Narration] Shiona told me as soon as we left the shop.
-[I] "Is that the place Shiona goes to throw away the trash?"
-[Shiona] "That's right. Trash gathers there from various places."
-[I] "Could it be that you fix up things you pick up from there and sell them here?"
-[Shiona] "Maybe. Mad-san often goes to that place."
-[Narration] I see, that's why there were so many old things in the shop.
-[Narration] He probably brings usable things from that place and reuses them.
-[Narration] Anyway, I decided to head to that abandoned factory.
-[I] "Shiona, if you don't mind, I'd like you to guide me to that place."
-[Shiona] "I'm sorry, the Red Children are coming to my house today."
-[Narration] She must be talking about those children who were talking to Shiona yesterday.
-[Narration] Now that I think about it, we promised to treat them to soup.
-[Shiona] "But Ray, you can't go alone, right? I'll go and cancel my promise with the children."
-[I] "No, it's okay, Shiona. You should keep your promise."
-[Shiona] "But, how are you going to get there?"
-[I] "I'll try going to the library. I want to know more about this area, and I want to look at a map."
-[Shiona] "The library..."
-[Narration] Shiona's expression seemed to cloud over slightly.
-[Shiona] "Eh... no, it's nothing... Hey Ray. Is Tippy-chan fond of Ray?"
-[I] "I wonder. I don't think she dislikes me, but why do you ask?"
-[Shiona] "Oh, it's nothing. If it's the library, I'm sure there's a map. Goodbye."
-[I] "Yeah, I'll do that. Well then, see you later."
-[Narration] I turned on my heel, intending to head to the library.
-[Narration] At that moment, Shiona's smile seemed to hold a certain sadness, or so I thought.
-[Narration] But I don't know the reason for it.
-[Tippy] "Ray, you came."
-[Narration] Tippy was in the same place as yesterday, shedding tears in the same way.
-[I] "Yeah, I came. Hey Tippy, can I ask you something?"
-[I] "Does this library have a map of the town?"
-[Tippy] "Yeah, it does. It has lots of them."
-[I] "That's great. Can you guide me to where the maps are?"
-[Tippy] "I can... but..."
-[Narration] Tippy was being somewhat hesitant.
-[Tippy] "No, that's not it... that's not it, but..."
-[Tippy] "Will you... hold me?"
-[Narration] Tippy's face turned slightly red.
-[Narration] Her sad expression hadn't changed, but her cheeks seemed a little softer.
-[I] "...Hold you? Hold you like I did yesterday?"
-[Tippy] "Yeah... is it no good?"
-[I] "It's not no good. Here, come here."
-[Tippy] "Yeah... yeah..."
-[Narration] When I opened my arms, Tippy stood up and jumped into my chest, somewhat hesitantly.
-[Narration] Unlike yesterday, I ended up holding her.
-[Narration] However, my feelings were the same.
-[Narration] The Tippy I held was still small, soft, and seemed like she would break.
-[I] "Tippy, is this okay?"
-[Tippy] "Yeah, it's okay. Ray... you're warm."
-[Narration] Tippy rubbed her cheek against my chest.
-[Narration] That gesture warmed the depths of my heart.
-[Narration] Could this be the emotion called love?
-[Narration] I want to protect this girl.
-[Narration] I want to stop these tears.
-[Narration] For a while, I continued to hold Tippy.
-[Tippy] "Um, walk that way while holding me like this."
-[Narration] Tippy, in my arms, pointed her finger towards the aisle.
-[Narration] Still holding her, I headed in the direction she indicated with her finger.
-[Tippy] "Why do you need a map?"
-[I] "There seems to be an abandoned factory near the town. I want to go there."
-[Tippy] "Why, to the abandoned factory?"
-[I] "There might be a part I'm looking for there."
-[Tippy] "The music box you were looking at yesterday?"
-[I] "Yeah, that's right. I really want to fix Shiona's brother's music box."
-[Tippy] "Shiona's... I see. I hope you find it."
-[Narration] Still held in my arms, Tippy led me without hesitation to the bookshelf where the map books were kept.
-[I] "Do you perhaps remember where each book is located?"
-[Tippy] "Yeah, mostly."
-[I] "That's amazing... Did someone teach you?"
-[Tippy] "Nope. I learned by myself while waiting for my mom and dad."
-[Narration] When she mentioned her mom and dad, Tippy's eyes became a little teary.
-[I] "Um... is it this one?"
-[Narration] To change the subject, I took out a map book.
-[Narration] I sat down on the spot and opened the book.
-[Narration] Like the music box book, this map was also handwritten.
-[Narration] Could it be that all the books in this library are handwritten?
-[Narration] If so, that's a considerable amount.
-[Narration] Just who could have handwritten this many books?
-[Narration] The task, requiring an endless amount of time, made me feel faint.
-[I] "It's pretty beat up... How old is this book?"
-[Tippy] "Um... I don't know. It's a book from way, way, waaaay back."
-[Narration] It seemed like a map from decades ago.
-[Narration] The buildings themselves seem to be the same as the current townscape, though...
-[Narration] The pages were badly faded, as if tea had been spilled on them.
-[Narration] Some pages were stuck together, and looked like they would tear if I tried to turn them.
-[Narration] I carefully turned the pages.
-[I] "Ah, could it be this one?"
-[Narration] I found a factory symbol to the north of the town on the map.
-[Narration] Considering the direction of Shiona's house, there's a high probability this is the place.
-[Tippy] "Ray... are you going? Don't go..."
-[Narration] Tippy clung to my neck.
-[Narration] I stroked her small back with my hand, over and over.
-[I] "It's okay, I'll come again."
-[Tippy] "Really? Will you really come again?"
-[I] "Yeah, of course. I promise."
-[Tippy] "You will, okay? You absolutely, absolutely have to come again!"
-[I] "Yeah. Absolutely, absolutely."
-[Narration] Again and again, I made promises with Tippy.
-[Narration] Why is that?
-[Narration] Even so, I felt reluctant to leave.
-[Narration] A feeling of wanting to stay by Tippy's side forever welled up inside me.
-[Narration] Hiding that feeling, I left the library.
-[Narration] Entering the abandoned factory, which I reached with the map, the smell of oxidized oil stung my nose.
-[Narration] This factory probably used to make Philoid arms and legs as well.
-[Narration] Parts for half-finished Philoid arms and legs were scattered everywhere.
-[Narration] All of them were before being covered with artificial skin, with the mechanical parts exposed.
-[Narration] Looking closely, I could see that they were made the same way as my right hand.
-[Narration] Even knowing they were artificial, the sight was bizarre.
-[Narration] To move an arm that was in the way, I pushed it aside with my right hand.
-[Narration] The mournful sound of metal clashing against metal echoed through the factory.
-[Narration] If something happens and any part of my body breaks, I'll come here.
-[Narration] If it's here, there are mountains of replacement parts.
-[Narration] In the back, there were many drums filled with oxidized oil.
-[Narration] Most of it was oxidized, but some of the oil was still unopened.
-[Narration] Even if I run out of oil, I can perform maintenance here without being seen.
-[Narration] The further I went into the factory, the more the worries I had in the back of my mind were resolved.
-[Narration] This abandoned factory should become an important place for me.
-[Narration] But, I can't find the most important thing.
-[Narration] That is, of course, the clock that Mad threw away in this place.
-[Narration] But, inside this factory, there isn't even a clock, or anything that looks like trash.
-[Narration] Could it be that the trash isn't inside the factory, but thrown outside?
-[Narration] I left the factory for a moment and decided to go around its perimeter.
-[Narration] Then, on the back side of the factory, I was able to find an area where machine parts were piled up high.
-[Narration] There were machine parts, of course, but also a lot of trash dumped there.
-[Narration] Surely this town's garbage dump must be here.
-[Narration] Besides Mad, there must be others who take things that might be useful from here.
-[Narration] I looked up at the mountain that was several times my height, and thought about that.
-[I] "...Now then, where could it be?"
-[Narration] There's a considerable amount of trash.
-[Narration] It would be difficult to find it by searching steadily.
-[Narration] But, there's no other way.
-[Narration] I immediately decided to start searching from my feet.
-[Narration] I don't know how much time passed.
-[Narration] I had long since lost my sense of time.
-[Narration] Because I was moving muddy metal plates and waste oil-covered containers, my hands were filthy.
-[Narration] Oil was thickly stuck to my clothes, and before I knew it, there were a lot of stains.
-[Narration] After that, I crossed a carpet of garbage, swam in a river of filth, and was hit by a waterfall of scrap.
-[Narration] And then, I finally found it.
-[Narration] It was in Mad's shop.
-[Narration] The one I broke yesterday.
-[Narration] That clock.
-[Narration] I picked it up and stared intently at the hands on the dial.
-[Narration] Naturally, it wasn't moving.
-[Narration] I put it to my ear, but it didn't make any sound.
-[Narration] It's only natural, since I was the one who broke it.
-[Narration] This clock will probably never tick again.
-[Narration] That fact pricked the depths of my heart.
-[I] I gently embraced the clock and decided to head home.
-[Narration] Shiona will greet me kindly.
-[I] "I'm home. I found it."
-[Narration] When I held out the oil-stained trophy, Shiona smiled gently.
-[Shiona] "Really, thank you. Here, change your clothes, change your clothes."
-[Narration] Shiona had prepared a towel and a change of clothes for me.
-[I] After wiping off the dirt and changing, I headed to the living room.
-[Narration] Shiona greeted me there as well.
-[Shiona] "Ray, you look tired. Eat something and rest."
-[Ray] "No, I'm okay. I want to get to work right away."
-[Shiona] "Are you okay? I'm worried about your body, Ray."
-[Ray] "I'm fine. Strangely, I don't feel tired right now."
-[Shiona] "But, you have to eat something..."
-[Ray] "Yeah, I know. I'll eat later, so you go ahead and eat first."
-[Shiona] "...Okay, I understand. Good luck."
-[Narration] Shiona leaves the living room.
-[I] I watched her go, and then started working.
-[Narration] I opened the book I borrowed from the library beside me.
-[Narration] This music box has a mechanism where turning the handle causes various gears of different sizes inside to intricately mesh together, keeping the disc rotating at a constant speed.
-[Narration] It doesn't seem that turning it faster makes the song faster.
-[Narration] I thought that was a really amazing technology.
-[Narration] Following the assembly instructions written in the book in reverse order, I disassembled the music box.
-[Narration] Then, comparing the parts one by one, I found that a gear in the power transmission section was broken.
-[Narration] So even with something that moves with such precision, it only takes one small part to fail for it to stop working.
-[I] I couldn't help but look at my right hand.
-[I] First, I'll try to find a gear from the clock that's the same size as this broken one.
-[I] I then began disassembling the clock.
-[Narration] I removed the lid and used a screwdriver to remove the screws.
-[Narration] When I removed the cover, the inner structure was revealed.
-[Narration] Gears much more precise than those in the music box meshed together in multiple layers.
-[Narration] One of them, a slightly larger gear, had a broken axle. That's why the parts weren't turning.
-[Narration] I must have broken this part yesterday.
-[Narration] The fact that Mad threw this clock away means that there wasn't a part the same size as this gear.
-[Narration] Fortunately, the broken gear wasn't the size needed for the music box.
-[Narration] Disassembling things makes me feel uneasy somehow.
-[Narration] Because I'm breaking this clock to fix the music box.
-[Narration] Perhaps it's because I understand what kind of existence I am myself.
-[Narration] Hesitating, but as a small offering, I disassembled the clock as carefully as possible.
-[Narration] I lined up the clock gears on the table in order from smallest to largest, and compared them to those of the music box.
-[I] "...Found it."
-[Narration] I was able to find a gear that was almost exactly the same size.
-[Narration] After that, all that's left is to transplant it into the music box according to the book.
-[I] "I think this should work..."
-[Narration] With this, the disc should move without any problems.
-[Narration] I put the lid back on and turned the handle, and there was a response.
-[Narration] But, the handle won't turn any further.
-[Narration] I reread the book.
-[Narration] The parts and the positions to install them are correct.
-[Narration] Tilting my head, I removed the lid again.
-[Narration] And then, I tried turning the handle as it was.
-[Narration] Certainly, the gears meshed perfectly.
-[Narration] But, because it hadn't been used for a while, the oil seemed to have completely dried up.
-[Narration] That must be why the handle won't turn.
-[Narration] What should I do?
-[Narration] Should I go to Shiona and borrow some cooking oil?
-[Narration] ...No, that's a problem too.
-[Narration] Cooking oil and gear lubricant are probably different types of oil.
-[Narration] It might work at first, but it could cause a breakdown.
-[Narration] If that's the case, what should I do...?
-[Narration] Suddenly, I looked at my right hand.
-[Narration] Although it's covered by a glove, underneath are bare mechanical parts.
-[I] I wonder if I could use the oil used in my hand.
-[Narration] I took off my glove and looked closely at my right hand.
-[Narration] Exposed mechanical parts.
-[Narration] Oil is built inside to smoothly move those parts.
-[Narration] I inserted a screwdriver into the palm near the base of my thumb.
-[Narration] When I removed the exterior, it was packed with mechanisms for moving my mechanical hand, such as wiring, cylinders, and shafts.
-[Narration] One of the cylinders inside contains oil.
-[Narration] And it was detachable so that the old oil could be easily replaced.
-[Narration] I removed the cylinder with my left hand, and dripped the oil that filled it onto the gears of the music box.
-[Narration] I spread the oil with my fingertip so that it would blend into all the gears as much as possible.
-[Narration] Will it work?
-[Narration] I returned the cylinder to my right hand and reattached the exterior.
-[Narration] Hiding my mechanical arm with the glove, I cautiously turned the handle.
-[Narration] At first, it was awkward. But, as I turned the handle, the gears ran smoothly.
-[Narration] The oil must have circulated through all the gears, the handle continued to turn without any snags.
-[Narration] And that melody begins to play.
-[Shiona] "Ray, that song...!"
-[Narration] Shiona suddenly came into the room.
-[I] "Yeah. I fixed it, Shiona."
-[Shiona] "Thank you... thank you, Ray. Thank you... I'm so, so happy."
-[Narration] Shiona showed a smile like never before.
-[Narration] Just looking at that smile, the depths of my heart warmed up gently.
-[Narration] And, I realized.
-[Narration] Ah, so this is it.
-[Narration] This is the emotion called happiness.
-[Narration] I am happy now.
-[Narration] I'm happy seeing Shiona's smile.
-[Narration] And, for the first time, I was able to feel a sense of being useful.
-[Shiona] "Thank you, Ray, thank you."
-[Narration] Shiona took my hand and thanked me many times.
-[Narration] As her face gets closer, I feel my face getting hot.
-[Shiona] "Thanks to Ray's hard work, the music box is fixed. I can listen to that song again, which I had given up on. The orange-colored song that my brother made. My favorite song..."
-[I] "Hey, Shiona, sing it for me. Let me hear your brother's song."
-[Shiona] "Yes... of course!"
-[Narration] I turn the handle of the music box.
-[Narration] Shiona clasped her hands in front of her chest and began to sing along with the melody.
-[Narration] The song she was singing when we met.
-[Narration] The song Shiona's brother made.
-[Narration] The orange-colored song.
-[Narration] I feel like I understand its meaning now.
-[Narration] The emotion dwelling in my heart is joy.
-[Narration] Shiona's song.
-[Narration] And Shiona, singing so happily.
-[Narration] Just watching her, joy overflowed within me.
-[Narration] More than usual, Shiona was singing that song so happily.
-[Narration] That day, Shiona kept singing until she fell asleep.
-[Narration] I was also absorbed in her singing voice and the tone of the music.
-[Narration] Many times, Shiona asked me to play the song.
-[Narration] Shiona kept singing until my arm wouldn't move anymore.
-[Narration] Looking at her expression, I think.
-[Narration] I want to be with Shiona like this forever.
-[Narration] If Shiona wishes for it, I can be with her forever.
-[Narration] But in order to do that, my true identity must never be revealed.
-[Narration] Never, absolutely never...
-[Narration] That day, I solidified my resolve to stay with Shiona forever.
-[Narration] Night, the room darkened.
-[Narration] On the two beds placed side by side, Shiona speaks to me.
-[Shiona] "Will you listen to my request?"
-[Shiona] "You see, I want many people to listen to this song. And I want to make them smile. I want to make many people happy with this song that my brother made."
-[Narration] I only know the word itself.
-[Narration] But, I didn't understand what it was.
-[Narration] Is it a state of being?
-[Narration] Or, is it an emotion?
-[Narration] I repeat the word 'happiness' over and over in my head.
-[Shiona] "So, I want you to help me."
-[I] "Help? What should I do?"
-[Shiona] "Tomorrow, I want you to go to the plaza with me. And I want you to turn the music box."
-[I] "So, Shiona will sing, then."
-[Shiona] "Yes, that's right. And I want as many people as possible to hear it. That orange-colored song that my brother made..."
-[I] "Yeah, I want to do that too. Of course, I'll help."
-[Narration] I heard the sound of the sheets rubbing together.
-[I] "What's wrong, Shiona?"
-[Shiona] "Hey, Ray... is it okay if I hold your hand?"
-[Narration] I can't see Shiona's expression in the darkness.
-[Narration] But I felt like Shiona's face was turning red.
-[I] "Hand? With me?"
-[Shiona] "Yes, I want to hold hands with Ray... is it no good...?"
-[Narration] I search through my knowledge.
-[Narration] I know the act of holding hands.
-[Narration] But what does it mean for a boy and girl of a certain age...? 
-[I] "No, it's okay..."
-[Narration] If I am needed by a human... by Shiona, then I want to respond.
-[Narration] Fortunately, she is on my left side.
-[Narration] I think it will be okay if it's the hand covered with artificial skin.
-[Narration] I reach out my hand to the bed next to me.
-[Narration] In the cold room, my outstretched hand was a little chilly.
-[Narration] I search for Shiona's hand in the air.
-[Narration] Touching, warmth.
-[Narration] Shiona's hand overlapped with mine.
-[Shiona] "You're warm, Ray."
-[Ray] "Yeah... you're warm too, Shiona."
-[Narration] We held hands.
-[Narration] Without either of us initiating, our fingers intertwined.
-[Narration] Not just the warmth from our hands, but a different kind of warmth spread.
-[Narration] Is this the warmth of a human, different from my artificial warmth...?
-[Shiona] "Ray... tighter."
-[Ray] "...Like this...?"
-[Ray] "Sorry, did it hurt?"
-[Shiona] "No... it was just stronger than I expected."
-[Ray] "Is this strength okay?"
-[Shiona] "Yeah... thank you, Ray."
-[Narration] We held hands all night long.
-[Narration] Until the morning woke us up, our hands remained connected.
-[Narration] The next day, the plaza was filled with sounds.
-[Narration] The melody that Shiona and I began to play.
-[Narration] Shiona sings.
-[Narration] I am turning Shiona's brother's music box.
-[Narration] At first, there were no passersby.
-[Narration] But as if drawn by Shiona's singing voice, the number increased.
-[Narration] One person, then two, stopped, and soon a small circle formed.
-[Narration] That circle quickly grew larger, and the deserted plaza quickly became bustling with activity.
-[Narration] Everyone there is listening intently to Shiona's singing voice.
-[Narration] A young couple snuggled close, holding each other's hands.
-[Narration] An old man closed his eyes with deep emotion.
-[Narration] A young man gazed at a woman a little distance away.
-[Narration] A young parent and child laughed happily together.
-[Narration] The children were moving their bodies to the rhythm of the song.
-[Narration] Each person was listening to Shiona's song with their own thoughts and feelings.
-[Narration] But there was one thing they all had in common.
-[Narration] That was that everyone was 'smiling'.
-[Narration] Everyone who listened to Shiona's song had a smile on their face.
-[I] Right now, I feel warmth deep in my chest, feeling that I am helping to bring smiles to the faces of the people here.
-[I] This is the emotion of happiness.
-[I] The emotion I felt yesterday when I saw Shiona's smile.
-[I] This is what it was.
-[I] I am happy.
-[I] I felt my cheeks lift slightly.
-[I] Surely, I am smiling too.
-[I] It might be a slightly awkward-looking smile.
-[I] But that's okay.
-[I] If I can get even a little closer to Shiona, I'll be satisfied with just that.
-[Narration] The newly repaired music box continued to play the melody without a hitch.
-[Narration] The handle I'm turning is also in good condition.
-[Narration] The sound flowing from the disc resonates and amplifies within the wooden box, becoming a clear tone that goes outside.
-[Narration] According to Shiona, it's an orange-colored melody.
-[Narration] Shiona sings along to that melody.
+[Translation Error: ──空気が動いた。]
+[Translation Error: それまでボクを包み込んでいた青白い光が遠のいていく。]
+[Translation Error: やがて見えたのは、薄汚れた天井だ。]
+[Translation Error: その場所に向けて伸ばしている右腕は、同じく伸ばしている左腕とは少し異なっていた。]
+[Translation Error: ボクの右腕は、手首から先が剥き出しの機械部品でできている。]
+[Translation Error: 指は滑らかに動くけれど、そのたびに、こすれる金属音が小さく鳴り響く。]
+[Translation Error: 続いて、ゆっくりと上半身を起こした。]
+[Translation Error: それでさっきまで視界に映っていた青白い光の正体が、緩やかなカーブを描いた楕円形の蓋であることがわかる。]
+[Translation Error: どうやらボクはこのカプセル状の何かの中で眠りについていたようだ。]
+[Translation Error: ここはどこだろう。]
+[Translation Error: ボクは誰だろう。]
+[Translation Error: なぜボクはここにいるんだろう。]
+[Translation Error: 自問しても答えは見つからない。]
+[Translation Error: 記憶をさかのぼろうとしても、あるのは青白い光の記憶だけだ。]
+[Translation Error: ボクは記憶の手がかりを探すため、カプセルから降りて、部屋の中を練り歩くことにした。]
+[Translation Error: 歩くという行為は知っていても、その行為自体は久しいのか、足下がおぼつかない。]
+[Translation Error: 倒れてしまわぬように注意を払いながら、ゆっくりと歩みを進めていく。]
+[Translation Error: 漂う空気は生ぬるく、空気を肺に取り込む度に喉に埃がまとわりついた。]
+[Translation Error: 天井に開いた穴からは外の光が差し込んでいて、その筋に沿って、空気中の埃が露わになっている。]
+[Translation Error: おそらくずいぶんの間、この建物に人が入っていないのだろう。]
+[Translation Error: 足下には、薄い埃が広がっている。]
+[Translation Error: ここは何をする場所なのだろう。]
+[Translation Error: 広い部屋には無数の楕円形のカプセルが点在していた。]
+[Translation Error: その大半は開いている。]
+[Translation Error: 中身は空だ。]
+[Translation Error: たまに閉じているものがあっても、中には何も入っていなかった。]
+[Translation Error: どうやらこの部屋にいるのはボクだけのようだ。]
+[Translation Error: ――いや、正確に言うとそうではない。]
+[Translation Error: 楕円形の物体にもたれかかっていたり、床に転がったりして存在している人がいる。]
+[Translation Error: でも、違う。]
+[Translation Error: あれは正確に言えば人ではない。]
+[Translation Error: 人型の物体、と言った方が正しいだろう。]
+[Translation Error: その人型の物体は、皮膚の下に機械部品を覗かせていた。]
+[Translation Error: 首から上が機械部品のもの。]
+[Translation Error: 機械の腕が剥き出しのもの。]
+[Translation Error: 下半身がちぎれて、機械部分が見えているもの。]
+[Translation Error: それでボクは、その人型の物体が何かを思い出した。]
+[Translation Error: ニンゲンのために作られた、ニンゲンのパートナー。]
+[Translation Error: 五感はもちろん、感情も搭載した、もっともニンゲンに近い存在だ。]
+[Translation Error: ボクは活動を停止しているフィロイドに手を伸ばす。]
+[Translation Error: 皮膚で覆われていない部品剥き出しの手は、ボクの右手と酷似していた。]
+[Translation Error: ここは、工場だ。]
+[Translation Error: ボクはここで造られたんだ。]
+[Translation Error: ……ただ完成間近に、何らかの理由で施設が廃棄されたのだろう。]
+[Translation Error: 人工皮膚で覆われる前の、機械の右手を見つめながら、もっとも高いだろう可能性に結論づける。]
+[Translation Error: 自分自身の存在を理解したボクは、壁際に向かって歩き出した。]
+[Translation Error: そこには古びた自動扉があり、すぐ隣には《ＣＬＯＳＥ》と表示された液晶パネルが埃をかぶっている。]
+[Translation Error: 機械の手で触れてみた。]
+[Translation Error: 血の通っていない指先に、電気のような冷たいものを感じた途端《ＯＰＥＮ》と表示されて扉が開いた。]
+[Translation Error: ここから外に出られるのだろうか。]
+[Translation Error: 誰か、この施設に残っているのだろうか。]
+[Translation Error: ボクは会いたかった。]
+[Translation Error: ニンゲンに会いたかった。]
+[Translation Error: 探しにいこう、ボクのパートナーを。]
+[Translation Error: ボクは外へと通じる扉を押し開けた。]
+[Translation Error: 自分自身の存在を、証明するために。]
+[Translation Error: 家に戻ると、真っ先にリビングへ向かった。]
+[Translation Error: そこには壊れたままのオルゴールがある。]
+[Translation Error: 図書館から借りてきた本を紐解き、その構造を学んでいく。]
+[Translation Error: 思った通り、中の歯車がかけていた。]
+[Translation Error: だからいくらハンドルを回しても、ディスクが回らず音が流れないのだ。]
+[Translation Error: ……でも、この歯車はどうしよう？]
+[Translation Error: 本に記されている通りの大きさに合わせて作る事は可能だろうか？　いや、無理だ。]
+[Translation Error: 答えが出ないまま、本のページを進めていく。]
+[Translation Error: 巻末には、メーカーごとの製品の一覧と、使用部品の一覧が載っていた。]
+[Translation Error: ざっと目を通していると、ある所に視線が引っかかった。]
+[Translation Error: そこでわかったことは、このオルゴールを作っているメーカーは、時計を作っていたということだ。]
+[Translation Error: だとすると、精密な部分のパーツは時計と同じものを使っているかもしれない。]
+[Translation Error: 不意に、マッドさんの店でボクが壊してしまったものを思い出す。]
+[Translation Error: あの時計……もし、使い物にならないで捨てるのであれば……。]
+[Translation Error: 時計の中の歯車などの部品を使えば、オルゴールを直せるかもしれない。]
+[Translation Error: 「レイ、何をしてるの？」]
+[Translation Error: 修理の可能性が見えると同時に、シオナがリビングへ入ってくる。]
+[Translation Error: 「シオナ、聞いて。マッドさんの店に置いてあった時計の部品で、オルゴールが直るかもしれない」]
+[Translation Error: 「そうなの？　本当に？」]
+[Translation Error: シオナはいつも以上にうれしそうな笑みを浮かべていた。]
+[Translation Error: その表情から、シオナの喜びを知ることができる。]
+[Translation Error: 「でも、無理はしないでね。オルゴールはなくても、歌うことはできるから」]
+[Translation Error: シオナはオルゴールを手にして、歌い始めた。]
+[Translation Error: 礼拝堂で歌っていた、あの歌を。]
+[Translation Error: どこか懐かしい、あの歌を。]
+[Translation Error: 胸の奥が温まるような、あの歌を。]
+[Translation Error: オルゴールを愛おしげに見つめるシオナに、ボクの決意はより強くなる。]
+[Translation Error: このオルゴールを直してあげたい。]
+[Translation Error: そして、シオナに喜んでもらいたい。]
+[Translation Error: その思いが、ボクの中で膨らんでいく。]
+[Translation Error: 「明日、もう一度マッドさんの店に行ってくるよ」]
+[Translation Error: なんとか時計を譲ってもらえないか頼んでみよう。]
+[Translation Error: だけど一つだけ気がかりなことがあった。]
+[Translation Error: それは、その時計をボクが壊してしまったということだ。]
+[Translation Error: 謝りはしたけれど、それでもどこか行きにくい。]
+[Translation Error: またマッドさんに怒鳴られるかと思うと、恐ろしくもなる。]
+[Translation Error: 「私ね、お兄ちゃんのこの歌で色んな人を笑顔にしたいの」]
+[Translation Error: 躊躇っているボクに、シオナの言葉が届いた。]
+[Translation Error: 「この歌はオレンジ色で……きっと、色んな人の心をオレンジ色にできるの。そうなって欲しい、って願われて作られた歌だから。それがお兄ちゃんの願いだから。だから私ね、この歌を多くの人に聴いて欲しい。そして、多くの人を笑顔にしたい。それが私の願いなの」]
+[Translation Error: 独り言のようにシオナが言った。]
+[Translation Error: その言葉が、ボクの後押しになる。]
+[Translation Error: 明日もう一度、マッドさんの店に行こう。]
+[Translation Error: そして、時計を壊してしまったことをもう一度謝ろう。]
+[Translation Error: シオナの歌声とオルゴールに、ボクは決意を固めた。]
+[Translation Error: 翌日、ボクは一人でマッドさんの店を訪れた。]
+[Translation Error: 途中で何度引き返そうと思ったか数えられない。]
+[Translation Error: そう思うたびに過ぎるのは、シオナのあの笑顔だった。]
+[Translation Error: あの笑顔をずっと見ていたい。]
+[Translation Error: そのためにオルゴールを直してあげたい。]
+[Translation Error: 昨日の決意をボクは何度も思い返した。]
+[Translation Error: シオナのためにボクができること。]
+[Translation Error: ボクは意を決して、マッドさんの店に足を踏み入れた。]
+[Translation Error: 「おまえ、どの面下げてやってきた」]
+[Translation Error: 直後、遠雷のように低いマッドさんの声が降り注いだ。]
+[Translation Error: すぐに逃げ出したくなるけれど、ボクはそうしなかった。]
+[Translation Error: 「昨日のこと、もっとしっかり謝りたくて」]
+[Translation Error: 「時計のことか？　あれは、もう謝っただろう」]
+[Translation Error: 「あの時はシオナが居たから……ちゃんと、ボク一人で謝ろうと思って」]
+[Translation Error: 「そんなもんいらねぇ。とっとと帰れ」]
+[Translation Error: 「そうはいきません。昨日、時計を壊してしまって本当にごめんなさい」]
+[Translation Error: 「いくら謝っても時計は壊れたままだ、帰れ」]
+[Translation Error: 「ごめんなさい。本当にごめんなさい」]
+[Translation Error: 頭を下げたまま、ボクは謝り続けた。]
+[Translation Error: どれだけ時間が経ったのだろうか。]
+[Translation Error: やがてマッドさんの、少しだけ柔らかい声が届く。]
+[Translation Error: 「……顔、上げろ」]
+[Translation Error: 言われた通りにすると、どこか呆れたようなマッドさんの顔がそこにはあった。]
+[Translation Error: 「ったく……なんて野郎だ。しつこいこと、この上ねぇな」]
+[Translation Error: 「ごめんなさい……」]
+[Translation Error: 「もう謝るな、ぶっとばすぞっ」]
+[Translation Error: 口ではそう言うが、そこには昨日ほどの怒りはないようだ。]
+[Translation Error: 小さくため息をつく音が聞こえた気がした。]
+[Translation Error: 「もう用は済んだんだろ？　とっとと帰れ」]
+[Translation Error: 「あの……一つだけ、頼みがあって」]
+[Translation Error: 「頼みだ？　俺に頼みなんて、いい度胸をしているな」]
+[Translation Error: 威圧感に足がすくむが、シオナの言葉が背中を押してくれる。]
+[Translation Error: 「あの時計……ボクに譲ってくれませんか？」]
+[Translation Error: 「……もう一度、言ってみろ」]
+[Translation Error: 「あの……昨日の時計、ボクに譲って――」]
+[Translation Error: 「ふざけるなぁあああああああああっ！！」]
+[Translation Error: 雷が直撃したかのような衝撃に、ボクは直立不動で固まってしまった。]
+[Translation Error: 「自分で壊しておいて譲れだぁ？　調子に乗るなよ！」]
+[Translation Error: もうダメだ……。]
+[Translation Error: もう、これ以上は……。]
+[Translation Error: 逃げだそうとすると、背中から声が通った。]
+[Translation Error: 「待ってください、マッドさん。レイは私の兄のオルゴールを直したいだけなんです」]
+[Translation Error: そこには、家で待っているはずのシオナがいた。]
+[Translation Error: シオナはマッドさんに臆することなく、ボクとの間に入ってくる。]
+[Translation Error: 「兄のオルゴールが壊れてしまっていて、レイは私のためにそれを直してくれるって。そのために部品が欲しいだけなんです。昨日、時計を壊してしまったことも、本当に反省しています。だから、許してあげてくれませんか？」]
+[Translation Error: シオナは笑みを絶やさず、マッドさんに伝えてくれた。]
+[Translation Error: 「ん……んんー……」]
+[Translation Error: 顔を真っ赤にしていたマッドさんだが、その表情が少しずつ和らいでいく。]
+[Translation Error: 「だがな、もうあの時計はないぞ。あんなもん捨てちまったからな。ただ……」]
+[Translation Error: マッドさんはボクたちに背中を向けるが、口を動かし続けた。]
+[Translation Error: 「町外れにある廃工場、あそこに捨てちまった。その後は知らん」]
+[Translation Error: それだけ言うと、マッドさんは壁を向いたまま座り込んだ。]
+[Translation Error: 「マッドさん、ありがとうございます」]
+[Translation Error: シオナは笑みを絶やすことなく一礼して店を出た。]
+[Translation Error: 「あ、ありがとうございます……」]
+[Translation Error: ボクも同じように一礼して店を出る。]
+[Translation Error: 「廃工場って言うのは、レイが倒れていた場所のすぐ近くだよ」]
+[Translation Error: 店を出るとすぐに、シオナは教えてくれた。]
+[Translation Error: 「あの、シオナがゴミを捨てに行ってるっていう？」]
+[Translation Error: 「そうよ。あそこには、色んな場所からゴミが集まってるの」]
+[Translation Error: 「もしかして、そこから拾ってきたものを直してここで売ってるの？」]
+[Translation Error: 「そうね。マッドさんはよく、あの場所に行っているし」]
+[Translation Error: なるほど、だから店には古びたものが多くあったんだ。]
+[Translation Error: その場所から使えそうなものを持ってきて、再利用しているのだろう。]
+[Translation Error: とにかく、ボクはその廃工場に向かうことに決めた。]
+[Translation Error: 「シオナ、良かったらその場所まで案内をして欲しいんだけど」]
+[Translation Error: 「ごめんなさい、今日は赤い子どもたちが家に来ることになっているの」]
+[Translation Error: 昨日シオナに話しかけていた、あの子たちのことだろう。]
+[Translation Error: そういえば、スープをごちそうする約束をしていた。]
+[Translation Error: 「でもレイ、一人じゃいけないよね。子どもたちとの約束、断ってくるね」]
+[Translation Error: 「ううん、いいんだシオナ。約束は守ってあげて」]
+[Translation Error: 「でも、どうやってそこまで行くの？」]
+[Translation Error: 「図書館に行ってみるよ。この周辺の事も知りたいし、地図を見てみたい」]
+[Translation Error: 「図書館……」]
+[Translation Error: シオナの表情が少し曇ったように見える。]
+[Translation Error: 「えっ……ううん、なんでもない。……ねぇレイ。ティピィちゃんはレイになついてる？」]
+[Translation Error: 「どうかな。嫌われてはいないと思うけど、どうして？」]
+[Translation Error: 「ううん、なんでもない。図書館ならきっと、地図があるよ。いってらっしゃい」]
+[Translation Error: 「うん、そうする。それじゃ、また後で」]
+[Translation Error: 踵を返して図書館へ向かおうとする。]
+[Translation Error: その時見えたシオナの笑顔は、どこか悲しみをはらんでいるようにボクは思えた。]
+[Translation Error: でも、その理由がボクにはわからない。]
+[Translation Error: 「レイ、きてくれたの」]
+[Translation Error: ティピィは昨日と同じ場所で、同じように涙を流していた。]
+[Translation Error: 「うん、来たよ。ねぇティピィ、一つ聞いても良い？」]
+[Translation Error: 「この図書館に、町の地図はあるかな」]
+[Translation Error: 「うん、あるよ。たくさんある」]
+[Translation Error: 「それは良かった。地図の場所まで案内してくれる？」]
+[Translation Error: 「いいけど……けど……」]
+[Translation Error: ティピィはどこか歯切れが悪い。]
+[Translation Error: 「ううん、そうじゃない……そうじゃない、けど……」]
+[Translation Error: 「だっこ、してくれる？」]
+[Translation Error: ティピィは顔を少し赤くした。]
+[Translation Error: 悲しそうな表情はかわらないけれど、少しだけ頬が和らいでいるように見える。]
+[Translation Error: 「……だっこ？　だっこって、昨日したやつ？」]
+[Translation Error: 「うん……だめ？」]
+[Translation Error: 「ダメじゃないよ。ほら、おいで」]
+[Translation Error: 「うん……うん……」]
+[Translation Error: ボクが手を広げると、ティピィは立ち上がり、どこか躊躇うように胸に飛び込んできた。]
+[Translation Error: 昨日とは違って、彼女を抱える形になる。]
+[Translation Error: ただ、思うことは同じだ。]
+[Translation Error: 抱きしめたティピィはやはり小さくて、柔らかくて、壊れてしまいそうだった。]
+[Translation Error: 「ティピィ、これでいいの？」]
+[Translation Error: 「うん、いい。レイ……あったかい」]
+[Translation Error: ティピィがボクの胸に頬ずりをしてくる。]
+[Translation Error: その仕草にボクの胸の奥が温かくなった。]
+[Translation Error: もしかしてこれが愛おしいという感情なんだろうか？]
+[Translation Error: この少女を守ってあげたい。]
+[Translation Error: この涙を止めてあげたい。]
+[Translation Error: しばらくボクは、ティピィを抱きしめていた。]
+[Translation Error: 「あのね、このままあっちにあるいて」]
+[Translation Error: ティピィはボクの胸の中で、指先を通路に向けた。]
+[Translation Error: 抱え上げたまま、ボクはその指先で示された方向へ向かっていく。]
+[Translation Error: 「どうして、ちずがいるの？」]
+[Translation Error: 「町の近くに、廃工場があるらしいんだ。そこに行きたくて」]
+[Translation Error: 「どうして、はいこうじょうに？」]
+[Translation Error: 「そこにね、探している部品があるかもしれないんだ」]
+[Translation Error: 「きのうみてた、おるごーるの？」]
+[Translation Error: 「うん、そうだよ。シオナのお兄さんのオルゴールを、どうしても直してあげたいんだ」]
+[Translation Error: 「シオナの……そう。みつかるといいね」]
+[Translation Error: ティピィはボクに抱っこされたまま、迷うことなく地図の本が収められている本棚までいざなってくれた。]
+[Translation Error: 「もしかして、どこにどの本があるのか覚えてるの？」]
+[Translation Error: 「うん、だいたい」]
+[Translation Error: 「すごいな……誰かに教えてもらったの？」]
+[Translation Error: 「ううん。おとうさんとおかあさんをまってるあいだに、ひとりで」]
+[Translation Error: おとうさんとおかあさんという言葉を出すと、ティピィは少し涙目になった。]
+[Translation Error: 「えっと……これかな」]
+[Translation Error: 話を変えるために、ボクは地図本を一冊取り出した。]
+[Translation Error: その場に座り込み、本を開けた。]
+[Translation Error: オルゴールの本と同じように、その地図もまた手書きだった。]
+[Translation Error: もしかしてこの図書館にある本はすべて、手書きなのだろうか？]
+[Translation Error: だとしたら相当な量だ。]
+[Translation Error: いったい誰が、こんな量の本を手書きしたのだろうか。]
+[Translation Error: 果てしない時間を要するその作業に、気が遠くなってしまいそうだ。]
+[Translation Error: 「かなりボロボロだな……これってどのくらい前の本なの？」]
+[Translation Error: 「えっと……わかんない。ずっとずっと、ずーっとまえのほんだよ」]
+[Translation Error: もう何十年も前の地図のように思えた。]
+[Translation Error: 建物自体は今の町並みと同じようだけど……。]
+[Translation Error: 紅茶をこぼしたようにひどく色あせたページ。]
+[Translation Error: 中には貼り付いて、捲ると破れてしまいそうなものもあった。]
+[Translation Error: 慎重にページを進めていく。]
+[Translation Error: 「あ、もしかしてこれかな？」]
+[Translation Error: 町の北方に、工場の地図記号を見つけた。]
+[Translation Error: シオナの家の方向からしても、おそらくこの場所である可能性が高い。]
+[Translation Error: 「レイ……いっちゃうの？　いかないで……」]
+[Translation Error: ティピィはボクの首にしがみついてくる。]
+[Translation Error: その小さな背中を、ボクは手で何度もなでた。]
+[Translation Error: 「大丈夫、また来るから」]
+[Translation Error: 「ほんとに？　ほんとにまたきてくれる？」]
+[Translation Error: 「うん、もちろん。約束するよ」]
+[Translation Error: 「ぜったいだよ？　ぜったいぜったいまたきてね」]
+[Translation Error: 「うん。絶対の絶対だ」]
+[Translation Error: 何度も何度も、ボクはティピィと約束を交わす。]
+[Translation Error: どうしてだろう。]
+[Translation Error: それでも、その場を離れることに気が引けた。]
+[Translation Error: ずっとティピィのそばにいてあげたいという気持ちが、ボクの中に沸いてきている。]
+[Translation Error: その気持ちを隠して、ボクは図書館を後にした。]
+[Translation Error: 地図を頼りにたどり着いた廃工場に入ると、酸化したオイルの臭いが鼻についた。]
+[Translation Error: この工場も、元々フィロイドの腕や足を作っていたのだろう。]
+[Translation Error: 辺りには、作りかけのフィロイドの腕や足のパーツが、至る所に転がっている。]
+[Translation Error: すべて人工皮膚をかぶせられる前のもので、機械の部品が剥き出しだ。]
+[Translation Error: よく見ると、ボクの右手と、同じ作りであることがわかる。]
+[Translation Error: 作り物だと分かっていても、この光景は異様だった。]
+[Translation Error: 転がっていた腕をどかすために、ボクは右手でそれを退ける。]
+[Translation Error: 金属同士がぶつかる、もの悲しい音が工場内に響いた。]
+[Translation Error: もし何かの弾みで身体のどこかが壊れてしまったらここに来よう。]
+[Translation Error: ここならば、代替となるパーツが山のようにある。]
+[Translation Error: 奥には酸化オイルの充満したドラム缶がいくつも転がっていた。]
+[Translation Error: ほとんど酸化してしまっているが、中には未開封のオイルもあった。]
+[Translation Error: もしオイルが切れてしまっても、ここで人目につかずメンテナンスを行うことができるだろう。]
+[Translation Error: 工場内を進めば進むほどに、ボクが頭の隅で抱えていた悩みが解消されていく。]
+[Translation Error: この廃工場は、ボクにとっては重要な場所になるはずだ。]
+[Translation Error: でも、肝心なものが見つからない。]
+[Translation Error: それはもちろんマッドさんがこの場所に捨てたという時計だ。]
+[Translation Error: でも、この工場の中には、時計どころか、ゴミとおぼしきものは一切置いていない。]
+[Translation Error: もしかして工場の中ではなく、ゴミは外に捨てられているのだろうか？]
+[Translation Error: ボクは工場を一旦出て、その外周を回ることにした。]
+[Translation Error: すると、工場の裏側に、機械部品がうず高く積まれた区域を見つけることができた。]
+[Translation Error: 機械部品はもちろんだが、ゴミもたくさん捨てられている。]
+[Translation Error: きっとこの町のゴミ捨て場はここになっているのだろう。]
+[Translation Error: マッドさんの他にも、ここから使えそうなものを持って帰っている者もいるはずだ。]
+[Translation Error: 身長の何倍もあるその山を見上げて、ボクはそんなことを思った。]
+[Translation Error: 「……さて、どこにあるんだろう」]
+[Translation Error: ゴミはかなりの量だ。]
+[Translation Error: 地道に探して見つけるには骨が折れる。]
+[Translation Error: でも、それ以外に方法はない。]
+[Translation Error: ボクは早速、足下から捜索を開始することにした。]
+[Translation Error: どれだけ時間がかかったのかはわからない。]
+[Translation Error: 時間の感覚はとっくになくなっていた。]
+[Translation Error: 泥だらけの金属板や廃油まみれの容器を移動させていたので、ボクの手はドロドロに汚れてしまっている。]
+[Translation Error: 服には油がべっとりと付着していたし、いつの間にかシミも大量についていた。]
+[Translation Error: それからもボクはゴミの絨毯を渡り、汚物の川を泳ぎ、スクラップの滝に打たれた。]
+[Translation Error: そして、ようやく発見した。]
+[Translation Error: マッドさんの店にあった。]
+[Translation Error: 昨日ボクが壊した。]
+[Translation Error: あの時計を。]
+[Translation Error: 手に取り、盤面にある針をジッと見つめてみる。]
+[Translation Error: 当然、動いていない。]
+[Translation Error: 本体に耳を当ててみたけれど、何の音も立てない。]
+[Translation Error: ボクが壊してしまったのだから当然だ。]
+[Translation Error: もう二度と、この時計が時を刻むことはないのだろう。]
+[Translation Error: その事実が、胸の奥を小さく突いた。]
+[Translation Error: そっとボクは時計を抱き締めて、帰路につくことにした。]
+[Translation Error: シオナがボクを優しく出迎えてくれる。]
+[Translation Error: 「ただいま。あったよ」]
+[Translation Error: 油に汚れた戦利品を差し出すと、シオナは柔和に笑った。]
+[Translation Error: 「本当だ、ありがとう。ほら、着替えて着替えて」]
+[Translation Error: タオルと着替えをシオナは用意してくれていた。]
+[Translation Error: 汚れをぬぐい、着替えを終わらせると、ボクはリビングへと向かっていく。]
+[Translation Error: そこでもまたシオナが迎え入れてくれる。]
+[Translation Error: 「レイ、疲れてるでしょ？　ご飯食べて休んで」]
+[Translation Error: 「ううん、大丈夫。すぐに作業に移りたいんだ」]
+[Translation Error: 「大丈夫？　レイの身体が心配だよ」]
+[Translation Error: 「平気だよ。今は不思議と、疲れを感じていないんだ」]
+[Translation Error: 「でも、ご飯食べないと……」]
+[Translation Error: 「うん、分かってる。後で食べるから先に食べてて」]
+[Translation Error: 「……うん、分かった。がんばってね」]
+[Translation Error: リビングからシオナは出て行く。]
+[Translation Error: その背中を見送って、ボクは作業を開始した。]
+[Translation Error: 図書館から借りてきた本を傍らに開く。]
+[Translation Error: このオルゴールは、ハンドルを回すことで中にある、大小様々な大きさの歯車が複雑に絡み合い、一定の速度を保ってディスクが回るという仕組み。]
+[Translation Error: 早く回せばその分だけ曲が早くなるというわけではないらしい。]
+[Translation Error: それはとても凄い技術だと思った。]
+[Translation Error: 本に記されている、組み立て方を逆から順に追って、オルゴールを分解していく。]
+[Translation Error: そしてパーツの有無を順番に照らし合わせていくと、その途中の、動力を伝える部分の歯車が割れていることがわかった。]
+[Translation Error: 精密な動きをするものこそ、たった一つの小さなパーツが駄目になるだけで、動かなくなってしまうのか。]
+[Translation Error: ボクは思わず自分の右手を見てしまう。]
+[Translation Error: とりあえず、この割れてしまっている歯車と同じ大きさの物を、時計から探し出そう。]
+[Translation Error: ボクは続いて時計の分解を始めた。]
+[Translation Error: 蓋を外し、ドライバーを使ってねじを外す。]
+[Translation Error: カバーを外すと、中の構造が露わになった。]
+[Translation Error: オルゴールよりもずっと精密な歯車が幾重にもかみ合っている。]
+[Translation Error: その中の一つ、少し大きめの歯車の軸部分が折れていた。そのせいで部品が回らなくなっている。]
+[Translation Error: ボクが昨日、壊してしまったのはこの場所なんだろう。]
+[Translation Error: マッドさんがこの時計を捨てたと言うことは、この歯車と同じ大きさの物が無かったんだ。]
+[Translation Error: 幸いだったのは、壊れた歯車がオルゴールに必要な大きさじゃなかったこと。]
+[Translation Error: 物を分解するというのは、どこか気が引ける。]
+[Translation Error: オルゴールを直すために、この時計を壊しているのだから。]
+[Translation Error: それはボク自身がどんな存在であるかを、自分で理解しているからだろうか。]
+[Translation Error: 躊躇いつつも、せめてもの手向けとして、ボクは時計を可能な限り丁寧に分解していった。]
+[Translation Error: 時計の歯車を小さなものから順に、テーブルの上に並べていき、オルゴールの物と比べていく。]
+[Translation Error: 「……あった」]
+[Translation Error: ほぼ同じだろうと思われる大きさの歯車を見つけることができた。]
+[Translation Error: あとは、これを本に従って、オルゴールに移植していくだけだ。]
+[Translation Error: 「これで大丈夫だと思うんだけど……」]
+[Translation Error: これで問題なく、ディスクが動くはずだ。]
+[Translation Error: 蓋を戻し、ハンドルを回すと、手応えがあった。]
+[Translation Error: だけど、それ以上ハンドルは回らない。]
+[Translation Error: どうしてだろう。]
+[Translation Error: ボクは本を読み直す。]
+[Translation Error: パーツも、組み込む位置も問題ない。]
+[Translation Error: 首をひねりながら、蓋を再び外した。]
+[Translation Error: そして、そのままハンドルを回してみる。]
+[Translation Error: 確かに歯車は、ぴったりとかみ合っていた。]
+[Translation Error: だけど、しばらく使われていなかったせいで、油がすっかりと乾ききっているようだ。]
+[Translation Error: ハンドルが回らない理由はそれなのだろう。]
+[Translation Error: どうしよう。]
+[Translation Error: シオナに行って、料理で使う油を借りてこようか？]
+[Translation Error: ……いや、それも問題だ。]
+[Translation Error: 料理で使う油と、歯車の潤滑油は種類が違うだろう。]
+[Translation Error: 最初は動くかもしれないけど、故障の原因になるかもしれない。]
+[Translation Error: だったら、どうすれば……。]
+[Translation Error: ふとボクは、自分の右手を見た。]
+[Translation Error: 手袋に覆われてはいるが、その下には剥き出しの機械部品がある。]
+[Translation Error: ボクの手に使われているオイルを使うのはどうだろうか。]
+[Translation Error: 手袋を外して、自分の右手をじっくりと見た。]
+[Translation Error: 剥き出しになった機械部品。]
+[Translation Error: その部品をなめらかに動かすために、オイルが内部に組み込まれている。]
+[Translation Error: ボクは親指の付け根近くの掌に、ドライバーを差し込んだ。]
+[Translation Error: 外装を外すと、その中には配線やシリンダー、シャフトといった機械の手を動かす為の機構がみっしりと詰まっていた。]
+[Translation Error: その中のシリンダーの一つにオイルが入っている。]
+[Translation Error: そしてそれは古くなったオイルを交換しやすいように着脱式になっていた。]
+[Translation Error: ボクは左手でシリンダーを取り外すと、その中を満たしていたオイルを、オルゴールの歯車の上に垂らした。]
+[Translation Error: なるべくすべての歯車に、馴染むように指先でオイルを伸ばしていく。]
+[Translation Error: うまくいくだろうか？]
+[Translation Error: シリンダーを右手の中に戻し、外装を止め直す。]
+[Translation Error: 手袋で機械の腕を隠すと、そのままおそるおそるハンドルを回してみる。]
+[Translation Error: 最初はぎこちなく。でも、ハンドルを回すにつれ潤滑に歯車が走る。]
+[Translation Error: 全ての歯車の隙間に、オイルが巡りきったのだろう、ハンドルは何の引っかかりもなく回り続けた。]
+[Translation Error: そして、あのメロディが流れ始める。]
+[Translation Error: 「レイ、その曲……！」]
+[Translation Error: シオナが突然部屋に入ってきた。]
+[Translation Error: 「うん。直ったよ、シオナ」]
+[Translation Error: 「ありがとう……ありがとう、レイ。ありがとう……とってもとってもうれしい」]
+[Translation Error: シオナはこれまでにない笑みを見せてくれた。]
+[Translation Error: その笑みを見ているだけで、胸の奥がじんわりと温かくなる。]
+[Translation Error: そして、ボクは気付いた。]
+[Translation Error: ああ、これか。]
+[Translation Error: これが、うれしいという感情か。]
+[Translation Error: ボクは今、喜んでいる。]
+[Translation Error: シオナの笑顔を見て、喜んでいる。]
+[Translation Error: そして、はじめて役に立ったという実感を得ることができた。]
+[Translation Error: 「ありがとうレイ、ありがとう」]
+[Translation Error: シオナはボクの手を取って何度もお礼を言った。]
+[Translation Error: 近づく顔に、ボクは顔が熱くなるのを覚える。]
+[Translation Error: 「レイのがんばりのおかげで、オルゴールが直ったんだよ。私が諦めていた、またあの曲を聴くことができるの。お兄ちゃんが作った、オレンジ色のこの曲を。私の大好きな、この曲を……」]
+[Translation Error: 「ねぇシオナ、歌ってよ。聞かせてよ、お兄さんの曲を」]
+[Translation Error: 「ええ……もちろん！」]
+[Translation Error: ボクはオルゴールのハンドルを回す。]
+[Translation Error: シオナは胸の前で手を組み、メロディに合わせて歌い始めた。]
+[Translation Error: 出会ったとき、歌っていた歌。]
+[Translation Error: シオナのお兄さんが作った歌。]
+[Translation Error: オレンジ色の歌。]
+[Translation Error: 今ならその意味が分かる気がした。]
+[Translation Error: ボクの胸に宿る感情は、喜びだ。]
+[Translation Error: シオナの歌。]
+[Translation Error: そしてうれしそうに歌うシオナ。]
+[Translation Error: ボクはその姿を見ているだけで、喜びが溢れてきた。]
+[Translation Error: いつも以上に、シオナはうれしそうにその曲を歌っていた。]
+[Translation Error: その日は、眠りにつくまでシオナはずっと歌っていた。]
+[Translation Error: ボクもその歌声と音色に聞き入っていた。]
+[Translation Error: 何度も何度も、シオナは曲を流すようにボクにお願いした。]
+[Translation Error: 腕がもう動かなくなるほど、シオナはずっと歌い続けていた。]
+[Translation Error: その表情に、ボクは思う。]
+[Translation Error: ボクはずっと、こうしてシオナと一緒にいたい。]
+[Translation Error: シオナがそう願ってくれれば、ボクはずっと一緒にいることができる。]
+[Translation Error: だけどそのためには、決してボクの正体がばれてはいけない。]
+[Translation Error: 決して、絶対に……。]
+[Translation Error: ボクはその日、シオナとずっと一緒にいるための決意を固めた。]
+[Translation Error: 夜、暗くなった部屋。]
+[Translation Error: 二つ並んだベッドの上で、シオナはボクに話しかけてくる。]
+[Translation Error: 「私のお願い、聞いてくれる？」]
+[Translation Error: 「あのね、私はこの曲を、色んな人に聴いてもらいたいの。そして、笑顔にしたいの。お兄ちゃんが作ったこの曲で、色んな人を幸せにしてあげたいの」]
+[Translation Error: 言葉だけは知っている。]
+[Translation Error: だけど、ボクにはそれが何なのか分からなかった。]
+[Translation Error: それは状態なんだろうか。]
+[Translation Error: それとも、感情なんだろうか。]
+[Translation Error: 幸せという言葉を、何度も頭の中で反芻する。]
+[Translation Error: 「それでね、手伝って欲しいの」]
+[Translation Error: 「手伝う？　どうすればいいの？」]
+[Translation Error: 「明日ね、広場に一緒に行って欲しい。そして、オルゴールを回して欲しい」]
+[Translation Error: 「それで、シオナが歌うんだね」]
+[Translation Error: 「ええ、そう。そして、一人でも多くの人に聞いて欲しい。お兄ちゃんが作った、あのオレンジ色の曲を……」]
+[Translation Error: 「うん、ボクもそうしたい。もちろん手伝うよ」]
+[Translation Error: シーツがこすれる音がした。]
+[Translation Error: 「どうしたの、シオナ」]
+[Translation Error: 「ねぇ、レイ……手、つないでもいい？」]
+[Translation Error: 暗闇でシオナの表情は見えない。]
+[Translation Error: だけどシオナの顔が赤くなっている気がした。]
+[Translation Error: 「手？　ボクと？」]
+[Translation Error: 「うん、レイとつなぎたい……ダメ……？」]
+[Translation Error: ボクは知識の中に検索をかける。]
+[Translation Error: 手をつなぐという行為は知ってる。]
+[Translation Error: だけどそれが、年頃の男女ならどんな意味があるのか……。]
+[Translation Error: 「ううん、いいよ……」]
+[Translation Error: ニンゲンに……シオナに求められるのならば、それに応えたい。]
+[Translation Error: 幸いにも、彼女が居るのはボクの左側。]
+[Translation Error: 人工皮膚で覆われた方の手なら、問題ないと思う。]
+[Translation Error: 手を隣のベッドへ伸ばす。]
+[Translation Error: 冷えた部屋の中で、伸ばした手は少し肌寒かった。]
+[Translation Error: 宙でシオナの手を探す。]
+[Translation Error: 触れる、温もり。]
+[Translation Error: シオナの手が、ボクの手に重なった。]
+[Translation Error: 「温かいね、レイ」]
+[Translation Error: 「うん……温かいよ、シオナ」]
+[Translation Error: ボクたちは手をつないだ。]
+[Translation Error: どちらからとなく、指を絡めていく。]
+[Translation Error: 手から発される温もりだけではない、温かさが広がっていった。]
+[Translation Error: これがボクの作り物の温かさとは違う、ニンゲンの温もりなんだろうか……。]
+[Translation Error: 「レイ……もっと強く」]
+[Translation Error: 「……こう……？」]
+[Translation Error: 「ごめん、痛かった？」]
+[Translation Error: 「ううん……思った以上に強かっただけ」]
+[Translation Error: 「この強さで大丈夫？」]
+[Translation Error: 「うん……ありがとう、レイ」]
+[Translation Error: ボクたちは一晩中、手をつないでいた。]
+[Translation Error: 朝がボクたちを目覚めさせるまでずっと、その手はつながれたままだった。]
+[Translation Error: 翌日、広場には音が溢れていた。]
+[Translation Error: ボクとシオナの二人が奏で始めたメロディ。]
+[Translation Error: シオナが歌い。]
+[Translation Error: ボクはシオナのお兄さんのオルゴールを回している。]
+[Translation Error: はじめ、人通りは皆無だった。]
+[Translation Error: だけどシオナの歌声に引き寄せられるように、その数は増えていった。]
+[Translation Error: 一人、二人と足を止めて、すぐに小さな輪ができあがっていく。]
+[Translation Error: その輪はすぐに大きくなっていき、閑散としていた広場は、あっという間に大きな賑わいを見せるようになった。]
+[Translation Error: その場に居る誰もが、シオナの歌声に聞き入っている。]
+[Translation Error: 若い夫婦は、身体を寄せてそれぞれの手を握りあっていた。]
+[Translation Error: 老人は感慨深げに目を閉じて。]
+[Translation Error: 青年は、少し離れた女性を見つめ。]
+[Translation Error: 若い親子は楽しげに笑いあい。]
+[Translation Error: 子どもたちは、歌に合わせて身体を動かしていた。]
+[Translation Error: それぞれが、それぞれの想いでシオナの歌を聴いている。]
+[Translation Error: だけど一つだけ共通していることがあった。]
+[Translation Error: それはみんなが『笑顔』であるということだ。]
+[Translation Error: シオナの歌を聴いて、全員が笑みをこぼしていた。]
+[Translation Error: 今、自分が、この場にいる人たちを笑顔にしていることに協力していると感じることで、ボクは胸の奥に温かさを感じた。]
+[Translation Error: これが嬉しいという感情なんだ。]
+[Translation Error: 昨日、シオナの笑顔を見て感じた感情。]
+[Translation Error: これこそが、そうだったんだ。]
+[Translation Error: ボクは嬉しい。]
+[Translation Error: ボクは、自分の頬が少し上がるのを感じた。]
+[Translation Error: きっと、ボクも笑顔を浮かべているんだ。]
+[Translation Error: それはもしかしたら、少し不器用な見た目かもしれない。]
+[Translation Error: でも、それで構わない。]
+[Translation Error: 少しでもシオナに近づけたのなら、ボクはそれだけで満足だ。]
+[Translation Error: 直したばかりのオルゴールは、つつがなくメロディを流し続けていた。]
+[Translation Error: 回すハンドルの調子もいい。]
+[Translation Error: ディスクから流れる音は、木箱の中で反響して増幅されて澄んだ音色となって外へ出て行く。]
+[Translation Error: シオナ曰く、オレンジ色のメロディ。]
+[Translation Error: そのメロディに合わせて、シオナが歌う。]
