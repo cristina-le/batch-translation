@@ -18,15 +18,17 @@ async def get_structured_data(text, schema):
     """
     Uses LLM to parse a natural language string into a list of structured objects.
     """
-    completion = await client.responses.parse(
+    logger.info(f"MESSAGEEEE: {text}")
+
+    completion = await client.beta.chat.completions.parse(
         model=Constants.MODEL,
-        input=[
+        messages=[
             {"role": "system", "content": Constants.SYSTEM_PROMPT},
             {"role": "user", "content": text},
         ],
-        text_format=schema,
+        response_format=schema,
         temperature=Constants.TEMPERATURE,
     )
 
-    message = completion.output_text
+    message = completion.choices[0].message.content
     return json.loads(message)

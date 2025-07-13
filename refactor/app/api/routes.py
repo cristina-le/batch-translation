@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 
 from app.core.schema import TaskRequest
 from app.services import get_translate_service
-from refactor.app.services.translate_service import TranslateService
+from app.services.translate_service import TranslateService
 
 router = APIRouter()
 logger = logging.getLogger("app")

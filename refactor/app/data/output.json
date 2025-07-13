@@ -1,1 +1,132 @@
-[]
+[
+  {
+    "job_id": "5e7160fd-c21e-41b5-9792-795b9b66bde7",
+    "completed_at": "2025-07-13T16:25:17.398328",
+    "content": [
+      {
+        "japanese": "そんなに汚したら、お⺟さんに怒られるよ",
+        "english": [
+          "[Translation Error]"
+        ]
+      }
+    ]
+  },
+  {
+    "job_id": "5bb32376-3154-465c-a7b5-399144968a6d",
+    "completed_at": "2025-07-13T18:23:32.644828",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "そんなに汚したら、お⺟さんに怒られるよ",
+        "english": "If you get that dirty, your mom's gonna be mad at you."
+      }
+    ]
+  },
+  {
+    "job_id": "65ab8f06-250b-489f-bbe2-e20dc32c15c2",
+    "completed_at": "2025-07-13T18:23:51.105684",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "そんなに汚した",
+        "english": "You got that dirty?"
+      }
+    ]
+  },
+  {
+    "job_id": "3e611d3b-204f-4b25-9f37-83d0c13daf60",
+    "completed_at": "2025-07-13T18:31:09.479555",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "そんなに汚した",
+        "english": "Did I make that much of a mess?"
+      },
+      {
+        "line": 1,
+        "japanese": "そんなに",
+        "english": "That much, huh?"
+      }
+    ]
+  },
+  {
+    "job_id": "0000928d-0add-4280-b5b4-4b9883273397",
+    "completed_at": "2025-07-13T18:31:48.191814",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "そんなに汚した",
+        "english": "Did I make that much of a mess?"
+      },
+      {
+        "line": 1,
+        "japanese": "そんなに",
+        "english": "That much, huh?"
+      }
+    ]
+  },
+  {
+    "job_id": "73fe9fc1-625f-4765-87c9-4300a96f27e9",
+    "completed_at": "2025-07-13T18:31:53.507968",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "そに汚した",
+        "english": "Did I make that much of a mess?"
+      },
+      {
+        "line": 1,
+        "japanese": "そんなに",
+        "english": "That much, huh?"
+      }
+    ]
+  },
+  {
+    "job_id": "2be9f85e-028b-43c3-b48f-6217b5983dfe",
+    "completed_at": "2025-07-13T18:32:05.649654",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "そに汚した",
+        "english": "Did I make that much of a mess?"
+      },
+      {
+        "line": 1,
+        "japanese": "そんなに",
+        "english": "That much, huh?"
+      }
+    ]
+  },
+  {
+    "job_id": "d9d415d6-980e-4326-990c-c8f9d8b8d66f",
+    "completed_at": "2025-07-13T18:32:14.446801",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "した",
+        "english": "I did?"
+      },
+      {
+        "line": 1,
+        "japanese": "そんなに",
+        "english": "That much?"
+      }
+    ]
+  },
+  {
+    "job_id": "7d02ca87-e97b-4581-ae3f-372b33dc29a1",
+    "completed_at": "2025-07-13T18:41:25.319170",
+    "content": [
+      {
+        "line": 0,
+        "japanese": "した",
+        "english": "I did."
+      },
+      {
+        "line": 1,
+        "japanese": "そんなに",
+        "english": "Not that much."
+      }
+    ]
+  }
+]

@@ -52,7 +52,7 @@ REQUIREMENTS:
 
 CRITICAL: 
 - Your translation MUST have EXACTLY {{ size }} lines, no more and no less.
-- Return the result as JSON: {{"translated_outputs": ["English line 1", "English line 2", ..., "English line {{ size }}"]}}
+- Return the result as JSON: {"translated_outputs": ["English line 1", "English line 2", ..., "English line {{ size }}"]}
 - Pay special attention to pronouns and subject-object relationships.
 - When translating actions, be clear about who is performing the action.
 
@@ -61,4 +61,3 @@ CONTEXT: Japanese text to translate:
 
 RESULT: Translation into English:
 """
-

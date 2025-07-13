@@ -4,7 +4,7 @@ from datetime import datetime
 from fastapi import BackgroundTasks
 
 from app.core.constant import Constants
-from refactor.app.services.translator import TranslationService
+from app.utils.translator import Translator
 from app.utils.common import parse_file_to_context
 
 logger = logging.getLogger("app")
@@ -14,7 +14,7 @@ class TranslateService:
     Main orchestrator for the translation pipeline.
     """
     def __init__(self):
-        self.translator = TranslationService()
+        self.translator = Translator()
         self.output_file = Constants.OUTPUT_FILE
 
     async def _execute_and_save(self, job_id: str, context: str):
@@ -22,12 +22,15 @@ class TranslateService:
         Executes an automation job and appends the payload to a JSON file.
         """
         translated_context = await self.translator.translate_full_text(context)
+        translated_context = "\n".join(translated_context).splitlines()
+        context = context.splitlines()
 
         payload = {
             "job_id": job_id,
             "completed_at": datetime.now().isoformat(),
             "content": [
                 {
+                    "line": i,
                     "japanese": context[i],
                     "english": translated_context[i]
                 } for i in range(len(context))

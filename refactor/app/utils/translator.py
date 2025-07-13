@@ -7,11 +7,10 @@ from app.core.constant import Constants
 from app.core.schema import Context
 from app.model.llm import get_structured_data
 from app.utils.common import split_into_chunks
-from app.utils.postprocess import post_process
 
 logger = logging.getLogger("app")
 
-class TranslationService:
+class Translator:
     """
     Handles Japanese to English translation with context memory.
     """
@@ -65,8 +64,7 @@ class TranslationService:
 
             try:
                 raw = await self.translate_chunk(chunk, line_count)
-                cleaned = post_process(raw)
-                translated_lines.extend(cleaned.splitlines())
+                translated_lines.extend(raw.splitlines())
             except Exception as e:
                 logger.error(f"✗ Error in chunk {idx}: {e}", exc_info=True)
                 translated_lines.extend(["[Translation Error]"] * line_count)
