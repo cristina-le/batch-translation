@@ -21,7 +21,7 @@ async def get_structured_data(text, schema):
     completion = await client.responses.parse(
         model=Constants.MODEL,
         input=[
-            {"role": "system", "content": Constants.TRANSLATION_PROMPT_TEMPLATE},
+            {"role": "system", "content": Constants.SYSTEM_PROMPT},
             {"role": "user", "content": text},
         ],
         text_format=schema,

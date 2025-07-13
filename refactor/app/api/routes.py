@@ -6,14 +6,14 @@ from fastapi.responses import JSONResponse
 
 from app.core.schema import TaskRequest
 from app.services import get_translate_service
-from refactor.app.services.translator import Translator
+from refactor.app.services.translate_service import TranslateService
 
 router = APIRouter()
 logger = logging.getLogger("app")
 
 
 @router.post("/task-execution")
-async def task_execution(body: TaskRequest, background_tasks: BackgroundTasks, service: Translator = Depends(get_translate_service)):
+async def task_execution(body: TaskRequest, background_tasks: BackgroundTasks, service: TranslateService = Depends(get_translate_service)):
     """
     Execute automation task based on the provided context.
     """

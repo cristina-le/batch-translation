@@ -1,63 +1,85 @@
 import logging
-import asyncio
+from collections import deque
 from typing import List
 
+from jinja2 import Template
+
 from app.core.constant import Constants
-from app.services.translation_service import TranslationService
-from app.utils.postprocess import post_process
+from app.core.schema import Context
+from app.model.llm import get_structured_data
 from app.utils.common import split_into_chunks
+from app.utils.postprocess import post_process
 
 logger = logging.getLogger("app")
 
-class Translator:
+class TranslationService:
     """
-    Main orchestrator for the translation pipeline.
+    Handles Japanese to English translation with context tracking and chunk-based processing.
     """
     def __init__(self):
-        self.translation_service = TranslationService()
+        self.history = deque(maxlen=Constants.CONTEXT_WINDOW)
 
-    async def translate_text(self, full_text: str) -> str:
+    def _prepare_prompt(self, japanese_text: str, size: int) -> str:
+        template = Template(Constants.TRANSLATE_PROMPT)
+        return template.render(
+            japanese_text=japanese_text,
+            size=size,
+            history=list(self.history)
+        )
+
+    async def translate_chunk(self, text: str, size: int) -> str:
         """
-        Translates a full string of Japanese text
+        Translates a chunk of text with a fixed number of lines.
         """
-        if not full_text.strip():
-            logger.warning("Input text is empty. Returning empty string.")
+        prompt = self._prepare_prompt(text, size)
+        response_data = await get_structured_data(prompt, Context)
+
+        translated_text = "\n".join(response_data["translated_outputs"])
+
+        self.history.append({
+            'japanese': text,
+            'english': translated_text
+        })
+
+        return translated_text
+
+    async def translate_full_text(self, text: str) -> str:
+        """
+        Translates an entire block of Japanese text, handling chunking and post-processing.
+        """
+        full_text = text.strip()
+        if not full_text:
+            logger.warning("Empty input text. Skipping translation.")
             return ""
 
-        logger.info(f"Starting translation for text with {len(full_text.splitlines())} lines.")
-        
-        chunks = split_into_chunks(full_text)
-        translated_chunks = []
-        
-        total_chunks = len(chunks)
-        logger.info(f"Text split into {total_chunks} chunks")
+        lines = full_text.splitlines()
+        logger.info(f"Translating text with {len(lines)} lines...")
 
-        for i, chunk in enumerate(chunks):
+        chunks = split_into_chunks(full_text)
+        total = len(chunks)
+        logger.info(f"Split into {total} chunk(s).")
+
+        translated_chunks: List[str] = []
+
+        for idx, chunk in enumerate(chunks, start=1):
             chunk_lines = chunk.splitlines()
+            line_count = len(chunk_lines)
+
             if not any(line.strip() for line in chunk_lines):
-                # If chunk is just whitespace, preserve it as empty lines
-                translated_chunks.append("\n".join([""] * len(chunk_lines)))
+                translated_chunks.append("\n".join([""] * line_count))
                 continue
 
-            logger.info(f"Translating chunk {i + 1}/{total_chunks}...")
+            logger.info(f"→ Translating chunk {idx}/{total} ({line_count} lines)...")
+
             try:
-                translated_chunk = await self.translation_service.translate(
-                    japanese_text=chunk,
-                    size=len(chunk_lines)
-                )
-                
-                # Apply post-processing to each chunk
-                processed_chunk = post_process(translated_chunk)
-                translated_chunks.append(processed_chunk)
-                logger.info(f"Chunk {i + 1}/{total_chunks} translated successfully.")
-
+                raw_translation = await self.translate_chunk(chunk, line_count)
+                cleaned = post_process(raw_translation)
+                translated_chunks.append(cleaned)
+                logger.info(f"✓ Chunk {idx}/{total} translated.")
             except Exception as e:
-                logger.error(f"Error translating chunk {i + 1}: {e}", exc_info=True)
-                # Add a placeholder to maintain line count on error
-                error_placeholder = [f"[Translation Error on line]" for _ in chunk_lines]
-                translated_chunks.append("\n".join(error_placeholder))
+                logger.error(f"✗ Error in chunk {idx}: {e}", exc_info=True)
+                placeholder = "\n".join(["[Translation Error]"] * line_count)
+                translated_chunks.append(placeholder)
 
-        logger.info("All chunks processed. Combining results.")
-        final_translation = "\n".join(translated_chunks)
-        
-        return final_translation
+        logger.info("All chunks processed. Returning full translation.")
+        return "\n".join(translated_chunks)
