@@ -47,3 +47,7 @@ async def download_file(client: httpx.AsyncClient, url: str, save_path: str):
         raise HTTPException(status_code=e.response.status_code, detail=f"Failed to download {url}")
     except httpx.RequestError as e:
         raise HTTPException(status_code=400, detail=f"Failed to download {url}: {e}")
+
+def split_into_chunks(text: str):
+        lines = text.splitlines()
+        return ["\n".join(lines[i:i + Constants.CHUNK_SIZE]) for i in range(0, len(lines), Constants.CHUNK_SIZE)]

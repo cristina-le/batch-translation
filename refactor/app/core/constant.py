@@ -22,6 +22,44 @@ class Constants:
     MODEL = "google/gemini-2.0-flash-001"
     TEMPERATURE = 0
     CHUNK_SIZE = 15
-    SPEAKER_AWARE = False
-    QUALITY_THRESHOLD = 9.0
     CONTEXT_WINDOW = 6
+
+    # Prompts
+    TRANSLATION_PROMPT_TEMPLATE = """
+You are a professional Japanese to English translator. Your goal is to produce translations that maximize BLEU score when compared to professional human translations. For each line of the following Japanese text, translate it to English.
+
+{context_section}
+
+REQUIREMENTS:
+- Maintain character speech patterns and personality.
+- Preserve Japanese honorifics where appropriate.
+- Keep cultural references intact.
+- Ensure emotional nuances are conveyed.
+- Use natural, flowing English suitable for high-quality localization.
+- Do not create empty lines in your translation.
+
+CRITICAL: 
+- Your translation MUST have EXACTLY {size} lines, no more and no less.
+- Return the result as JSON: {{"translated_outputs": ["English line 1", "English line 2", ..., "English line {size}"]}}
+- Pay special attention to pronouns and subject-object relationships.
+- When translating actions, be clear about who is performing the action.
+
+CONTEXT: Japanese text to translate:
+{japanese_text} 
+
+RESULT: Translation into English:
+"""
+
+    CONTEXT_SECTION_TEMPLATE = """
+For context, here are the previous segments and their translations:
+{context_history}
+Now based on the previous translations:
+"""
+
+    CONTEXT_HISTORY_ITEM_TEMPLATE = """
+Previous Japanese:
+{japanese}
+
+Previous English:
+{english}
+"""
